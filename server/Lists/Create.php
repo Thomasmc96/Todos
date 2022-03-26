@@ -7,11 +7,25 @@ include_once '../Config/Database.php';
 $datebaseService = new DatabaseService();
 $connection = $datebaseService->getConnection();
 
-// Get incoming data
-$data = json_decode(file_get_contents("php://input"));
-$name = $data->name;
+try{
 
-if(!empty($name)){
+    // Get incoming data
+    $data = json_decode(file_get_contents("php://input"));
+
+    if(empty($data->name)){
+        
+        // Send error response
+        http_response_code(500);
+        echo json_encode([
+            "message" => "Name can't be empty"
+        ]);
+    
+        exit(0);
+    }
+
+    // Data fields
+    $name = $data->name;
+
     // Prepare query
     $query = "
         INSERT INTO 
@@ -35,10 +49,18 @@ if(!empty($name)){
             "message" => $name . " was created as a new list"
         ]);
     }else {
+
         // Send error response
         http_response_code(500);
         echo json_encode([
             "message" => "Unable to create list"
         ]);
     }
+} catch(\Exception $e) {
+
+     // Send error response
+     http_response_code(500);
+     echo json_encode([
+         "message" => $e
+     ]);
 }
