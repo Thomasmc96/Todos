@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Import own components
 import Frontpage from './components/Frontpage/Frontpage';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 
 const App = () => {
   return (
@@ -16,7 +15,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Frontpage />} />
       </Routes>
-      <Footer />
     </Router>
   );
 };
