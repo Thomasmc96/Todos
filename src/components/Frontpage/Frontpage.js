@@ -1,7 +1,8 @@
 import React from "react";
 
 const Frontpage = () => {
-  <div>Frontpage</div>;
+  console.log("asd");
+  return <div>Frontpage</div>;
 };
 
 export default Frontpage;
