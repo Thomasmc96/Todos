@@ -13,13 +13,12 @@ try{
     $data = json_decode(file_get_contents("php://input"));
 
     if(empty($data->name)){
-        
-        // Send error response
         http_response_code(500);
+
+        // Send error response
         echo json_encode([
             "message" => "Name can't be empty"
         ]);
-    
         exit(0);
     }
 
@@ -44,22 +43,22 @@ try{
     if($statement->execute()){
         
         // Send success response
-        http_response_code(200);
         echo json_encode([
-            "message" => $name . " was created as a new list"
+            "message" => $name . " was created as a new list",
+            "lists_id" => $connection->lastInsertId()
         ]);
     }else {
+        http_response_code(500);
 
         // Send error response
-        http_response_code(500);
         echo json_encode([
             "message" => "Unable to create list"
         ]);
     }
 } catch(\Exception $e) {
+    http_response_code(500);
 
      // Send error response
-     http_response_code(500);
      echo json_encode([
          "message" => $e
      ]);
