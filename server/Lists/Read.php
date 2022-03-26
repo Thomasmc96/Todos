@@ -52,7 +52,7 @@ try{
         // Send error response
         http_response_code(500);
         echo json_encode([
-            "message" => "Unable to create list"
+            "message" => "Unable to get list"
         ]);
     }
 } catch(\Exception $e) {
