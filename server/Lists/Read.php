@@ -7,6 +7,8 @@ include_once '../Config/Database.php';
 $datebaseService = new DatabaseService();
 $connection = $datebaseService->getConnection();
 
+header('Content-Type: application/json');
+
 try{
 
     // Get incoming data

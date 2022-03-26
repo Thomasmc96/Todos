@@ -1,11 +1,21 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './Frontpage.css';
 import addNewList from '../../assets/img/add-new-list.svg';
 import list from '../../assets/img/small-list.svg';
 import sharedList from '../../assets/img/shared-list.svg';
-
+import axios from 'axios';
 
 const Frontpage = () => {
+
+  useEffect(() => {
+      axios('localhost:8000/server/Lists/Read.php').then((result) => {
+        console.log(result)
+      }).catch((error) => {
+        console.log(error)
+      })
+
+  });
+
   return (
   <div className="frontpage">
     <div className="profileFront">
