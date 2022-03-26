@@ -1,3 +1,9 @@
+@font-face {
+    font-family: berlin;
+    src: url('../src/assets/font/Berlin\ Sans\ FB\ Regular.ttf');
+}
+
 body{
     margin: 0;
+    font-family: berlin;
 }
