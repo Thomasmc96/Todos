@@ -54,9 +54,20 @@ try{
         // Send success response
         http_response_code(200);
 
-        $lists = $statement->fetchAll(PDO::FETCH_ASSOC);
+        // $lists = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        echo json_encode($lists);
+        $listName = "";
+        $products = [];
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            $listName = $row['list_name'];
+            $products[] = [
+                "products_id" => $row['products_id'],
+                "name" => $row['name'],
+                "completed" => $row['completed']
+            ];
+        }
+
+        echo json_encode(["list_name" => $listName, "products" => $products]);
     }else {
 
         // Send error response
