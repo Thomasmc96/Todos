@@ -21,7 +21,7 @@ try{
 
         $lists_id = $_GET['lists_id'];
 
-        $where .= " AND lists_id = " . $lists_id;
+        $where .= " AND p.lists_id = " . $lists_id;
 
     } else {
           // Send error response
@@ -36,9 +36,11 @@ try{
     // Prepare query
     $query = "
         SELECT  
-            *
+            p.products_id, p.name, p.completed, l.name as list_name
         FROM
-            products
+            products p
+        INNER JOIN
+            lists l ON l.lists_id = p.lists_id
         WHERE
             ". $where ."
         ";
@@ -60,7 +62,7 @@ try{
         // Send error response
         http_response_code(500);
         echo json_encode([
-            "message" => "Unable to products"
+            "message" => "Unable to get products"
         ]);
     }
 } catch(\Exception $e) {
