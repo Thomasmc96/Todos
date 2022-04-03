@@ -5,6 +5,7 @@ import listIcon from "../../assets/img/small-list.svg";
 import sharedList from "../../assets/img/shared-list.svg";
 import axios from "axios";
 import AddNewList from './AddNewList.js';
+import { Link } from "react-router-dom";
 
 const Frontpage = () => {
 
@@ -39,10 +40,10 @@ const Frontpage = () => {
         <hr className="hrList" />
         {lists.length > 0 && lists.map((list) => {
           return(
-          <div key={list.lists_id} className="list">
+          <Link to={'/list/'+list.lists_id} key={list.lists_id} className="list">
             <img className="listIcon" src={listIcon} alt="Liste ikon" />
             <p>{list.name}</p>
-          </div>
+          </Link>
           )
         })}
       </section>
