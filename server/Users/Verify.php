@@ -5,6 +5,7 @@ include_once '../Config/Database.php';
 require "../../vendor/autoload.php";
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 // Establish database connection
 $datebaseService = new DatabaseService();
@@ -12,17 +13,14 @@ $connection = $datebaseService->getConnection();
 
 // Get incoming data
 $data = json_decode(file_get_contents("php://input"));
-$secret_key = "YOUR_SECRET_KEY";
-$jwt = null;
+$secret_key = "todo-app-key";
 
 
-    $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
-    $arr = explode(" ", $authHeader);
-    $jwt = $arr[1];
+    $jwt = $_SERVER['HTTP_AUTHORIZATION'];
 
     if ($jwt) {
         try {
-            $decoded = JWT::decode($jwt, $secret_key, array('HS256'));
+            $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
             echo json_encode(array(
                 "message" => "Access granted",
                 "code" => 200

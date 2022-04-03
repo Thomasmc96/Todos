@@ -37,7 +37,7 @@ $connection = $datebaseService->getConnection();
             users
         WHERE 
             email = :email 
-        LIMIT 0,1";
+        LIMIT 1";
 
     $statement = $connection->prepare($query);
     $statement->bindParam("email", $email);
@@ -52,7 +52,7 @@ $connection = $datebaseService->getConnection();
         $password2 = $row['password'];
 
         if (password_verify($password, $password2)) {
-            $secret_key = "YOUR_SECRET_KEY";
+            $secret_key = "todo-app-key";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
             $audience_claim = "THE_AUDIENCE";
             $issuedat_claim = time(); // issued at

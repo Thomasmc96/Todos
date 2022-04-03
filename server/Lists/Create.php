@@ -12,30 +12,33 @@ try{
     // Get incoming data
     $data = json_decode(file_get_contents("php://input"));
 
-    if(empty($data->name)){
+    if(empty($data->name) || empty($data->users_id)){
         http_response_code(500);
 
         // Send error response
         echo json_encode([
-            "message" => "Name can't be empty"
+            "message" => "Values are missing"
         ]);
         exit(0);
     }
 
     // Data fields
     $name = $data->name;
+    $users_id = $data->users_id;
 
     // Prepare query
     $query = "
         INSERT INTO 
             lists
         SET 
+            users_id = :users_id
             name = :name
         ";
 
     $statement = $connection->prepare($query);
 
     // Bind data
+    $statement->bindParam(":users_id", $users_id);
     $statement->bindParam(":name", $name);
 
 
