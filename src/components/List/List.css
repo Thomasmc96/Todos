@@ -35,7 +35,7 @@
     background-color: #000000;
     border: none; 
     height: 1vw;
-    width: 80vw;
+    width: 80%;
     border-radius: 10px;
     margin-top: 0;
     margin-block-start: 0;
@@ -47,3 +47,55 @@
    text-align: center;
 }
 
+.listSection #notDoneIcon{
+    width: 25px;
+    margin-right: 15px;
+}
+
+
+.listSection #editIcon{
+    width: 25px;
+}
+
+.listSection .todoProduct{
+    display: flex;
+    justify-content: space-between;
+    background-color: #82CB80;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 5px;
+    padding: 2% 5%;
+}
+
+.listSection .todoProduct p{
+   font-size: 20px;
+   margin: 0;
+}
+
+.listSection .doneOrNot{
+    display: flex;
+}
+
+.listSection .addSection img{
+    width: 35px;
+    margin-right: 10px;
+}
+
+.listSection .addSection p{
+   font-size: 20px;
+   margin: 5%;
+}
+ 
+.listSection .addSection{
+    display: flex;
+    background-color: #7BA779;
+    width: 70%;
+    border-radius: 5px;
+    padding: 2% 5%;
+    position: fixed;
+    top: 90%;
+    left: 10%;
+}
