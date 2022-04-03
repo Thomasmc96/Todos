@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Import own components
 import Frontpage from './components/Frontpage/Frontpage';
 import Header from './components/Header/Header';
+import List from './components/List/List'
 
 const App = () => {
   return (
@@ -14,7 +15,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Frontpage />} />
-      </Routes>
+        <Route path='/list/:id' element={<List />} />
+       </Routes>
     </Router>
   );
 };
