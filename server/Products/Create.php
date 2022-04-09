@@ -49,7 +49,8 @@ try{
         // Send success response
         http_response_code(200);
         echo json_encode([
-            "message" => $name . " was created as a new product"
+            "message" => $name . " was created as a new product",
+            "products_id" => $connection->lastInsertId()
         ]);
     }else {
 

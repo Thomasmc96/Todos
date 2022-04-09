@@ -21,7 +21,7 @@ try{
 
         $lists_id = $_GET['lists_id'];
 
-        $where .= " AND p.lists_id = " . $lists_id;
+        $where .= " AND l.lists_id = " . $lists_id;
 
     } else {
           // Send error response
@@ -38,9 +38,9 @@ try{
         SELECT  
             p.products_id, p.name, p.completed, l.name as list_name
         FROM
-            products p
-        INNER JOIN
-            lists l ON l.lists_id = p.lists_id
+            lists l
+        LEFT JOIN
+            products p ON p.lists_id = l.lists_id
         WHERE
             ". $where ."
         ";
@@ -54,17 +54,19 @@ try{
         // Send success response
         http_response_code(200);
 
-        // $lists = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         $listName = "";
         $products = [];
         while($row = $statement->fetch(PDO::FETCH_ASSOC)){
             $listName = $row['list_name'];
-            $products[] = [
-                "products_id" => $row['products_id'],
-                "name" => $row['name'],
-                "completed" => $row['completed']
-            ];
+
+            if(!empty($row['products_id'])){
+                $products[] = [
+                    "products_id" => $row['products_id'],
+                    "name" => $row['name'],
+                    "completed" => $row['completed']
+                ];
+            }
         }
 
         echo json_encode(["list_name" => $listName, "products" => $products]);
