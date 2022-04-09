@@ -4,21 +4,22 @@ import addNewListIcon from "../../assets/img/add-new-list.svg";
 import listIcon from "../../assets/img/small-list.svg";
 import sharedList from "../../assets/img/shared-list.svg";
 import axios from "axios";
-import AddNewList from './AddNewList.js';
-import DeleteList from './DeleteList.js';
+import AddNewList from "./AddNewList.js";
+import DeleteList from "./DeleteList.js";
 import { Link } from "react-router-dom";
 
 const Frontpage = () => {
-
-  const [lists, setLists] = useState([])
-  const [toggleNewList, setToggleNewList] = useState(false)
-  const [toggleDeleteList, setToggleDeleteList] = useState(false)
+  const [lists, setLists] = useState([]);
+  const [toggleNewList, setToggleNewList] = useState(false);
+  const [toggleDeleteList, setToggleDeleteList] = useState(false);
 
   useEffect(() => {
-    axios("http://localhost:8000/server/lists/read.php")
+    const users_id = localStorage.getItem("users_id");
+    console.log(users_id);
+    axios(`http://localhost:8000/server/lists/read.php?users_id=${users_id}`)
       .then((result) => {
         console.log(result.data);
-        setLists(result.data)
+        setLists(result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,11 +27,11 @@ const Frontpage = () => {
   }, []);
 
   const showNewList = () => {
-    setToggleNewList(!toggleNewList)
-  }
+    setToggleNewList(!toggleNewList);
+  };
   const showDeleteList = () => {
-    setToggleDeleteList(!toggleDeleteList)
-  }
+    setToggleDeleteList(!toggleDeleteList);
+  };
 
   return (
     <div className="frontpage">
@@ -39,18 +40,28 @@ const Frontpage = () => {
         <p className="profileName">Ditte Hansen</p>
       </div>
       <hr className="hr" />
-      <img className="addNewListIcon" src={addNewListIcon} alt="Tilføj ny liste" onClick={showNewList}/>
+      <img
+        className="addNewListIcon"
+        src={addNewListIcon}
+        alt="Tilføj ny liste"
+        onClick={showNewList}
+      />
       <section>
         <h3 className="listCategory">Lister oprettet af mig</h3>
         <hr className="hrList" />
-        {lists.length > 0 && lists.map((list) => {
-          return(
-          <Link to={'/list/'+list.lists_id} key={list.lists_id} className="list">
-            <img className="listIcon" src={listIcon} alt="Liste ikon" />
-            <p>{list.name}</p>
-          </Link>
-          )
-        })}
+        {lists.length > 0 &&
+          lists.map((list) => {
+            return (
+              <Link
+                to={"/list/" + list.lists_id}
+                key={list.lists_id}
+                className="list"
+              >
+                <img className="listIcon" src={listIcon} alt="Liste ikon" />
+                <p>{list.name}</p>
+              </Link>
+            );
+          })}
       </section>
       {/* <section>
         <h3 className="listCategory">Lister delt med mig</h3>
@@ -69,11 +80,20 @@ const Frontpage = () => {
           )
         })}
       </section> */}
-      {toggleDeleteList &&  <DeleteList showDeleteList={showDeleteList} setLists={setLists} lists={lists}/>}
-      {toggleNewList && 
-        <AddNewList showNewList={showNewList} setLists={setLists} lists={lists}/>
-      }
-   
+      {toggleDeleteList && (
+        <DeleteList
+          showDeleteList={showDeleteList}
+          setLists={setLists}
+          lists={lists}
+        />
+      )}
+      {toggleNewList && (
+        <AddNewList
+          showNewList={showNewList}
+          setLists={setLists}
+          lists={lists}
+        />
+      )}
     </div>
   );
 };

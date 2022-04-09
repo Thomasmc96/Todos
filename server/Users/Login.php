@@ -43,6 +43,7 @@ $connection = $datebaseService->getConnection();
     $statement->bindParam("email", $email);
     $statement->execute();
 
+
     $num = $statement->rowCount();
 
     if ($num > 0) {
@@ -78,6 +79,8 @@ $connection = $datebaseService->getConnection();
                     "code" => 200,
                     "jwt" => $jwt,
                     "email" => $email,
+                    "name" => $name,
+                    "id" => $id,
                     "expireAt" => $expire_claim
                 )
             );
