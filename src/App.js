@@ -9,6 +9,7 @@ import Frontpage from "./components/Frontpage/Frontpage";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Login from "./components/Login/Login";
+import SignUp from "./components/SignUp/SignUp";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Frontpage />} />
         <Route path="/list/:id" element={<List />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </Router>
   );

@@ -1,14 +1,16 @@
 import React from "react";
-import "./Login.css";
+import "./SignUp.css";
 
-const Login = () => {
+const SignUp = () => {
   const submitLogin = () => {
     console.log("Login");
   };
   return (
     <div className="loginSection">
-      <h1>Login for at komme igang</h1>
-      <form className="loginForm" onSubmit={submitLogin} autoComplete="off">
+      <h1>Opret dig her</h1>
+      <form className="loginForm" onSubmit={submitLogin}>
+        <label className="labels" htmlFor="name">Navn</label>
+        <input className="inputBoxLogin" type="name" name="name" required />
         <label className="labels" htmlFor="email">Email</label>
         <input className="inputBoxLogin" type="email" name="email" required />
         <label className="labels" htmlFor="password">Password</label>
@@ -20,4 +22,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

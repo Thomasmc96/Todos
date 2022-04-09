@@ -46,4 +46,10 @@
     border-radius: 5px;
     border-color: none;
     border-width: 0px;
+    background-color: #D5F2D4;
 }
+
+/* input:-internal-autofill-selected {
+    background-color: #D5F2D4;
+    color: -internal-light-dark(black, white) !important;
+} */
