@@ -1,0 +1,49 @@
+.loginSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+}
+
+.loginSection h1{
+    margin-top: 20%;
+}
+
+.labels{
+    font-size: 20px;
+    margin: 5%;
+}
+
+.loginForm a{
+    color: black;
+}
+
+.loginForm button{
+    background-color: #7BA779;
+    padding: 8%;
+    margin: 1%;
+    border-radius: 5px;
+    border: none;
+    font-family: berlin;
+    font-size: 20px;
+    margin-bottom: 8%;
+    margin-top: 15%;
+    width: 60%;
+}
+
+.loginForm .inputBoxLogin{
+    text-align: left;
+    font-family: berlin;
+    width: 130%;
+    height: 10vw;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: none;
+    border-width: 0px;
+}
