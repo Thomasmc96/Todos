@@ -13,11 +13,11 @@ try{
     $data = json_decode(file_get_contents("php://input"));
 
     if(empty($data->name) || empty($data->users_id)){
-        http_response_code(500);
 
         // Send error response
         echo json_encode([
-            "message" => "Values are missing"
+            "message" => "Values are missing",
+            "code" => 500
         ]);
         exit(0);
     }
@@ -31,7 +31,7 @@ try{
         INSERT INTO 
             lists
         SET 
-            users_id = :users_id
+            users_id = :users_id,
             name = :name
         ";
 
@@ -51,18 +51,18 @@ try{
             "lists_id" => $connection->lastInsertId()
         ]);
     }else {
-        http_response_code(500);
 
         // Send error response
         echo json_encode([
-            "message" => "Unable to create list"
+            "message" => "Unable to create list",
+            "code" => 500
         ]);
     }
 } catch(\Exception $e) {
-    http_response_code(500);
 
      // Send error response
      echo json_encode([
-         "message" => $e
+         "message" => $e,
+         "code" => 500
      ]);
 }
