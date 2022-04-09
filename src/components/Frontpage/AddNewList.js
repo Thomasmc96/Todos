@@ -4,9 +4,11 @@ import axios from "axios";
 const AddNewList = (props) => {
   const [listName, setListName] = useState("");
 
+  // Function that adds a new list to the users list
   const pushNewList = (event) => {
     event.preventDefault();
 
+    // API call
     axios
       .post("http://localhost:8000/server/lists/create.php", {
         name: listName,
@@ -14,6 +16,7 @@ const AddNewList = (props) => {
       })
       .then(function (response) {
         console.log(response);
+        // If response if good
         if (response.status === 200) {
           props.setLists([
             ...props.lists,
@@ -29,6 +32,7 @@ const AddNewList = (props) => {
     props.showNewList();
   };
 
+  // Handles users input when typing list name
   const handleListName = (event) => {
     setListName(event.target.value);
   };
@@ -48,7 +52,9 @@ const AddNewList = (props) => {
           onChange={handleListName}
         />
         <div>
-          <button onClick={props.showNewList}>Tilbage</button>
+          <button type="button" onClick={props.showNewList}>
+            Tilbage
+          </button>
           <button type="submit">Opret</button>
         </div>
       </form>

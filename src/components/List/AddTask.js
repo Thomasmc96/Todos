@@ -7,9 +7,9 @@ const AddTask = (props) => {
 
   const [taskName, setTaskName] = useState("");
 
+  // Function that adds a new task to the users list
   const pushTask = (event) => {
     event.preventDefault();
-
     axios
       .post("http://localhost:8000/server/products/create.php", {
         name: taskName,
@@ -17,6 +17,7 @@ const AddTask = (props) => {
       })
       .then(function (response) {
         console.log(response);
+        // If response if good
         if (response.status === 200) {
           props.setList({
             list_name: props.list.list_name,
@@ -39,6 +40,7 @@ const AddTask = (props) => {
     props.showAddTask();
   };
 
+  // Handles users input when typing task name
   const handleTaskName = (event) => {
     setTaskName(event.target.value);
   };
@@ -58,7 +60,9 @@ const AddTask = (props) => {
           onChange={handleTaskName}
         />
         <div>
-          <button onClick={props.showAddTask}>Tilbage</button>
+          <button type="button" onClick={props.showAddTask}>
+            Tilbage
+          </button>
           <button type="submit">Tilføj</button>
         </div>
       </form>
