@@ -7,11 +7,13 @@ import editIcon from "../../assets/img/edit.svg";
 import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import AddTask from './AddTask.js';
 
 const List = () =>{
     const {id}=useParams()
 
     const [list, setList] = useState({list_name: '', products: [{completed: '', name: '', products_id: ''}]})
+    const [toggleAddTask, setToggleAddTask] = useState(false)
     
     useEffect(() => {
         axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
@@ -23,6 +25,10 @@ const List = () =>{
             console.log(error);
           });
       }, []);
+
+      const showAddTask = () => {
+        setToggleAddTask(!toggleAddTask)
+      }
 
     return(
         <div className="listSection">
@@ -49,12 +55,14 @@ const List = () =>{
                         <img id="editIcon" src={editIcon} alt="Redigér ikon" />
                     </div>
                 )
-
             })}
-            <div className="addSection">
+            <div className="addSection" onClick={showAddTask}>
                 <img src={addIcon} alt="Tilføj opgave ikon" />
-                <p>Tilføj et punkt</p>
+                <p>Tilføj en opgave</p>
             </div>
+            {toggleAddTask && 
+          <AddTask showAddTask={showAddTask} setList={setList} list={list}/>
+        }
         </div>
     )
 }

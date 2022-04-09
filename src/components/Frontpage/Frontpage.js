@@ -5,12 +5,14 @@ import listIcon from "../../assets/img/small-list.svg";
 import sharedList from "../../assets/img/shared-list.svg";
 import axios from "axios";
 import AddNewList from './AddNewList.js';
+import DeleteList from './DeleteList.js';
 import { Link } from "react-router-dom";
 
 const Frontpage = () => {
 
   const [lists, setLists] = useState([])
   const [toggleNewList, setToggleNewList] = useState(false)
+  const [toggleDeleteList, setToggleDeleteList] = useState(false)
 
   useEffect(() => {
     axios("http://localhost:8000/server/lists/read.php")
@@ -25,6 +27,9 @@ const Frontpage = () => {
 
   const showNewList = () => {
     setToggleNewList(!toggleNewList)
+  }
+  const showDeleteList = () => {
+    setToggleDeleteList(!toggleDeleteList)
   }
 
   return (
@@ -64,10 +69,10 @@ const Frontpage = () => {
           )
         })}
       </section> */}
-
-       {toggleNewList && 
-          <AddNewList showNewList={showNewList} setLists={setLists} lists={lists}/>
-        }
+      {toggleDeleteList &&  <DeleteList showDeleteList={showDeleteList} setLists={setLists} lists={lists}/>}
+      {toggleNewList && 
+        <AddNewList showNewList={showNewList} setLists={setLists} lists={lists}/>
+      }
    
     </div>
   );
