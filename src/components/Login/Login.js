@@ -6,13 +6,14 @@ const Login = () => {
     console.log("Login");
   };
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={submitLogin}>
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" required />
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" required />
+    <div className="loginSection">
+      <h1>Login for at komme igang</h1>
+      <form className="loginForm" onSubmit={submitLogin}>
+        <label className="labels" htmlFor="email">Email</label>
+        <input className="inputBoxLogin" type="email" name="email" required />
+        <label className="labels" htmlFor="password">Password</label>
+        <input className="inputBoxLogin" type="password" name="password" required />
+        <a href=""><p>Ikke allerede bruger? Så opret dig her.</p></a>
         <button type="Submit">Login</button>
       </form>
     </div>
