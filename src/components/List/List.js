@@ -3,6 +3,7 @@ import "./List.css";
 import backIcon from "../../assets/img/back.svg";
 import shareIcon from "../../assets/img/share.svg";
 import notDoneIcon from "../../assets/img/not-done.svg";
+import doneIcon from "../../assets/img/done.svg";
 import editIcon from "../../assets/img/edit.svg";
 import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
@@ -65,6 +66,16 @@ const List = () => {
           );
         }
       })}
+      <hr className="hr" />
+      <p id="doneText">Fuldførte opgave (slettes efter 5 min)</p>
+      <div className="doneProduct">
+          <img
+            id="doneIcon"
+            src={doneIcon}
+            alt="Færdig ikon"
+          />
+          <p>Slik</p>
+        </div>
       <div className="addSection" onClick={showAddTask}>
         <img src={addIcon} alt="Tilføj opgave ikon" />
         <p>Tilføj en opgave</p>
