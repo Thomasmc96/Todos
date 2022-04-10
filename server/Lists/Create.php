@@ -24,7 +24,7 @@ try{
 
     // Data fields
     $name = $data->name;
-    $users_id = $data->users_id;
+    $users_id = base64_decode($data->users_id);
 
     // Prepare query
     $query = "

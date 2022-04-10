@@ -12,7 +12,7 @@ const AddNewList = (props) => {
     axios
       .post("http://localhost:8000/server/lists/create.php", {
         name: listName,
-        users_id: 1,
+        users_id: localStorage.getItem("users_id"),
       })
       .then(function (response) {
         console.log(response);
