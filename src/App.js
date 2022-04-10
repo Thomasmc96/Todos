@@ -13,16 +13,13 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 
 const App = () => {
-  const [validToken, setValidToken] = useState(false);
+  const nonAuthPaths = ["/login", "/signup"];
 
   useEffect(() => {
     var token = localStorage.getItem("token");
 
     if (token === null) {
-      if (
-        window.location.pathname !== "/login" &&
-        window.location.pathname !== "/signup"
-      ) {
+      if (nonAuthPaths.includes(window.location.path)) {
         window.location.replace("/login");
       }
     } else {
@@ -41,15 +38,10 @@ const App = () => {
         )
         .then(function (response) {
           console.log(response);
-          // If response if good
+          // If response is good
           if (response.data.code === 200) {
-            setValidToken(true);
-            console.log("success");
           } else {
-            if (
-              window.location.pathname !== "/login" &&
-              window.location.pathname !== "/signup"
-            ) {
+            if (nonAuthPaths.includes(window.location.path)) {
               window.location.replace("/login");
             }
           }

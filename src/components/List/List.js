@@ -49,8 +49,8 @@ const List = () => {
       <h1>{list.list_name}</h1>
       <hr className="hr" />
       {list.products.map((product) => {
-        {
-          product.completed == 0 && (
+        if (product.completed == "0") {
+          return (
             <div className="todoProduct" key={product.products_id}>
               <div className="doneOrNot">
                 <img
