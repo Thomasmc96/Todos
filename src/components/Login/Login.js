@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   // State variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showLoginError, setShowLoginError] = useState(false)
+
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
+    setShowLoginError(false)
   };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
+    setShowLoginError(false)
+
   };
 
   const submitLogin = (e) => {
@@ -35,7 +40,7 @@ const Login = () => {
           window.location.replace("/");
         } else {
           // Show error message
-          console.log("error");
+          setShowLoginError(true)
         }
       })
       .catch(function (error) {
@@ -69,9 +74,12 @@ const Login = () => {
           onChange={handlePassword}
           required
         />
-        <a href="">
+        <Link to={"/signup"}>
           <p>Ikke allerede bruger? Så opret dig her.</p>
-        </a>
+        </Link>
+        {showLoginError && (
+          <p id="loginError">En af de indtastede værdier er forkerte - prøv igen!</p>
+        )}
         <button type="Submit">Login</button>
       </form>
     </div>

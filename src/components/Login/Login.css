@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     margin: 5%;
+    width: 100%;
 }
 
 .loginSection h1{
@@ -40,7 +41,7 @@
 .loginForm .inputBoxLogin{
     text-align: left;
     font-family: berlin;
-    width: 130%;
+    width: 80%;
     height: 10vw;
     font-size: 20px;
     border-radius: 5px;
@@ -48,4 +49,11 @@
     border-width: 0px;
     background-color: #D5F2D4;
 }
+
+#loginError{
+    color: #FC4848;
+    width: 60%;
+    text-align:center
+}
+
 
