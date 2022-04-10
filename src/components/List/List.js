@@ -9,6 +9,7 @@ import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import AddTask from "./AddTask.js";
+import ShareList from "./ShareList.js";
 
 const List = () => {
   const { id } = useParams();
@@ -18,6 +19,9 @@ const List = () => {
     products: [{ completed: "", name: "", products_id: "" }],
   });
   const [toggleAddTask, setToggleAddTask] = useState(false);
+
+  const [toggleShareList, setToggleShareList] = useState(false);
+
 
   useEffect(() => {
     axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
@@ -34,6 +38,10 @@ const List = () => {
     setToggleAddTask(!toggleAddTask);
   };
 
+  const showShareList = () => {
+    setToggleShareList(!toggleShareList);
+  };
+
   return (
     <div className="listSection">
       <div className="firstSection">
@@ -41,7 +49,7 @@ const List = () => {
           <img id="back" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
-        <div className="shareSection">
+        <div className="shareSection" onClick={showShareList}>
           <p>Del liste</p>
           <img id="share" src={shareIcon} alt="Del liste ikon" />
         </div>
@@ -82,6 +90,9 @@ const List = () => {
       </div>
       {toggleAddTask && (
         <AddTask showAddTask={showAddTask} setList={setList} list={list} />
+      )}
+      {toggleShareList && (
+      <ShareList  showShareList={showShareList}/>
       )}
     </div>
   );
