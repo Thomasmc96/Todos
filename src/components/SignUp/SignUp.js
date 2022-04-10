@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import "./SignUp.css";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +31,12 @@ const SignUp = () => {
   };
 
   const handleCheckboxValue = (e) => {
-    console.log(checkboxValue)
     setCheckboxValue(!checkboxValue);
     setShowCheckboxError(false)
+  }
+
+  const redirect = (e) => {
+    navigate("/login")
   }
 
   const submitLogin = (e) => {
@@ -68,7 +73,7 @@ const SignUp = () => {
           <p id="checkboxError">Husk at acceptere vilkårene - prøv igen!</p>
         )}
         <div id="btnContainer">
-          <button type="button">Tilbage</button>
+          <button type="button" onClick={redirect}>Tilbage</button>
           <button type="Submit">Opret</button>
         </div>
       </form>

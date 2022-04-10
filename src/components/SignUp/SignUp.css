@@ -24,7 +24,7 @@
     color: black;
 }
 
-.signUpForm button{
+.signUpForm button, .signUpForm #backBtn{
     background-color: #7BA779;
     padding: 8%;
     margin: 1%;
