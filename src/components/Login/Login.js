@@ -59,7 +59,7 @@ const Login = () => {
           required
         />
         <label className="labels" htmlFor="password">
-          Password
+          Adgangskode
         </label>
         <input
           className="inputBoxLogin"

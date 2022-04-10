@@ -1,22 +1,76 @@
-import React from "react";
+import React, {useState} from "react";
 import "./SignUp.css";
 
 const SignUp = () => {
-  const submitLogin = () => {
-    console.log("Login");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPasswordError, setShowPasswordError] = useState(false)
+  const [checkboxValue, setCheckboxValue] = useState(false)
+  const [showCheckboxError, setShowCheckboxError] = useState(false)
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    setShowPasswordError(false)
+  };
+
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+    setShowPasswordError(false)
+  };
+
+  const handleCheckboxValue = (e) => {
+    console.log(checkboxValue)
+    setCheckboxValue(!checkboxValue);
+    setShowCheckboxError(false)
+  }
+
+  const submitLogin = (e) => {
+    e.preventDefault();
+   
+    if(password !== confirmPassword){
+      setShowPasswordError(true)
+    }
+
+    if(!checkboxValue){
+      setShowCheckboxError(true)
+    }
   };
   return (
-    <div className="loginSection">
+    <div className="signUpSection">
       <h1>Opret dig her</h1>
-      <form className="loginForm" onSubmit={submitLogin}>
+      <form className="signUpForm" onSubmit={submitLogin} autoComplete="off">
         <label className="labels" htmlFor="name">Navn</label>
-        <input className="inputBoxLogin" type="name" name="name" required />
+        <input onChange={handleName} className="inputBoxSignUp" type="name" name="name" required />
         <label className="labels" htmlFor="email">Email</label>
-        <input className="inputBoxLogin" type="email" name="email" required />
-        <label className="labels" htmlFor="password">Password</label>
-        <input className="inputBoxLogin" type="password" name="password" required />
-        <a href=""><p>Ikke allerede bruger? Så opret dig her.</p></a>
-        <button type="Submit">Login</button>
+        <input onChange={handleEmail} className="inputBoxSignUp" type="email" name="email" required />
+        <label className="labels" htmlFor="password">Adgangskode</label>
+        <input onChange={handlePassword} className="inputBoxSignUp" type="password" name="password" required />
+        <label className="labels" htmlFor="password">Gentag adgangskode</label>
+        <input onChange={handleConfirmPassword} className="inputBoxSignUp" type="password" name="password" required />
+        {showPasswordError && (
+          <p id="passwordError">Adgangskoderne er ikke ens - prøv igen!</p>
+        )}
+        <div id="checkboxContainer">
+          <input id="checkbox" type="checkbox" name="acceptCheckbox" value={checkboxValue} onChange={handleCheckboxValue}/>
+          <label htmlFor="acceptChechbox">Klik her for at acceptere vores <a href="">vilkår</a>  </label>
+        </div>
+        {showCheckboxError && (
+          <p id="checkboxError">Husk at acceptere vilkårene - prøv igen!</p>
+        )}
+        <div id="btnContainer">
+          <button type="button">Tilbage</button>
+          <button type="Submit">Opret</button>
+        </div>
       </form>
     </div>
   );
