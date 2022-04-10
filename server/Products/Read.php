@@ -25,9 +25,9 @@ try{
 
     } else {
           // Send error response
-          http_response_code(500);
           echo json_encode([
-              "message" => "No lists_id was given"
+              "message" => "No lists_id was given",
+              "code" => 500
           ]);
       
           exit(0);
@@ -52,7 +52,6 @@ try{
     if($statement->execute()){
         
         // Send success response
-        http_response_code(200);
 
 
         $listName = "";
@@ -69,20 +68,20 @@ try{
             }
         }
 
-        echo json_encode(["list_name" => $listName, "products" => $products]);
+        echo json_encode(["list_name" => $listName, "products" => $products, "code" => 200]);
     }else {
 
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "Unable to get products"
+            "message" => "Unable to get products",
+            "code" => 500
         ]);
     }
 } catch(\Exception $e) {
 
      // Send error response
-     http_response_code(500);
      echo json_encode([
-         "message" => $e
+         "message" => $e,
+         "code" => 500
      ]);
 }

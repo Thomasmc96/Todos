@@ -36,6 +36,7 @@ $secret_key = "todo-app-key";
     } else {
     
         echo json_encode(array(
-            "message" => "Something went wrong"
+            "message" => "Something went wrong",
+            "code" => 500,
         ));
     }

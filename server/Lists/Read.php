@@ -30,7 +30,7 @@ try{
     // Fetch by users_id
     if(isset($_GET['users_id']) && !empty($_GET['users_id'])){
 
-        $users_id = $_GET['users_id'];
+        $users_id = base64_decode($_GET['users_id']);
 
         $where .= " AND users_id = " . $users_id;
     }else {

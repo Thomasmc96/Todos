@@ -15,9 +15,9 @@ try{
     if(empty($data->name) || empty($data->lists_id)){
         
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "Values are missing"
+            "message" => "Values are missing",
+            "code" => 500
         ]);
     
         exit(0);
@@ -47,24 +47,24 @@ try{
     if($statement->execute()){
         
         // Send success response
-        http_response_code(200);
         echo json_encode([
             "message" => $name . " was created as a new product",
-            "products_id" => $connection->lastInsertId()
+            "products_id" => $connection->lastInsertId(),
+            "code" => 200
         ]);
     }else {
 
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "Unable to create product"
+            "message" => "Unable to create product",
+            "code" => 500
         ]);
     }
 } catch(\Exception $e) {
 
      // Send error response
-     http_response_code(500);
      echo json_encode([
-         "message" => $e
+         "message" => $e,
+         "code" => 500
      ]);
 }

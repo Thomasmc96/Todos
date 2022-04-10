@@ -48,7 +48,8 @@ try{
         // Send success response
         echo json_encode([
             "message" => $name . " was created as a new list",
-            "lists_id" => $connection->lastInsertId()
+            "lists_id" => $connection->lastInsertId(),
+            "code" => 200
         ]);
     }else {
 

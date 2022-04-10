@@ -1,156 +1,160 @@
-.frontpage .profileFront{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.frontpage .profileFront {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.frontpage .profileIcon{
-    background-color: #82CB80;
-    padding: 1rem;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    font-size: 17px;
+.frontpage .profileIcon {
+  background-color: #82cb80;
+  padding: 1rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  font-size: 17px;
 }
 
-.frontpage .profileName{
-    margin-left: 0.5rem;
-    font-size: 17px;
+.frontpage .profileName {
+  margin-left: 0.5rem;
+  font-size: 17px;
 }
 
-.frontpage .hr{
-    background-color: #000000;
-    border: none; 
-    height: 1vw;
-    width: 80vw;
-    border-radius: 10px;
-    margin-top: 0;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    line-height: 0;
+.frontpage .hr {
+  background-color: #000000;
+  border: none;
+  height: 1vw;
+  width: 80vw;
+  border-radius: 10px;
+  margin-top: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  line-height: 0;
 }
 
-.frontpage .hrList{
-    background-color: #000000;
-    border: none;
-    height: 1vw;
-    width: 80vw;
-    border-radius: 10px;
-    margin-top: 0.5rem;
-    line-height: 0;
+.frontpage .hrList {
+  background-color: #000000;
+  border: none;
+  height: 1vw;
+  width: 80vw;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  line-height: 0;
 }
 
-.frontpage .sharedListIcon{
-    width: 1.5rem;
-    margin-left: 1rem;
+.frontpage .sharedListIcon {
+  width: 1.5rem;
+  margin-left: 1rem;
 }
 
-.frontpage .listCategory{
-    margin-left: 12%;
-    display: inline;
+.frontpage .listCategory {
+  margin-left: 12%;
+  display: inline;
 }
 
-.frontpage section{
-    margin-bottom: 15%;
-    margin-top: 5%;
+.frontpage section {
+  margin-bottom: 15%;
+  margin-top: 5%;
 }
 
-.frontpage .addNewListIcon{
-    width: 3.5rem;
-    display: block;
-    margin-left: auto;
-    margin-right: 4rem;
-    margin-top: 1rem
+.frontpage .addNewListIcon {
+  width: 3.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: 4rem;
+  margin-top: 1rem;
 }
 
-.frontpage .listIcon{
-    width: 1.5rem;
-    margin-right: 1rem;
+.frontpage .listIcon {
+  width: 1.5rem;
+  margin-right: 1rem;
 }
 
-.frontpage .list{
-    display: flex;
-    margin-left: 17%;
-    text-decoration: none;
-    color: black;
-    
+.frontpage .deleteIcon {
+  width: 1.3rem;
+  margin-left: auto;
+  margin-right: 4rem;
 }
 
-.frontpage .list p{
-    font-size: 17px;
-    
+.frontpage .list {
+  display: flex;
+}
+.frontpage .listLink {
+  display: flex;
+  margin-left: 17%;
+  text-decoration: none;
+  color: black;
 }
 
+.frontpage .list p {
+  font-size: 17px;
+}
 
 /* Add new list pop up box */
 
-.addNewListBox{
-    background-color: #7BA779;
-    width: 80vw;
-    border-radius: 20px;
-    position: fixed;
-    top: 30%;
-    left: 10%;
-    text-align: center;
+.addNewListBox {
+  background-color: #7ba779;
+  width: 80vw;
+  border-radius: 20px;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  text-align: center;
 }
 
-.addNewListBox h2{
-    font-size: 30px;
+.addNewListBox h2 {
+  font-size: 30px;
 }
 
-.addNewListBox .inputBox{
-    text-align: left;
-    font-family: berlin;
-    width: 80%;
-    height: 8vw;
-    font-size: 17px;
-    border-radius: 5px;
-    border-color: none;
-    border-width: 0px;
+.addNewListBox .inputBox {
+  text-align: left;
+  font-family: berlin;
+  width: 80%;
+  height: 8vw;
+  font-size: 17px;
+  border-radius: 5px;
+  border-color: none;
+  border-width: 0px;
 }
 
-.addNewListBox button{
-    background-color: white;
-    padding: 3%;
-    margin: 1%;
-    border-radius: 5px;
-    border: none;
-    font-family: berlin;
-    font-size: 17px;
-    margin-bottom: 8%;
-    margin-top: 8%;
-    width: 40%;
+.addNewListBox button {
+  background-color: white;
+  padding: 3%;
+  margin: 1%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 17px;
+  margin-bottom: 8%;
+  margin-top: 8%;
+  width: 40%;
 }
 
-
-.deleteList{
-    background-color: #7BA779;
-    width: 80vw;
-    border-radius: 20px;
-    position: fixed;
-    top: 30%;
-    left: 10%;
-    text-align: center;
+.deleteList {
+  background-color: #7ba779;
+  width: 80vw;
+  border-radius: 20px;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  text-align: center;
 }
 
-.deleteList h2{
-    font-size: 20px;
-    margin-top: 10%;
+.deleteList h2 {
+  font-size: 20px;
+  margin-top: 10%;
 }
 
-
-.deleteList button{
-    background-color: white;
-    padding: 3%;
-    margin: 1%;
-    border-radius: 5px;
-    border: none;
-    font-family: berlin;
-    font-size: 17px;
-    margin-bottom: 8%;
-    margin-top: 8%;
-    width: 40%;
+.deleteList button {
+  background-color: white;
+  padding: 3%;
+  margin: 1%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 17px;
+  margin-bottom: 8%;
+  margin-top: 8%;
+  width: 40%;
 }
 
-#deleteBtn{
-    background-color: #FC4848;
+#deleteBtn {
+  background-color: #fc4848;
 }

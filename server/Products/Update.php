@@ -65,9 +65,9 @@ try{
     if($statement->execute()){
         
         // Send success response
-        http_response_code(200);
         echo json_encode([
-            "message" => "The product was updated"
+            "message" => "The product was updated",
+            "code" => 200
         ]);
     }else {
 

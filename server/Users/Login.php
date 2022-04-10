@@ -16,11 +16,11 @@ $connection = $datebaseService->getConnection();
  try{
 
     if(empty($data->email) || empty($data->password)){
-        http_response_code(500);
 
         // Send error response
         echo json_encode([
-            "message" => "Values are missing"
+            "message" => "Values are missing",
+            "code" => 500
         ]);
         exit(0);
     }
@@ -48,7 +48,7 @@ $connection = $datebaseService->getConnection();
 
     if ($num > 0) {
         $row = $statement->fetch(PDO::FETCH_ASSOC);
-        $id = $row['users_id'];
+        $id = base64_encode($row['users_id']);
         $name = $row['name'];
         $password2 = $row['password'];
 
@@ -92,11 +92,10 @@ $connection = $datebaseService->getConnection();
     }
 }
 catch(\Exception $e) {
-    http_response_code(500);
 
      // Send error response
      echo json_encode([
          "message" => $e,
-         "code" => 401
+         "code" => 500
      ]);
 }

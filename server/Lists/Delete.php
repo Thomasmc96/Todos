@@ -15,9 +15,9 @@ try{
     if(empty($data->lists_id)){
         
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "lists_id can't be empty"
+            "message" => "lists_id can't be empty",
+            "code" => 500
         ]);
     
         exit(0);
@@ -28,10 +28,14 @@ try{
 
     // Prepare query
     $query = "
-        DELETE FROM 
-            lists
+        DELETE 
+            l, p 
+        FROM 
+            lists l
+        LEFT JOIN 
+            products p ON p.lists_id = l.lists_id
         WHERE 
-            lists_id = :lists_id
+            l.lists_id = :lists_id
         ";
 
     $statement = $connection->prepare($query);
@@ -44,23 +48,23 @@ try{
     if($statement->execute()){
         
         // Send success response
-        http_response_code(200);
         echo json_encode([
-            "message" => "Success"
+            "message" => "Success",
+            "code" => 200
         ]);
     }else {
 
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "Unable to delete list"
+            "message" => "Unable to delete list",
+            "code" => 500
         ]);
     }
 } catch(\Exception $e) {
 
      // Send error response
-     http_response_code(500);
      echo json_encode([
-         "message" => $e
+         "message" => $e,
+         "code" => 500
      ]);
 }
