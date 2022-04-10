@@ -19,7 +19,10 @@ const App = () => {
     var token = localStorage.getItem("token");
 
     if (token === null) {
-      if (window.location.pathname !== "/login") {
+      if (
+        window.location.pathname !== "/login" &&
+        window.location.pathname !== "/signup"
+      ) {
         window.location.replace("/login");
       }
     } else {
@@ -43,7 +46,10 @@ const App = () => {
             setValidToken(true);
             console.log("success");
           } else {
-            if (window.location.pathname !== "/login") {
+            if (
+              window.location.pathname !== "/login" &&
+              window.location.pathname !== "/signup"
+            ) {
               window.location.replace("/login");
             }
           }

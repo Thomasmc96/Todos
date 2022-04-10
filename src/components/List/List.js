@@ -49,15 +49,21 @@ const List = () => {
       <h1>{list.list_name}</h1>
       <hr className="hr" />
       {list.products.map((product) => {
-        return (
-          <div className="todoProduct" key={product.products_id}>
-            <div className="doneOrNot">
-              <img id="notDoneIcon" src={notDoneIcon} alt="Ikke-færdig ikon" />
-              <p>{product.name}</p>
+        {
+          product.completed == 0 && (
+            <div className="todoProduct" key={product.products_id}>
+              <div className="doneOrNot">
+                <img
+                  id="notDoneIcon"
+                  src={notDoneIcon}
+                  alt="Ikke-færdig ikon"
+                />
+                <p>{product.name}</p>
+              </div>
+              <img id="editIcon" src={editIcon} alt="Redigér ikon" />
             </div>
-            <img id="editIcon" src={editIcon} alt="Redigér ikon" />
-          </div>
-        );
+          );
+        }
       })}
       <div className="addSection" onClick={showAddTask}>
         <img src={addIcon} alt="Tilføj opgave ikon" />

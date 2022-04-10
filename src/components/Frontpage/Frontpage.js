@@ -6,9 +6,11 @@ import deleteIcon from "../../assets/img/delete.svg";
 import axios from "axios";
 import AddNewList from "./AddNewList.js";
 import DeleteList from "./DeleteList.js";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Frontpage = () => {
+  const navigate = useNavigate();
+
   const [lists, setLists] = useState([]);
   const [toggleNewList, setToggleNewList] = useState(false);
   const [toggleDeleteList, setToggleDeleteList] = useState(false);
@@ -24,6 +26,9 @@ const Frontpage = () => {
 
   useEffect(() => {
     const users_id = localStorage.getItem("users_id");
+    if (!users_id) {
+      navigate("/login");
+    }
     console.log(users_id);
     axios(`http://localhost:8000/server/lists/read.php?users_id=${users_id}`)
       .then((result) => {
