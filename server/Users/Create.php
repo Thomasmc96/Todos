@@ -2,6 +2,7 @@
 // Include files
 include_once '../Config/Cors.php';
 include_once '../Config/Database.php';
+include_once "./UsersUtil.php";
 
 // Establish database connection
 $datebaseService = new DatabaseService();
@@ -47,12 +48,14 @@ try{
 
     // Execute statement
     if($statement->execute()){
+        // Login
+        login($email, $data->password);
         
-        // Send success response
-        echo json_encode([
-            "message" => "The new user was created",
-            "users_id" => $connection->lastInsertId()
-        ]);
+        // // Send success response
+        // echo json_encode([
+        //     "message" => "The new user was created",
+        //     "users_id" => $connection->lastInsertId()
+        // ]);
     }else {
 
         // Send error response
