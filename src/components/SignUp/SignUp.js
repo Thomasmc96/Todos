@@ -55,13 +55,13 @@ const SignUp = () => {
       <h1>Opret dig her</h1>
       <form className="signUpForm" onSubmit={submitLogin} autoComplete="off">
         <label className="labels" htmlFor="name">Navn</label>
-        <input onChange={handleName} className="inputBoxSignUp" type="name" name="name" required />
+        <input placeholder="Navn" onChange={handleName} className="inputBoxSignUp" type="name" name="name" required />
         <label className="labels" htmlFor="email">Email</label>
-        <input onChange={handleEmail} className="inputBoxSignUp" type="email" name="email" required />
+        <input placeholder="Email" onChange={handleEmail} className="inputBoxSignUp" type="email" name="email" required />
         <label className="labels" htmlFor="password">Adgangskode</label>
-        <input onChange={handlePassword} className="inputBoxSignUp" type="password" name="password" required />
+        <input placeholder="Adgangskode" onChange={handlePassword} className="inputBoxSignUp" type="password" name="password" required />
         <label className="labels" htmlFor="password">Gentag adgangskode</label>
-        <input onChange={handleConfirmPassword} className="inputBoxSignUp" type="password" name="password" required />
+        <input placeholder="Gentag adgangskode" onChange={handleConfirmPassword} className="inputBoxSignUp" type="password" name="password" required />
         {showPasswordError && (
           <p id="passwordError">Adgangskoderne er ikke ens - prøv igen!</p>
         )}
