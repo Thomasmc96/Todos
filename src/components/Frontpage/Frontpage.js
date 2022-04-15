@@ -29,10 +29,8 @@ const Frontpage = () => {
     if (!users_id) {
       navigate("/login");
     }
-    console.log(users_id);
     axios(`http://localhost:8000/server/lists/read.php?users_id=${users_id}`)
       .then((result) => {
-        console.log(result.data);
         setLists(result.data);
       })
       .catch((error) => {
@@ -46,30 +44,6 @@ const Frontpage = () => {
   };
   const showDeleteList = () => {
     setToggleDeleteList(!toggleDeleteList);
-  };
-
-  const deleteList = (e, lists_id) => {
-    e.preventDefault();
-    console.log(lists_id);
-    // API call
-    axios
-      .post("http://localhost:8000/server/lists/delete.php", {
-        lists_id: lists_id,
-      })
-      .then(function (response) {
-        console.log(response);
-        // If response if good
-        if (response.data.code === 200) {
-          console.log("deleted");
-        } else {
-          // Show error message
-          console.log("error");
-        }
-      })
-      .catch(function (error) {
-        // Another error message
-        console.log(error);
-      });
   };
 
   return (
