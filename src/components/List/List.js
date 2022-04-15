@@ -8,8 +8,9 @@ import editIcon from "../../assets/img/edit.svg";
 import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import AddTask from "./AddTask.js";
 import ShareList from "./ShareList.js";
+import AddTask from "./AddTask.js";
+import EditTask from "./EditTask.js";
 
 const List = () => {
   const { id } = useParams();
@@ -24,6 +25,8 @@ const List = () => {
 
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
+
+  const [toggleEditTask, setToggleEditTask] = useState(false)
 
   useEffect(() => {
     axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
@@ -50,6 +53,10 @@ const List = () => {
         setShowCompletedTasks(true);
       }
     }
+  };
+
+  const showEditTask = () => {
+    setToggleEditTask(!toggleEditTask);
   };
 
   const showAddTask = () => {
@@ -130,7 +137,7 @@ const List = () => {
                 />
                 <p>{product.name}</p>
               </div>
-              <img id="editIcon" src={editIcon} alt="Redigér ikon" />
+              <img onClick={showEditTask} id="editIcon" src={editIcon} alt="Redigér ikon" />
             </div>
           );
         }
@@ -166,6 +173,7 @@ const List = () => {
         <AddTask showAddTask={showAddTask} setList={setList} list={list} />
       )}
       {toggleShareList && <ShareList showShareList={showShareList} />}
+      {toggleEditTask && <EditTask showEditTask={showEditTask}/>}
     </div>
   );
 };
