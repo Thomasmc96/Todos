@@ -21,12 +21,14 @@ const Header = () => {
       ) : (
         <img className="logo" src={todo} alt="To do ikon" />
       )}
-      <img
-        onClick={showSettings}
-        id="settingsIcon"
-        src={settings}
-        alt="Instillinger ikon"
-      />
+      {localStorage.getItem("users_id") !== null && (
+        <img
+          onClick={showSettings}
+          id="settingsIcon"
+          src={settings}
+          alt="Instillinger ikon"
+        />
+      )}
       {toggleSettings && <Settings showSettings={showSettings} />}
     </header>
   );
