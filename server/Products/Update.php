@@ -12,6 +12,7 @@ try{
     // Get incoming data
     $data = json_decode(file_get_contents("php://input"));
 
+    // Check products_id
     if(empty($data->products_id)){
         
         // Send error response
@@ -36,6 +37,13 @@ try{
 
     // Data fields
     $products_id = $data->products_id;
+
+    // Set date_completed depending of completed
+    if($data->completed == "1"){
+        $set .= ", date_completed = NOW()";
+    } else if($data->completed == "0"){
+        $set .= ", date_completed = NULL";
+    }
 
     // Prepare query
     $query = "

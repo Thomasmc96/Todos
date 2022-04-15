@@ -12,24 +12,25 @@ import AddTask from "./AddTask.js";
 import ShareList from "./ShareList.js";
 
 const List = () => {
+  // Params from URL
   const { id } = useParams();
 
+  // States
   const [list, setList] = useState({
     list_name: "",
     products: [{ completed: "", name: "", products_id: "" }],
   });
   const [toggleAddTask, setToggleAddTask] = useState(false);
-
   const [toggleShareList, setToggleShareList] = useState(false);
-
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
 
   useEffect(() => {
     axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
       .then((result) => {
-        // Save data in state
+        // Save data to state
         setList(result.data);
+        console.log(result.data);
         checkProducts(result.data.products);
       })
       .catch((error) => {
@@ -37,7 +38,9 @@ const List = () => {
       });
   }, []);
 
+  // Checks if the data contains any uncompleted and any completed tasks
   const checkProducts = (data) => {
+    // Reset values
     setShowCompletedTasks(false);
     setShowUncompletedTasks(false);
 
@@ -45,7 +48,6 @@ const List = () => {
     for (let i = 0; i < data.length; i++) {
       if (data[i].completed == "0") {
         setShowUncompletedTasks(true);
-        console.log("uncom");
       } else if (data[i].completed == "1") {
         setShowCompletedTasks(true);
       }
@@ -115,49 +117,51 @@ const List = () => {
       {!showUncompletedTasks && (
         <p className="doneText">Alle opgaver er løst</p>
       )}
-      {list.products.map((product, i) => {
-        if (product.completed == "0") {
-          return (
-            <div className="todoProduct" key={product.products_id}>
-              <div className="doneOrNot">
-                <img
-                  id="notDoneIcon"
-                  src={notDoneIcon}
-                  alt="Ikke-færdig ikon"
-                  onClick={(event) => {
-                    completeTask(event, i, 1);
-                  }}
-                />
-                <p>{product.name}</p>
+      {Array.isArray(list.products) &&
+        list.products.map((product, i) => {
+          if (product.completed == "0") {
+            return (
+              <div className="todoProduct" key={product.products_id}>
+                <div className="doneOrNot">
+                  <img
+                    id="notDoneIcon"
+                    src={notDoneIcon}
+                    alt="Ikke-færdig ikon"
+                    onClick={(event) => {
+                      completeTask(event, i, 1);
+                    }}
+                  />
+                  <p>{product.name}</p>
+                </div>
+                <img id="editIcon" src={editIcon} alt="Redigér ikon" />
               </div>
-              <img id="editIcon" src={editIcon} alt="Redigér ikon" />
-            </div>
-          );
-        }
-      })}
+            );
+          }
+        })}
       {showCompletedTasks && (
         <span>
           <hr className="hr" />
           <p className="doneText">Fuldførte opgave (slettes efter 30 min)</p>
         </span>
       )}
-      {list.products.map((product, i) => {
-        if (product.completed == "1") {
-          return (
-            <div className="doneProduct" key={product.products_id}>
-              <img
-                id="doneIcon"
-                src={doneIcon}
-                alt="Færdig ikon"
-                onClick={(event) => {
-                  completeTask(event, i, 0);
-                }}
-              />
-              <p>{product.name}</p>
-            </div>
-          );
-        }
-      })}
+      {Array.isArray(list.products) &&
+        list.products.map((product, i) => {
+          if (product.completed == "1") {
+            return (
+              <div className="doneProduct" key={product.products_id}>
+                <img
+                  id="doneIcon"
+                  src={doneIcon}
+                  alt="Færdig ikon"
+                  onClick={(event) => {
+                    completeTask(event, i, 0);
+                  }}
+                />
+                <p>{product.name}</p>
+              </div>
+            );
+          }
+        })}
       <div className="addSection" onClick={showAddTask}>
         <img src={addIcon} alt="Tilføj opgave ikon" />
         <p>Tilføj en opgave</p>

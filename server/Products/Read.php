@@ -36,7 +36,7 @@ try{
     // Prepare query
     $query = "
         SELECT  
-            p.products_id, p.name, p.completed, l.name as list_name
+            p.products_id, p.name, p.completed, p.date_completed, l.name as list_name
         FROM
             lists l
         LEFT JOIN
@@ -51,23 +51,26 @@ try{
     // Execute statement
     if($statement->execute()){
         
-        // Send success response
-
-
         $listName = "";
         $products = [];
+        
+        // Loop through rows 
         while($row = $statement->fetch(PDO::FETCH_ASSOC)){
             $listName = $row['list_name'];
 
             if(!empty($row['products_id'])){
-                $products[] = [
-                    "products_id" => $row['products_id'],
-                    "name" => $row['name'],
-                    "completed" => $row['completed']
-                ];
+                // If uncompleted or if completed in less than 30 mins ago
+                if($row['completed'] == "0" || strtotime(date($row['date_completed'])) > strtotime("-30 minutes") ){
+                    $products[] = [
+                        "products_id" => $row['products_id'],
+                        "name" => $row['name'],
+                        "completed" => $row['completed'],
+                    ];
+                 }
             }
         }
 
+        // Send success response
         echo json_encode(["list_name" => $listName, "products" => $products, "code" => 200]);
     }else {
 
