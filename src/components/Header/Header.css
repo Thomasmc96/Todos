@@ -1,5 +1,8 @@
 .header {
     background-color: #B3EEB1;
+    display: flex;
+    justify-content: space-between;
+
 }
 
 
@@ -10,3 +13,7 @@
     margin-bottom: 1rem;
 }
 
+#settingsIcon{
+    width: 8%;
+    margin-right: 5%;
+}
