@@ -15,7 +15,6 @@ const AddNewList = (props) => {
         users_id: localStorage.getItem("users_id"),
       })
       .then(function (response) {
-        console.log(response);
         // If response if good
         if (response.status === 200) {
           props.setLists([

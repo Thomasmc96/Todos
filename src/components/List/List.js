@@ -90,7 +90,6 @@ const List = () => {
         completed: status,
       })
       .then(function (response) {
-        console.log(response);
         // If response if good
         if (response.data.code === 200) {
           // Save to state

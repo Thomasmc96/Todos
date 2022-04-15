@@ -13,7 +13,6 @@ const DeleteList = (props) => {
         lists_id: props.lists_id,
       })
       .then(function (response) {
-        console.log(response);
         // If response if good
         if (response.data.code === 200) {
           props.setLists((prevLists) => {

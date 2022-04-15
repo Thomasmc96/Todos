@@ -19,7 +19,6 @@ const EditTask = (props) => {
         name: taskName,
       })
       .then(function (response) {
-        console.log(response);
         // If response if good
         if (response.data.code === 200) {
           // Toggle popup
