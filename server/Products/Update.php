@@ -39,10 +39,12 @@ try{
     $products_id = $data->products_id;
 
     // Set date_completed depending of completed
-    if($data->completed == "1"){
-        $set .= ", date_completed = NOW()";
-    } else if($data->completed == "0"){
-        $set .= ", date_completed = NULL";
+    if(isset($data->completed)){
+        if($data->completed == "1"){
+            $set .= ", date_completed = NOW()";
+        } else if($data->completed == "0"){
+            $set .= ", date_completed = NULL";
+        }
     }
 
     // Prepare query

@@ -146,6 +146,15 @@ const List = () => {
                   src={editIcon}
                   alt="Redigér ikon"
                 />
+                {toggleEditTask && (
+                  <EditTask
+                    showEditTask={showEditTask}
+                    task={product}
+                    setList={setList}
+                    list={list}
+                    index={i}
+                  />
+                )}
               </div>
             );
           }
@@ -182,7 +191,6 @@ const List = () => {
         <AddTask showAddTask={showAddTask} setList={setList} list={list} />
       )}
       {toggleShareList && <ShareList showShareList={showShareList} />}
-      {toggleEditTask && <EditTask showEditTask={showEditTask} />}
     </div>
   );
 };
