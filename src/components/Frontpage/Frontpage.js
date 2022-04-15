@@ -13,7 +13,7 @@ const Frontpage = () => {
 
   const [lists, setLists] = useState([]);
   const [toggleNewList, setToggleNewList] = useState(false);
-  const [toggleDeleteList, setToggleDeleteList] = useState(false);
+  const [toggleDeleteList, setToggleDeleteList] = useState(0);
 
   // Get name and initials from local storage
   if (localStorage.getItem("name") !== null) {
@@ -42,8 +42,8 @@ const Frontpage = () => {
   const showNewList = () => {
     setToggleNewList(!toggleNewList);
   };
-  const showDeleteList = () => {
-    setToggleDeleteList(!toggleDeleteList);
+  const showDeleteList = (id) => {
+    setToggleDeleteList(id);
   };
 
   return (
@@ -74,11 +74,11 @@ const Frontpage = () => {
                   className="deleteIcon"
                   src={deleteIcon}
                   alt="Delete ikon"
-                  onClick={showDeleteList}
+                  onClick={() => showDeleteList(list.lists_id)}
                 />
-                {toggleDeleteList && (
+                {toggleDeleteList === list.lists_id && (
                   <DeleteList
-                    showDeleteList={showDeleteList}
+                    showDeleteList={() => showDeleteList(0)}
                     setLists={setLists}
                     lists_id={list.lists_id}
                   />

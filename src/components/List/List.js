@@ -23,10 +23,9 @@ const List = () => {
   });
   const [toggleAddTask, setToggleAddTask] = useState(false);
   const [toggleShareList, setToggleShareList] = useState(false);
+  const [toggleEditTask, setToggleEditTask] = useState(0);
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
-
-  const [toggleEditTask, setToggleEditTask] = useState(false);
 
   useEffect(() => {
     axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
@@ -57,8 +56,8 @@ const List = () => {
     }
   };
 
-  const showEditTask = () => {
-    setToggleEditTask(!toggleEditTask);
+  const showEditTask = (id) => {
+    setToggleEditTask(id);
   };
 
   const showAddTask = () => {
@@ -141,14 +140,14 @@ const List = () => {
                   <p>{product.name}</p>
                 </div>
                 <img
-                  onClick={showEditTask}
+                  onClick={() => showEditTask(product.products_id)}
                   id="editIcon"
                   src={editIcon}
                   alt="Redigér ikon"
                 />
-                {toggleEditTask && (
+                {toggleEditTask === product.products_id && (
                   <EditTask
-                    showEditTask={showEditTask}
+                    showEditTask={() => showEditTask(0)}
                     task={product}
                     setList={setList}
                     list={list}
