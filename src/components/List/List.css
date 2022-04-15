@@ -1,171 +1,166 @@
-.listSection .firstSection{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 12%;
-    margin-right: 12%;
+.listSection .firstSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 12%;
+  margin-right: 12%;
 }
 
-.listSection .firstSection #back{
-    width: 10px;
-    margin-right: 10%;
+.listSection .firstSection #back {
+  width: 10px;
+  margin-right: 10%;
 }
 
-.listSection .firstSection #share{
-    width: 20px;
-    margin-left: 10%;
+.listSection .firstSection #share {
+  width: 20px;
+  margin-left: 10%;
 }
 
-
-.listSection .firstSection .backSection{
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-    color: black;
+.listSection .firstSection .backSection {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  color: black;
 }
 
-.listSection .firstSection .shareSection{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 27%;
-}
-    
-.listSection .hr{
-    background-color: #000000;
-    border: none; 
-    height: 1vw;
-    width: 80%;
-    border-radius: 10px;
-    margin-top: 0;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    line-height: 0;
+.listSection .firstSection .shareSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 27%;
 }
 
-.listSection h1{
-   text-align: center;
+.listSection .hr {
+  background-color: #000000;
+  border: none;
+  height: 1vw;
+  width: 80%;
+  border-radius: 10px;
+  margin-top: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  line-height: 0;
 }
 
-.listSection #notDoneIcon{
-    width: 25px;
-    margin-right: 15px;
+.listSection h1 {
+  text-align: center;
 }
 
-
-.listSection #editIcon{
-    width: 25px;
+.listSection #notDoneIcon {
+  width: 25px;
+  margin-right: 15px;
 }
 
-.listSection .todoProduct{
-    display: flex;
-    justify-content: space-between;
-    background-color: #82CB80;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border-radius: 5px;
-    padding: 2% 5%;
+.listSection #editIcon {
+  width: 25px;
 }
 
-.listSection .todoProduct p{
-   font-size: 20px;
-   margin: 0;
+.listSection .todoProduct {
+  display: flex;
+  justify-content: space-between;
+  background-color: #82cb80;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 5px;
+  padding: 2% 5%;
 }
 
-.listSection .doneOrNot{
-    display: flex;
+.listSection .todoProduct p {
+  font-size: 20px;
+  margin: 0;
 }
 
-#doneText{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
- 
-.doneProduct{
-    display: flex;
-    background-color: #D5F2D4;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border-radius: 5px;
-    padding: 2% 5%;
-    text-align: left;
+.listSection .doneOrNot {
+  display: flex;
 }
 
-.doneProduct p{
-    font-size: 20px;
-    margin: 0;
+.doneText {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#doneIcon{
-    width: 25px;
-    margin-right: 15px;
+.doneProduct {
+  display: flex;
+  background-color: #d5f2d4;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 5px;
+  padding: 2% 5%;
+  text-align: left;
 }
 
-
-
-
-.listSection .addSection{
-    display: flex;
-    background-color: #7BA779;
-    width: 70%;
-    border-radius: 5px;
-    padding: 2% 5%;
-    position: fixed;
-    top: 90%;
-    left: 10%;
+.doneProduct p {
+  font-size: 20px;
+  margin: 0;
 }
 
-.listSection .addSection img{
-    width: 35px;
-    margin-right: 10px;
+#doneIcon {
+  width: 25px;
+  margin-right: 15px;
 }
 
-.listSection .addSection p{
-   font-size: 20px;
-   margin: 5%;
+.listSection .addSection {
+  display: flex;
+  background-color: #7ba779;
+  width: 70%;
+  border-radius: 5px;
+  padding: 2% 5%;
+  position: fixed;
+  top: 90%;
+  left: 10%;
 }
 
-.addTask{
-    background-color: #7BA779;
-    width: 80vw;
-    border-radius: 20px;
-    position: fixed;
-    top: 30%;
-    left: 10%;
-    text-align: center;  
+.listSection .addSection img {
+  width: 35px;
+  margin-right: 10px;
 }
 
-.addTask h2{
-    font-size: 30px;
+.listSection .addSection p {
+  font-size: 20px;
+  margin: 5%;
 }
 
-.addTask .inputBox{
-    text-align: left;
-    font-family: berlin;
-    width: 80%;
-    height: 8vw;
-    font-size: 17px;
-    border-radius: 5px;
-    border-color: none;
-    border-width: 0px;
+.addTask {
+  background-color: #7ba779;
+  width: 80vw;
+  border-radius: 20px;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  text-align: center;
 }
 
-.addTask button{
-    background-color: white;
-    padding: 3%;
-    margin: 1%;
-    border-radius: 5px;
-    border: none;
-    font-family: berlin;
-    font-size: 17px;
-    margin-bottom: 8%;
-    margin-top: 8%;
-    width: 40%;
+.addTask h2 {
+  font-size: 30px;
+}
+
+.addTask .inputBox {
+  text-align: left;
+  font-family: berlin;
+  width: 80%;
+  height: 8vw;
+  font-size: 17px;
+  border-radius: 5px;
+  border-color: none;
+  border-width: 0px;
+}
+
+.addTask button {
+  background-color: white;
+  padding: 3%;
+  margin: 1%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 17px;
+  margin-bottom: 8%;
+  margin-top: 8%;
+  width: 40%;
 }

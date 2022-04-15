@@ -15,9 +15,9 @@ try{
     if(empty($data->products_id)){
         
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "products_id can't be empty"
+            "message" => "products_id can't be empty",
+            "code" => 500
         ]);
     
         exit(0);
@@ -72,16 +72,16 @@ try{
     }else {
 
         // Send error response
-        http_response_code(500);
         echo json_encode([
-            "message" => "Unable to update product"
+            "message" => "Unable to update product",
+            "code" => 500
         ]);
     }
 } catch(\Exception $e) {
 
      // Send error response
-     http_response_code(500);
      echo json_encode([
-         "message" => $e
+         "message" => $e,
+         "code" => 500
      ]);
 }

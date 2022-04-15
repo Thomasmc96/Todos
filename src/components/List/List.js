@@ -22,17 +22,35 @@ const List = () => {
 
   const [toggleShareList, setToggleShareList] = useState(false);
 
+  const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
+  const [showCompletedTasks, setShowCompletedTasks] = useState(false);
 
   useEffect(() => {
     axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
       .then((result) => {
-        console.log(result.data);
+        // Save data in state
         setList(result.data);
+        checkProducts(result.data.products);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  const checkProducts = (data) => {
+    setShowCompletedTasks(false);
+    setShowUncompletedTasks(false);
+
+    // Check if there are any completed or uncompleted tasks
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].completed == "0") {
+        setShowUncompletedTasks(true);
+        console.log("uncom");
+      } else if (data[i].completed == "1") {
+        setShowCompletedTasks(true);
+      }
+    }
+  };
 
   const showAddTask = () => {
     setToggleAddTask(!toggleAddTask);
@@ -40,6 +58,43 @@ const List = () => {
 
   const showShareList = () => {
     setToggleShareList(!toggleShareList);
+  };
+
+  const completeTask = (event, index, status) => {
+    event.preventDefault();
+
+    // Save state array in local variable
+    let products = [...list.products];
+
+    // Save the one product we are handling
+    let product = products[index];
+
+    // Set value for property
+    product.completed = status;
+
+    // Save product in local array
+    products[index] = product;
+
+    // API call
+    axios
+      .post("http://localhost:8000/server/products/update.php", {
+        products_id: product.products_id,
+        completed: status,
+      })
+      .then(function (response) {
+        console.log(response);
+        // If response if good
+        if (response.data.code === 200) {
+          // Save to state
+          setList({ list_name: list.list_name, products: products });
+          checkProducts(products);
+        } else {
+          console.log("Error");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -57,7 +112,10 @@ const List = () => {
       <hr className="hr" />
       <h1>{list.list_name}</h1>
       <hr className="hr" />
-      {list.products.map((product) => {
+      {!showUncompletedTasks && (
+        <p className="doneText">Alle opgaver er løst</p>
+      )}
+      {list.products.map((product, i) => {
         if (product.completed == "0") {
           return (
             <div className="todoProduct" key={product.products_id}>
@@ -66,6 +124,9 @@ const List = () => {
                   id="notDoneIcon"
                   src={notDoneIcon}
                   alt="Ikke-færdig ikon"
+                  onClick={(event) => {
+                    completeTask(event, i, 1);
+                  }}
                 />
                 <p>{product.name}</p>
               </div>
@@ -74,16 +135,29 @@ const List = () => {
           );
         }
       })}
-      <hr className="hr" />
-      <p id="doneText">Fuldførte opgave (slettes efter 5 min)</p>
-      <div className="doneProduct">
-          <img
-            id="doneIcon"
-            src={doneIcon}
-            alt="Færdig ikon"
-          />
-          <p>Slik</p>
-        </div>
+      {showCompletedTasks && (
+        <span>
+          <hr className="hr" />
+          <p className="doneText">Fuldførte opgave (slettes efter 30 min)</p>
+        </span>
+      )}
+      {list.products.map((product, i) => {
+        if (product.completed == "1") {
+          return (
+            <div className="doneProduct" key={product.products_id}>
+              <img
+                id="doneIcon"
+                src={doneIcon}
+                alt="Færdig ikon"
+                onClick={(event) => {
+                  completeTask(event, i, 0);
+                }}
+              />
+              <p>{product.name}</p>
+            </div>
+          );
+        }
+      })}
       <div className="addSection" onClick={showAddTask}>
         <img src={addIcon} alt="Tilføj opgave ikon" />
         <p>Tilføj en opgave</p>
@@ -91,9 +165,7 @@ const List = () => {
       {toggleAddTask && (
         <AddTask showAddTask={showAddTask} setList={setList} list={list} />
       )}
-      {toggleShareList && (
-      <ShareList  showShareList={showShareList}/>
-      )}
+      {toggleShareList && <ShareList showShareList={showShareList} />}
     </div>
   );
 };
