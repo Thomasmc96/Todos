@@ -42,6 +42,15 @@ try {
     $statement->execute();
 
     $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if(empty($user)){
+         // Send error response
+         echo json_encode([
+            "message" => "User wasn't found",
+            "code" => 404
+        ]);
+        exit();
+    }
     $users_id = $user[0]["users_id"];
  
 
