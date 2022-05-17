@@ -36,11 +36,13 @@ try{
     // Prepare query
     $query = "
         SELECT  
-            p.products_id, p.name, p.completed, p.date_completed, l.name as list_name
+            p.products_id, p.name, p.completed, p.date_completed, l.name as list_name, l.users_id, ls.users_id as shared_user
         FROM
             lists l
         LEFT JOIN
             products p ON p.lists_id = l.lists_id
+        LEFT JOIN
+            lists_shared ls on ls.lists_id = l.lists_id
         WHERE
             ". $where ."
         ";
@@ -57,6 +59,14 @@ try{
         // Loop through rows 
         while($row = $statement->fetch(PDO::FETCH_ASSOC)){
             $listName = $row['list_name'];
+            $usersId = base64_encode($row['users_id']);
+
+            // Set shared users
+            $sharedUsers = [];
+            if(!in_array($row['shared_user'], $sharedUsers)){
+                $sharedUsers[] = base64_encode($row['shared_user']);
+            }
+            
 
             if(!empty($row['products_id'])){
                 // If uncompleted or if completed in less than 30 mins ago
@@ -71,7 +81,7 @@ try{
         }
 
         // Send success response
-        echo json_encode(["list_name" => $listName, "products" => $products, "code" => 200]);
+        echo json_encode(["list_name" => $listName, "users_id" => $usersId, "products" => $products, "shared_users" => $sharedUsers, "code" => 200]);
     }else {
 
         // Send error response

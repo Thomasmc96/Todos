@@ -12,6 +12,7 @@ const Frontpage = () => {
   const navigate = useNavigate();
 
   const [lists, setLists] = useState([]);
+  const [sharedLists, setSharedLists] = useState([]);
   const [toggleNewList, setToggleNewList] = useState(false);
   const [toggleDeleteList, setToggleDeleteList] = useState(0);
 
@@ -29,9 +30,23 @@ const Frontpage = () => {
     if (!users_id) {
       navigate("/login");
     }
+    // Get lists made by current user
     axios(`http://localhost:8000/server/lists/read.php?users_id=${users_id}`)
       .then((result) => {
+        console.log(result.data);
         setLists(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // Get lists shared to current user
+    axios(
+      `http://localhost:8000/server/lists/sharedlists/read.php?users_id=${users_id}`
+    )
+      .then((result) => {
+        console.log(result.data);
+        setSharedLists(result.data);
       })
       .catch((error) => {
         console.log(error);
@@ -62,7 +77,8 @@ const Frontpage = () => {
       <section>
         <h3 className="listCategory">Lister oprettet af mig</h3>
         <hr className="hrList" />
-        {lists.length > 0 &&
+        {Array.isArray(lists) &&
+          lists.length > 0 &&
           lists.map((list) => {
             return (
               <div className="list" key={list.lists_id}>
@@ -83,6 +99,27 @@ const Frontpage = () => {
                     lists_id={list.lists_id}
                   />
                 )}
+              </div>
+            );
+          })}
+      </section>
+      <section>
+        <h3 className="listCategory">Lister delt med mig</h3>
+        <hr className="hrList" />
+        {Array.isArray(sharedLists) &&
+          sharedLists.length > 0 &&
+          sharedLists.map((sharedList) => {
+            return (
+              <div className="list" key={sharedList.lists_id}>
+                <Link to={"/list/" + sharedList.lists_id} className="listLink">
+                  <img className="listIcon" src={listIcon} alt="Liste ikon" />
+                  <div className="sharedContainer">
+                    <p>{sharedList.name}</p>
+                    <span className="sharedBy">
+                      {"(af " + sharedList.users_name + ")"}
+                    </span>
+                  </div>
+                </Link>
               </div>
             );
           })}

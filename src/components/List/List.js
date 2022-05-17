@@ -30,10 +30,23 @@ const List = () => {
   useEffect(() => {
     axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
       .then((result) => {
-        // Save data to state
-        setList(result.data);
+        // Check user is allowed to see list
+        // if (result.data.users_id !== localStorage.getItem("users_id")) {
+        let sharedUsers = result.data.shared_users;
+        console.log(result.data.users_id === localStorage.getItem("users_id"));
+        console.log(sharedUsers.includes(localStorage.getItem("users_id")));
         console.log(result.data);
-        checkProducts(result.data.products);
+
+        if (
+          result.data.users_id === localStorage.getItem("users_id") ||
+          sharedUsers.includes(localStorage.getItem("users_id"))
+        ) {
+          // Save data to state
+          setList(result.data);
+          checkProducts(result.data.products);
+        } else {
+          window.location.replace("/");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -111,10 +124,12 @@ const List = () => {
           <img id="back" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
-        <div className="shareSection" onClick={showShareList}>
-          <p>Del liste</p>
-          <img id="share" src={shareIcon} alt="Del liste ikon" />
-        </div>
+        {list.users_id === localStorage.getItem("users_id") && (
+          <div className="shareSection" onClick={showShareList}>
+            <p>Del liste</p>
+            <img id="share" src={shareIcon} alt="Del liste ikon" />
+          </div>
+        )}
       </div>
       <hr className="hr" />
       <h1>{list.list_name}</h1>
