@@ -20,6 +20,7 @@ const AddTask = (props) => {
         if (response.status === 200) {
           props.setList({
             list_name: props.list.list_name,
+            users_id: props.list.users_id,
             products: [
               ...props.list.products,
               {

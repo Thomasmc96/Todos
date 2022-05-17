@@ -14,16 +14,11 @@ try{
     // Get incoming data
     $data = json_decode(file_get_contents("php://input"));
 
-    
-    // Prepare WHERE
-    // $where = "1";
-
     // Fetch by users_id
     if(isset($_GET['users_id']) && !empty($_GET['users_id'])){
 
         $users_id = base64_decode($_GET['users_id']);
 
-        // $where .= " AND users_id = " . $users_id;
     }else {
         // Send error response
         echo json_encode([

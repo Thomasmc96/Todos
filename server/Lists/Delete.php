@@ -29,11 +29,13 @@ try{
     // Prepare query
     $query = "
         DELETE 
-            l, p 
+            l, p, ls
         FROM 
             lists l
         LEFT JOIN 
             products p ON p.lists_id = l.lists_id
+        LEFT JOIN 
+            lists_shared ls ON ls.lists_id = l.lists_id
         WHERE 
             l.lists_id = :lists_id
         ";

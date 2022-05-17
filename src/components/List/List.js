@@ -117,6 +117,9 @@ const List = () => {
       });
   };
 
+  console.log(list.users_id);
+  console.log(localStorage.getItem("users_id"));
+
   return (
     <div className="listSection">
       <div className="firstSection">

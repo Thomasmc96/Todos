@@ -38,6 +38,7 @@ const EditTask = (props) => {
 
           props.setList({
             list_name: props.list.list_name,
+            users_id: props.list.users_id,
             products: products,
           });
         } else {
