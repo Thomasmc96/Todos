@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import environment from "../../environment";
 
 const ShareList = (props) => {
   const params = useParams();
@@ -12,7 +13,7 @@ const ShareList = (props) => {
     event.preventDefault();
 
     axios
-      .post("http://localhost:8000/server/lists/sharedlists/sendmail.php", {
+      .post(`${environment[0]}/server/Lists/SharedLists/Sendmail.php`, {
         mail: mail,
         lists_id: lists_id,
         name: localStorage.getItem("name"),

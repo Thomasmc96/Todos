@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import environment from "../../environment";
 
 const EditTask = (props) => {
   const [taskName, setTaskName] = useState(props.task.name);
@@ -14,7 +15,7 @@ const EditTask = (props) => {
     }
 
     axios
-      .post("http://localhost:8000/server/products/update.php", {
+      .post(`${environment[0]}/server/Products/Update.php`, {
         products_id: props.task.products_id,
         name: taskName,
       })

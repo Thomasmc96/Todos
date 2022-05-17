@@ -11,6 +11,7 @@ import { useParams, Link } from "react-router-dom";
 import ShareList from "./ShareList.js";
 import AddTask from "./AddTask.js";
 import EditTask from "./EditTask.js";
+import environment from "../../environment";
 
 const List = () => {
   // Params from URL
@@ -28,7 +29,7 @@ const List = () => {
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
 
   useEffect(() => {
-    axios(`http://localhost:8000/server/products/read.php?lists_id=${id}`)
+    axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}`)
       .then((result) => {
         // Check user is allowed to see list
         // if (result.data.users_id !== localStorage.getItem("users_id")) {
@@ -98,7 +99,7 @@ const List = () => {
 
     // API call
     axios
-      .post("http://localhost:8000/server/products/update.php", {
+      .post(`${environment[0]}/server/Products/Update.php`, {
         products_id: product.products_id,
         completed: status,
       })

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import environment from "../../environment";
 
 const AddTask = (props) => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const AddTask = (props) => {
   const pushTask = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8000/server/products/create.php", {
+      .post(`${environment[0]}/server/Products/Create.php`, {
         name: taskName,
         lists_id: id,
       })

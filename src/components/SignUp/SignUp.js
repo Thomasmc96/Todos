@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import environment from "../../environment";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const SignUp = () => {
 
     // API call
     axios
-      .post("http://localhost:8000/server/users/create.php", {
+      .post(`${environment[0]}/server/Users/Create.php`, {
         name: name,
         email: email,
         password: password,
@@ -82,14 +83,50 @@ const SignUp = () => {
     <div className="signUpSection">
       <h1>Opret dig her</h1>
       <form className="signUpForm" onSubmit={submitLogin} autoComplete="off">
-        <label className="labels" htmlFor="name">Navn</label>
-        <input placeholder="Navn" onChange={handleName} className="inputBoxSignUp" type="name" name="name" required />
-        <label className="labels" htmlFor="email">Email</label>
-        <input placeholder="Email" onChange={handleEmail} className="inputBoxSignUp" type="email" name="email" required />
-        <label className="labels" htmlFor="password">Adgangskode</label>
-        <input placeholder="Adgangskode" onChange={handlePassword} className="inputBoxSignUp" type="password" name="password" required />
-        <label className="labels" htmlFor="password">Gentag adgangskode</label>
-        <input placeholder="Gentag adgangskode" onChange={handleConfirmPassword} className="inputBoxSignUp" type="password" name="password" required />
+        <label className="labels" htmlFor="name">
+          Navn
+        </label>
+        <input
+          placeholder="Navn"
+          onChange={handleName}
+          className="inputBoxSignUp"
+          type="name"
+          name="name"
+          required
+        />
+        <label className="labels" htmlFor="email">
+          Email
+        </label>
+        <input
+          placeholder="Email"
+          onChange={handleEmail}
+          className="inputBoxSignUp"
+          type="email"
+          name="email"
+          required
+        />
+        <label className="labels" htmlFor="password">
+          Adgangskode
+        </label>
+        <input
+          placeholder="Adgangskode"
+          onChange={handlePassword}
+          className="inputBoxSignUp"
+          type="password"
+          name="password"
+          required
+        />
+        <label className="labels" htmlFor="password">
+          Gentag adgangskode
+        </label>
+        <input
+          placeholder="Gentag adgangskode"
+          onChange={handleConfirmPassword}
+          className="inputBoxSignUp"
+          type="password"
+          name="password"
+          required
+        />
         {showPasswordError && (
           <p id="passwordError">Adgangskoderne er ikke ens - prøv igen!</p>
         )}

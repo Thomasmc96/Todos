@@ -7,6 +7,7 @@ import axios from "axios";
 import AddNewList from "./AddNewList.js";
 import DeleteList from "./DeleteList.js";
 import { useNavigate, Link } from "react-router-dom";
+import environment from "../../environment";
 
 const Frontpage = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Frontpage = () => {
       navigate("/login");
     }
     // Get lists made by current user
-    axios(`http://localhost:8000/server/lists/read.php?users_id=${users_id}`)
+    axios(`${environment[0]}/server/Lists/Read.php?users_id=${users_id}`)
       .then((result) => {
         console.log(result.data);
         setLists(result.data);
@@ -40,9 +41,9 @@ const Frontpage = () => {
         console.log(error);
       });
 
-    // Get lists shared to current user
+    // Get lists shared for the current user
     axios(
-      `http://localhost:8000/server/lists/sharedlists/read.php?users_id=${users_id}`
+      `${environment[0]}/server/Lists/SharedLists/Read.php?users_id=${users_id}`
     )
       .then((result) => {
         console.log(result.data);

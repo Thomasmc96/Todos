@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import environment from "../../environment";
 
 const AddNewList = (props) => {
   const [listName, setListName] = useState("");
@@ -10,7 +11,7 @@ const AddNewList = (props) => {
 
     // API call
     axios
-      .post("http://localhost:8000/server/lists/create.php", {
+      .post(`${environment[0]}/server/Lists/Create.php`, {
         name: listName,
         users_id: localStorage.getItem("users_id"),
       })

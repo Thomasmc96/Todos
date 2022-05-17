@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import environment from "../../environment";
 
 const DeleteList = (props) => {
   const [listName, setListName] = useState("");
@@ -9,7 +10,7 @@ const DeleteList = (props) => {
 
     // API call
     axios
-      .post("http://localhost:8000/server/lists/delete.php", {
+      .post(`${environment[0]}/server/Lists/Delete.php`, {
         lists_id: props.lists_id,
       })
       .then(function (response) {

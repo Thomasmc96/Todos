@@ -55,7 +55,7 @@ try {
  
 
     // Link for the user to access
-    $link = "http://localhost:8000/server/lists/sharedlists/create.php?lists_id=$lists_id&users_id=$users_id";
+    $link = "https://todos.dk/server/Lists/SharedLists/Create.php?lists_id=$lists_id&users_id=$users_id";
 
  
     // Subject for mail
@@ -67,19 +67,13 @@ try {
                 $link";
 
     // Prepare headers for mail
-    $headers =  "From: Todo <info@todo.dk>\r\n";
-    $headers .= "Reply-To: Todo <info@todo.dk>\r\n";
-    $headers .= "Return-Path: Todo <info@todo.dk>\r\n";
-
-    echo json_encode([
-        "link" => $link,
-        "message" => $message
-    ]);
-    exit();
+    $headers =  "From: Todo <info@todos.dk>\r\n";
+    $headers .= "Reply-To: Todo <info@todos.dk>\r\n";
+    $headers .= "Return-Path: Todo <info@todos.dk>\r\n";
 
     // Send mail
     if (mail($mail, $subject, $message, $headers) ) {
-     // Send error response
+     // Send success response
      echo json_encode([
         "message" => "The mail was sent",
         "code" => 200
