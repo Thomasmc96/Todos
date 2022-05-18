@@ -3,6 +3,7 @@ import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [showPasswordError, setShowPasswordError] = useState(false);
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -37,8 +39,8 @@ const SignUp = () => {
     setShowCheckboxError(false);
   };
 
-  const redirect = (e) => {
-    navigate("/login");
+  const redirect = (path) => {
+    navigate(path);
   };
 
   const submitLogin = (e) => {
@@ -55,6 +57,7 @@ const SignUp = () => {
       return;
     }
 
+    setLoading(true);
     // API call
     axios
       .post(`${environment[0]}/server/Users/Create.php`, {
@@ -63,6 +66,8 @@ const SignUp = () => {
         password: password,
       })
       .then(function (response) {
+        setLoading(false);
+
         console.log(response);
         // If response if good
         if (response.data.code === 200) {
@@ -77,6 +82,7 @@ const SignUp = () => {
       .catch(function (error) {
         // Another error message
         console.log(error);
+        setLoading(false);
       });
   };
   return (
@@ -87,7 +93,6 @@ const SignUp = () => {
           Navn
         </label>
         <input
-          placeholder="Navn"
           onChange={handleName}
           className="inputBoxSignUp"
           type="name"
@@ -98,7 +103,6 @@ const SignUp = () => {
           Email
         </label>
         <input
-          placeholder="Email"
           onChange={handleEmail}
           className="inputBoxSignUp"
           type="email"
@@ -109,7 +113,6 @@ const SignUp = () => {
           Adgangskode
         </label>
         <input
-          placeholder="Adgangskode"
           onChange={handlePassword}
           className="inputBoxSignUp"
           type="password"
@@ -120,7 +123,6 @@ const SignUp = () => {
           Gentag adgangskode
         </label>
         <input
-          placeholder="Gentag adgangskode"
           onChange={handleConfirmPassword}
           className="inputBoxSignUp"
           type="password"
@@ -145,11 +147,20 @@ const SignUp = () => {
         {showCheckboxError && (
           <p id="checkboxError">Husk at acceptere vilkårene - prøv igen!</p>
         )}
+
         <div id="btnContainer">
-          <button type="button" onClick={redirect}>
-            Tilbage
-          </button>
-          <button type="Submit">Opret</button>
+          {loading ? (
+            <div className="loading">
+              <TailSpin color="#000000" height={40} width={40} />
+            </div>
+          ) : (
+            <React.Fragment>
+              <button type="button" onClick={() => redirect("/login")}>
+                Tilbage
+              </button>
+              <button type="Submit">Opret</button>
+            </React.Fragment>
+          )}
         </div>
       </form>
     </div>

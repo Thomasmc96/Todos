@@ -8,6 +8,7 @@ import AddNewList from "./AddNewList.js";
 import DeleteList from "./DeleteList.js";
 import { useNavigate, Link } from "react-router-dom";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const Frontpage = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const Frontpage = () => {
   const [sharedLists, setSharedLists] = useState([]);
   const [toggleNewList, setToggleNewList] = useState(false);
   const [toggleDeleteList, setToggleDeleteList] = useState(0);
+  const [loadingLists, setLoadingLists] = useState(false);
+  const [loadingSharedLists, setLoadingSharedLists] = useState(false);
 
   // Get name and initials from local storage
   if (localStorage.getItem("name") !== null) {
@@ -31,14 +34,18 @@ const Frontpage = () => {
     if (!users_id) {
       navigate("/login");
     }
+    setLoadingLists(true);
+    setLoadingSharedLists(true);
     // Get lists made by current user
     axios(`${environment[0]}/server/Lists/Read.php?users_id=${users_id}`)
       .then((result) => {
         console.log(result.data);
         setLists(result.data);
+        setLoadingLists(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoadingLists(false);
       });
 
     // Get lists shared for the current user
@@ -48,9 +55,11 @@ const Frontpage = () => {
       .then((result) => {
         console.log(result.data);
         setSharedLists(result.data);
+        setLoadingSharedLists(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoadingSharedLists(false);
       });
   }, []);
 
@@ -78,7 +87,12 @@ const Frontpage = () => {
       <section>
         <h3 className="listCategory">Lister oprettet af mig</h3>
         <hr className="hrList" />
-        {Array.isArray(lists) &&
+        {loadingLists ? (
+          <div className="loading">
+            <TailSpin color="#000000" height={40} width={40} />
+          </div>
+        ) : (
+          Array.isArray(lists) &&
           lists.length > 0 &&
           lists.map((list) => {
             return (
@@ -102,12 +116,22 @@ const Frontpage = () => {
                 )}
               </div>
             );
-          })}
+          })
+        )}
+        {/* Empty lists */}
+        {Array.isArray(lists) && lists.length === 0 && (
+          <div className="list listLink">Her er tomt...</div>
+        )}
       </section>
       <section>
         <h3 className="listCategory">Lister delt med mig</h3>
         <hr className="hrList" />
-        {Array.isArray(sharedLists) &&
+        {loadingSharedLists ? (
+          <div className="loading">
+            <TailSpin color="#000000" height={40} width={40} />
+          </div>
+        ) : (
+          Array.isArray(sharedLists) &&
           sharedLists.length > 0 &&
           sharedLists.map((sharedList) => {
             return (
@@ -123,7 +147,12 @@ const Frontpage = () => {
                 </Link>
               </div>
             );
-          })}
+          })
+        )}
+        {/* Empty shared lists */}
+        {Array.isArray(lists) && lists.length === 0 && (
+          <div className="list listLink">Her er tomt...</div>
+        )}
       </section>
       {/* <section>
         <h3 className="listCategory">Lister delt med mig</h3>

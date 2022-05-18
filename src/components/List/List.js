@@ -12,6 +12,7 @@ import ShareList from "./ShareList.js";
 import AddTask from "./AddTask.js";
 import EditTask from "./EditTask.js";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const List = () => {
   // Params from URL
@@ -27,8 +28,10 @@ const List = () => {
   const [toggleEditTask, setToggleEditTask] = useState(0);
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}`)
       .then((result) => {
         // Check user is allowed to see list
@@ -37,6 +40,7 @@ const List = () => {
         console.log(result.data.users_id === localStorage.getItem("users_id"));
         console.log(sharedUsers.includes(localStorage.getItem("users_id")));
         console.log(result.data);
+        setLoading(false);
 
         if (
           result.data.users_id === localStorage.getItem("users_id") ||
@@ -51,6 +55,7 @@ const List = () => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, []);
 
@@ -138,68 +143,76 @@ const List = () => {
       <hr className="hr" />
       <h1>{list.list_name}</h1>
       <hr className="hr" />
-      {!showUncompletedTasks && (
-        <p className="doneText">Alle opgaver er løst</p>
-      )}
-      {Array.isArray(list.products) &&
-        list.products.map((product, i) => {
-          if (product.completed == "0") {
-            return (
-              <div className="todoProduct" key={product.products_id}>
-                <div className="doneOrNot">
+      <div className="tasks">
+        {!showUncompletedTasks && (
+          <p className="doneText">Alle opgaver er løst</p>
+        )}
+        {loading ? (
+          <div className="loading">
+            <TailSpin color="#000000" height={60} width={60} />
+          </div>
+        ) : (
+          Array.isArray(list.products) &&
+          list.products.map((product, i) => {
+            if (product.completed == "0") {
+              return (
+                <div className="todoProduct" key={product.products_id}>
+                  <div className="doneOrNot">
+                    <img
+                      id="notDoneIcon"
+                      src={notDoneIcon}
+                      alt="Ikke-færdig ikon"
+                      onClick={(event) => {
+                        completeTask(event, i, 1);
+                      }}
+                    />
+                    <p>{product.name}</p>
+                  </div>
                   <img
-                    id="notDoneIcon"
-                    src={notDoneIcon}
-                    alt="Ikke-færdig ikon"
+                    onClick={() => showEditTask(product.products_id)}
+                    id="editIcon"
+                    src={editIcon}
+                    alt="Redigér ikon"
+                  />
+                  {toggleEditTask === product.products_id && (
+                    <EditTask
+                      showEditTask={() => showEditTask(0)}
+                      task={product}
+                      setList={setList}
+                      list={list}
+                      index={i}
+                    />
+                  )}
+                </div>
+              );
+            }
+          })
+        )}
+        {showCompletedTasks && (
+          <span>
+            <hr className="hr" />
+            <p className="doneText">Fuldførte opgave (slettes efter 30 min)</p>
+          </span>
+        )}
+        {Array.isArray(list.products) &&
+          list.products.map((product, i) => {
+            if (product.completed == "1") {
+              return (
+                <div className="doneProduct" key={product.products_id}>
+                  <img
+                    id="doneIcon"
+                    src={doneIcon}
+                    alt="Færdig ikon"
                     onClick={(event) => {
-                      completeTask(event, i, 1);
+                      completeTask(event, i, 0);
                     }}
                   />
                   <p>{product.name}</p>
                 </div>
-                <img
-                  onClick={() => showEditTask(product.products_id)}
-                  id="editIcon"
-                  src={editIcon}
-                  alt="Redigér ikon"
-                />
-                {toggleEditTask === product.products_id && (
-                  <EditTask
-                    showEditTask={() => showEditTask(0)}
-                    task={product}
-                    setList={setList}
-                    list={list}
-                    index={i}
-                  />
-                )}
-              </div>
-            );
-          }
-        })}
-      {showCompletedTasks && (
-        <span>
-          <hr className="hr" />
-          <p className="doneText">Fuldførte opgave (slettes efter 30 min)</p>
-        </span>
-      )}
-      {Array.isArray(list.products) &&
-        list.products.map((product, i) => {
-          if (product.completed == "1") {
-            return (
-              <div className="doneProduct" key={product.products_id}>
-                <img
-                  id="doneIcon"
-                  src={doneIcon}
-                  alt="Færdig ikon"
-                  onClick={(event) => {
-                    completeTask(event, i, 0);
-                  }}
-                />
-                <p>{product.name}</p>
-              </div>
-            );
-          }
-        })}
+              );
+            }
+          })}
+      </div>
       <div className="addSection" onClick={showAddTask}>
         <img src={addIcon} alt="Tilføj opgave ikon" />
         <p>Tilføj en opgave</p>

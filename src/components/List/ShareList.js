@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const ShareList = (props) => {
   const params = useParams();
   const lists_id = params.id;
 
   const [mail, setMail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const share = (event) => {
     event.preventDefault();
+    setLoading(true);
 
     axios
       .post(`${environment[0]}/server/Lists/SharedLists/SendMail.php`, {
@@ -19,6 +22,7 @@ const ShareList = (props) => {
         name: localStorage.getItem("name"),
       })
       .then(function (response) {
+        setLoading(false);
         console.log(response.data);
 
         // If response if good
@@ -30,6 +34,7 @@ const ShareList = (props) => {
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -46,12 +51,18 @@ const ShareList = (props) => {
           autoComplete="off"
           onChange={(e) => setMail(e.target.value)}
         />
-        <div>
-          <button type="button" onClick={props.showShareList}>
-            Tilbage
-          </button>
-          <button type="submit">Del liste</button>
-        </div>
+        {loading ? (
+          <div className="loading">
+            <TailSpin color="#000000" height={40} width={40} />
+          </div>
+        ) : (
+          <div>
+            <button type="button" onClick={props.showShareList}>
+              Tilbage
+            </button>
+            <button type="submit">Del liste</button>
+          </div>
+        )}
       </form>
     </div>
   );

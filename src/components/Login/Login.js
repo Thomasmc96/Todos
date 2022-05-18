@@ -3,12 +3,14 @@ import "./Login.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const Login = () => {
   // State variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showLoginError, setShowLoginError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -22,7 +24,7 @@ const Login = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     // API call
     axios
       .post(`${environment[0]}/server/Users/Login.php`, {
@@ -30,6 +32,8 @@ const Login = () => {
         password: password,
       })
       .then(function (response) {
+        setLoading(false);
+
         console.log(response);
         // If response if good
         if (response.data.code === 200) {
@@ -45,6 +49,7 @@ const Login = () => {
       .catch(function (error) {
         // Another error message
         console.log(error);
+        setLoading(false);
       });
   };
   return (
@@ -81,7 +86,13 @@ const Login = () => {
             En af de indtastede værdier er forkerte - prøv igen!
           </p>
         )}
-        <button type="Submit">Login</button>
+        {loading ? (
+          <div className="loading">
+            <TailSpin color="#000000" height={40} width={40} />
+          </div>
+        ) : (
+          <button type="Submit">Login</button>
+        )}
       </form>
     </div>
   );

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const AddNewList = (props) => {
   const [listName, setListName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Function that adds a new list to the users list
   const pushNewList = (event) => {
     event.preventDefault();
-
+    setLoading(true);
     // API call
     axios
       .post(`${environment[0]}/server/Lists/Create.php`, {
@@ -16,20 +18,22 @@ const AddNewList = (props) => {
         users_id: localStorage.getItem("users_id"),
       })
       .then(function (response) {
+        setLoading(false);
+
         // If response if good
         if (response.status === 200) {
           props.setLists([
             ...props.lists,
             { lists_id: response.data.lists_id, name: listName },
           ]);
-        } else {
+
+          props.showNewList();
         }
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
-
-    props.showNewList();
   };
 
   // Handles users input when typing list name
@@ -51,12 +55,18 @@ const AddNewList = (props) => {
           value={listName}
           onChange={handleListName}
         />
-        <div>
-          <button type="button" onClick={props.showNewList}>
-            Tilbage
-          </button>
-          <button type="submit">Opret</button>
-        </div>
+        {loading ? (
+          <div className="loading">
+            <TailSpin color="#000000" height={40} width={40} />
+          </div>
+        ) : (
+          <div>
+            <button type="button" onClick={props.showNewList}>
+              Tilbage
+            </button>
+            <button type="submit">Opret</button>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const EditTask = (props) => {
   const [taskName, setTaskName] = useState(props.task.name);
+  const [loading, setLoading] = useState(false);
 
   const edit = (event) => {
     event.preventDefault();
@@ -13,13 +15,15 @@ const EditTask = (props) => {
       props.showEditTask();
       return;
     }
-
+    setLoading(true);
     axios
       .post(`${environment[0]}/server/Products/Update.php`, {
         products_id: props.task.products_id,
         name: taskName,
       })
       .then(function (response) {
+        setLoading(false);
+
         // If response if good
         if (response.data.code === 200) {
           // Toggle popup
@@ -48,6 +52,7 @@ const EditTask = (props) => {
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -67,14 +72,20 @@ const EditTask = (props) => {
         value={taskName}
         onChange={handleEditTask}
       />
-      <div>
-        <button type="button" onClick={props.showEditTask}>
-          Tilbage
-        </button>
-        <button type="submit" onClick={edit}>
-          Gem
-        </button>
-      </div>
+      {loading ? (
+        <div className="loading">
+          <TailSpin color="#000000" height={40} width={40} />
+        </div>
+      ) : (
+        <div>
+          <button type="button" onClick={props.showEditTask}>
+            Tilbage
+          </button>
+          <button type="submit" onClick={edit}>
+            Gem
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,59 +1,61 @@
-.loginSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.loginSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.loginForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 5%;
-    width: 100%;
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5%;
+  width: 100%;
 }
 
-.loginSection h1{
-    margin-top: 20%;
+.loginSection h1 {
+  margin-top: 20%;
 }
 
-.labels{
-    font-size: 20px;
-    margin: 5%;
+.labels {
+  font-size: 20px;
+  margin: 5%;
 }
 
-.loginForm a{
-    color: black;
+.loginForm a {
+  color: black;
 }
 
-.loginForm button{
-    background-color: #7BA779;
-    padding: 8%;
-    margin: 1%;
-    border-radius: 5px;
-    border: none;
-    font-family: berlin;
-    font-size: 20px;
-    margin-bottom: 8%;
-    margin-top: 15%;
-    width: 60%;
+.loginForm button {
+  background-color: #7ba779;
+  padding: 8%;
+  margin: 1%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 20px;
+  margin-bottom: 8%;
+  margin-top: 15%;
+  width: 60%;
 }
 
-.loginForm .inputBoxLogin{
-    text-align: left;
-    font-family: berlin;
-    width: 80%;
-    height: 10vw;
-    font-size: 20px;
-    border-radius: 5px;
-    border-color: none;
-    border-width: 0px;
-    background-color: #D5F2D4;
+.loginForm .inputBoxLogin {
+  text-align: left;
+  font-family: berlin;
+  width: 80%;
+  height: 10vw;
+  font-size: 20px;
+  border-radius: 5px;
+  border-color: none;
+  border-width: 0px;
+  background-color: #d5f2d4;
 }
 
-#loginError{
-    color: #FC4848;
-    width: 60%;
-    text-align:center
+#loginError {
+  color: #fc4848;
+  width: 60%;
+  text-align: center;
 }
 
-
+.loading {
+  margin-top: 15%;
+}

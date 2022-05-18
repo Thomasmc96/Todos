@@ -77,6 +77,10 @@
   display: flex;
 }
 
+.tasks {
+  margin-bottom: 10rem;
+}
+
 .doneText {
   width: 80%;
   margin-left: auto;
