@@ -13,7 +13,7 @@ const ShareList = (props) => {
     event.preventDefault();
 
     axios
-      .post(`${environment[0]}/server/Lists/SharedLists/Sendmail.php`, {
+      .post(`${environment[0]}/server/Lists/SharedLists/SendMail.php`, {
         mail: mail,
         lists_id: lists_id,
         name: localStorage.getItem("name"),
