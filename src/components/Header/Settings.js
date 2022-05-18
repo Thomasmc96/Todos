@@ -10,6 +10,7 @@ const Settings = (props) => {
 
   return (
     <div className="settings">
+      <props.InstallPWAButton />
       <h2>Vil du logge ud?</h2>
       <div>
         <button type="button" onClick={props.showSettings}>

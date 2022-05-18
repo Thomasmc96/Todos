@@ -213,10 +213,12 @@ const List = () => {
             }
           })}
       </div>
-      <div className="addSection" onClick={showAddTask}>
-        <img src={addIcon} alt="Tilføj opgave ikon" />
-        <p>Tilføj en opgave</p>
-      </div>
+      {!toggleAddTask && (
+        <div className="addSection" onClick={showAddTask}>
+          <img src={addIcon} alt="Tilføj opgave ikon" />
+          <p>Tilføj en opgave</p>
+        </div>
+      )}
       {toggleAddTask && (
         <AddTask showAddTask={showAddTask} setList={setList} list={list} />
       )}
