@@ -37,7 +37,7 @@ function InstallPWAButton() {
 
   return (
     <React.Fragment>
-      {deferredPrompt == "" && (
+      {deferredPrompt !== "" && (
         <button type="button" className="pwaBtn" onClick={handleInstallClick}>
           Installér App
         </button>
