@@ -91,9 +91,7 @@ const Frontpage = () => {
           <div className="loading">
             <TailSpin color="#000000" height={40} width={40} />
           </div>
-        ) : (
-          Array.isArray(lists) &&
-          lists.length > 0 &&
+        ) : Array.isArray(lists) && lists.length > 0 ? (
           lists.map((list) => {
             return (
               <div className="list" key={list.lists_id}>
@@ -117,10 +115,12 @@ const Frontpage = () => {
               </div>
             );
           })
-        )}
-        {/* Empty lists */}
-        {Array.isArray(lists) && lists.length === 0 && (
-          <div className="list listLink">Her er tomt...</div>
+        ) : (
+          // Empty lists
+          Array.isArray(lists) &&
+          lists.length === 0 && (
+            <div className="list listLink">Her er tomt...</div>
+          )
         )}
       </section>
       <section>
@@ -130,9 +130,7 @@ const Frontpage = () => {
           <div className="loading">
             <TailSpin color="#000000" height={40} width={40} />
           </div>
-        ) : (
-          Array.isArray(sharedLists) &&
-          sharedLists.length > 0 &&
+        ) : Array.isArray(sharedLists) && sharedLists.length > 0 ? (
           sharedLists.map((sharedList) => {
             return (
               <div className="list" key={sharedList.lists_id}>
@@ -148,30 +146,14 @@ const Frontpage = () => {
               </div>
             );
           })
-        )}
-        {/* Empty shared lists */}
-        {Array.isArray(lists) && lists.length === 0 && (
-          <div className="list listLink">Her er tomt...</div>
+        ) : (
+          // Empty shared lists
+          Array.isArray(sharedLists) &&
+          sharedLists.length === 0 && (
+            <div className="list listLink">Her er tomt...</div>
+          )
         )}
       </section>
-      {/* <section>
-        <h3 className="listCategory">Lister delt med mig</h3>
-        <img
-          className="sharedListIcon"
-          src={sharedList}
-          alt="Delt med mig - ikon"
-        />
-        <hr className="hrList" />
-        {lists.length > 0 && lists.map((list) => {
-          return(
-          <div key={list.lists_id} className="list">
-            <img className="listIcon" src={listIcon} alt="Liste ikon" />
-            <p>{list.name}</p>
-          </div>
-          )
-        })}
-      </section> */}
-
       {toggleNewList && (
         <AddNewList
           showNewList={showNewList}
