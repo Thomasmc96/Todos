@@ -59,17 +59,17 @@ try {
 
  
     // Subject for mail
-    $subject = "Invitation til To do";
+    $subject = "Invitation til Todos liste";
 
     // Message in mail
-    $message = "Du er blevet inviteret til en liste af $name. <br><br>
-                Klik på linket for at acceptere invitation. <br><br>
+    $message = "Du er blevet inviteret til en liste af $name.\r\n
+                Klik på linket for at acceptere invitation.\r\n
                 $link";
 
     // Prepare headers for mail
-    $headers =  "From: Todo <info@todos.dk>\r\n";
-    $headers .= "Reply-To: Todo <info@todos.dk>\r\n";
-    $headers .= "Return-Path: Todo <info@todos.dk>\r\n";
+    $headers =  "From: Todos <info@todos.dk>\r\n";
+    $headers .= "Reply-To: Todos <info@todos.dk>\r\n";
+    $headers .= "Return-Path: Todos <info@todos.dk>\r\n";
 
     // Send mail
     if (mail($mail, $subject, $message, $headers) ) {

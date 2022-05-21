@@ -21,7 +21,7 @@ const AddTask = (props) => {
       })
       .then(function (response) {
         setLoading(false);
-        // If response if good
+        // If response is good
         if (response.status === 200) {
           props.setList({
             list_name: props.list.list_name,
@@ -36,7 +36,10 @@ const AddTask = (props) => {
             ],
           });
 
-          props.showAddTask();
+          setTaskName("");
+          document.getElementById("taskNameBox").focus();
+          document.getElementById("addTaskHeader").innerHTML =
+            "Tilføj en opgave mere";
         } else {
         }
       })
@@ -53,9 +56,10 @@ const AddTask = (props) => {
 
   return (
     <div className="addTask">
-      <h2>Tilføj en opgave</h2>
+      <h2 id="addTaskHeader">Tilføj en opgave</h2>
       <form onSubmit={pushTask}>
         <input
+          id="taskNameBox"
           autoFocus
           type="text"
           name="name"
