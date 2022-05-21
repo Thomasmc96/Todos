@@ -64,6 +64,7 @@ const EditTask = (props) => {
     <div className="addTask">
       <h2>Skift navn på punktet</h2>
       <input
+        autoFocus
         type="text"
         name="name"
         className="inputBox"

@@ -56,6 +56,7 @@ const AddTask = (props) => {
       <h2>Tilføj en opgave</h2>
       <form onSubmit={pushTask}>
         <input
+          autoFocus
           type="text"
           name="name"
           className="inputBox"

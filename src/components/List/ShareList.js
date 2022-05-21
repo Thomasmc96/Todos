@@ -43,6 +43,7 @@ const ShareList = (props) => {
       <h2>Del liste</h2>
       <form onSubmit={share}>
         <input
+          autoFocus
           type="text"
           name="name"
           className="inputBox"

@@ -4,7 +4,6 @@ import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
 
 const DeleteList = (props) => {
-  const [listName, setListName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const deleteList = (event) => {
@@ -34,10 +33,6 @@ const DeleteList = (props) => {
         console.log(error);
         setLoading(false);
       });
-  };
-
-  const handleListName = (event) => {
-    setListName(event.target.value);
   };
 
   return (

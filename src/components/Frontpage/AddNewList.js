@@ -46,6 +46,7 @@ const AddNewList = (props) => {
       <h2>Opret liste</h2>
       <form onSubmit={pushNewList}>
         <input
+          autoFocus
           type="text"
           name="name"
           className="inputBox"
