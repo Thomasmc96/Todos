@@ -59,3 +59,7 @@
 #logOut {
   background-color: #fc4848;
 }
+
+.settings .version {
+  margin-top: 0;
+}
