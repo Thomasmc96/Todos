@@ -78,9 +78,8 @@
 }
 
 .tasks {
-  margin-bottom: 10rem;
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 10rem auto;
 }
 
 .doneText {
