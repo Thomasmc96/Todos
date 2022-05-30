@@ -13,6 +13,8 @@ import AddTask from "./AddTask.js";
 import EditTask from "./EditTask.js";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { arrayMoveImmutable } from "array-move";
 
 const List = () => {
   // Params from URL
@@ -37,15 +39,14 @@ const List = () => {
         // Check user is allowed to see list
         // if (result.data.users_id !== localStorage.getItem("users_id")) {
         let sharedUsers = result.data.shared_users;
-        console.log(result.data.users_id === localStorage.getItem("users_id"));
-        console.log(sharedUsers.includes(localStorage.getItem("users_id")));
-        console.log(result.data);
+
         setLoading(false);
 
         if (
           result.data.users_id === localStorage.getItem("users_id") ||
           sharedUsers.includes(localStorage.getItem("users_id"))
         ) {
+          console.log(result.data);
           // Save data to state
           setList(result.data);
           checkProducts(result.data.products);
@@ -54,7 +55,6 @@ const List = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
       });
   }, []);
@@ -88,6 +88,9 @@ const List = () => {
   };
 
   const completeTask = (event, index, status) => {
+    console.log(event);
+    console.log(index);
+    console.log(status);
     event.preventDefault();
 
     // Save state array in local variable
@@ -109,6 +112,7 @@ const List = () => {
         completed: status,
       })
       .then(function (response) {
+        console.log(response.data);
         // If response if good
         if (response.data.code === 200) {
           // Save to state
@@ -123,8 +127,90 @@ const List = () => {
       });
   };
 
-  console.log(list.users_id);
-  console.log(localStorage.getItem("users_id"));
+  const SortableItem = SortableElement(({ product, i }) => (
+    <div className="todoProduct" key={product.products_id}>
+      <div className="doneOrNot">
+        <img
+          id="notDoneIcon"
+          src={notDoneIcon}
+          alt="Ikke-færdig ikon"
+          onClick={(event) => {
+            // console.log(event);
+            completeTask(event, i, 1);
+          }}
+        />
+        <p>{product.name}</p>
+      </div>
+      <img
+        onClick={() => showEditTask(product.products_id)}
+        id="editIcon"
+        src={editIcon}
+        alt="Redigér ikon"
+      />
+      {toggleEditTask === product.products_id && (
+        <EditTask
+          showEditTask={() => showEditTask(0)}
+          task={product}
+          setList={setList}
+          list={list}
+          index={i}
+        />
+      )}
+    </div>
+  ));
+
+  const SortableList = SortableContainer(({ list }) => {
+    return (
+      <div className="sortTasks">
+        {Array.isArray(list.products) &&
+          list.products
+            .sort((a, b) => a.sort_index - b.sort_index)
+            .map((product, i) => {
+              if (product.completed == "0") {
+                return (
+                  <SortableItem
+                    product={product}
+                    i={i}
+                    index={i}
+                    key={product.products_id}
+                  />
+                );
+              }
+            })}
+      </div>
+    );
+  });
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    // let productsTemp = list.products;
+    let arr = arrayMoveImmutable(list.products, oldIndex, newIndex);
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].sort_index = i;
+    }
+    setList({
+      list_name: list.list_name,
+      users_id: list.users_id,
+      products: arr,
+    });
+    console.log(arr);
+    // API call
+    axios
+      .post(`${environment[0]}/server/Products/Update.php`, {
+        products: arr,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        // If response if good
+        if (response.data.code === 200) {
+          console.log("Success");
+        } else {
+          console.log("Error");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="listSection">
@@ -144,49 +230,56 @@ const List = () => {
       <h1>{list.list_name}</h1>
       <hr className="hr" />
       <div className="tasks">
-        {!showUncompletedTasks && (
-          <p className="doneText">Alle opgaver er løst</p>
-        )}
+        {!showUncompletedTasks &&
+          Array.isArray(list.products) &&
+          list.products.length > 0 && (
+            <p className="doneText">Alle opgaver er løst</p>
+          )}
+        {!showUncompletedTasks &&
+          Array.isArray(list.products) &&
+          list.products.length === 0 && <p className="doneText"></p>}
         {loading ? (
           <div className="loading">
             <TailSpin color="#000000" height={60} width={60} />
           </div>
         ) : (
-          Array.isArray(list.products) &&
-          list.products.map((product, i) => {
-            if (product.completed == "0") {
-              return (
-                <div className="todoProduct" key={product.products_id}>
-                  <div className="doneOrNot">
-                    <img
-                      id="notDoneIcon"
-                      src={notDoneIcon}
-                      alt="Ikke-færdig ikon"
-                      onClick={(event) => {
-                        completeTask(event, i, 1);
-                      }}
-                    />
-                    <p>{product.name}</p>
-                  </div>
-                  <img
-                    onClick={() => showEditTask(product.products_id)}
-                    id="editIcon"
-                    src={editIcon}
-                    alt="Redigér ikon"
-                  />
-                  {toggleEditTask === product.products_id && (
-                    <EditTask
-                      showEditTask={() => showEditTask(0)}
-                      task={product}
-                      setList={setList}
-                      list={list}
-                      index={i}
-                    />
-                  )}
-                </div>
-              );
-            }
-          })
+          Array.isArray(list.products) && (
+            <SortableList list={list} onSortEnd={onSortEnd} pressDelay={150} />
+          )
+          // list.products.map((product, i) => {
+          //   if (product.completed == "0") {
+          //     return (
+          //       <div className="todoProduct" key={product.products_id}>
+          //         <div className="doneOrNot">
+          //           <img
+          //             id="notDoneIcon"
+          //             src={notDoneIcon}
+          //             alt="Ikke-færdig ikon"
+          //             onClick={(event) => {
+          //               completeTask(event, i, 1);
+          //             }}
+          //           />
+          //           <p>{product.name}</p>
+          //         </div>
+          //         <img
+          //           onClick={() => showEditTask(product.products_id)}
+          //           id="editIcon"
+          //           src={editIcon}
+          //           alt="Redigér ikon"
+          //         />
+          //         {toggleEditTask === product.products_id && (
+          //           <EditTask
+          //             showEditTask={() => showEditTask(0)}
+          //             task={product}
+          //             setList={setList}
+          //             list={list}
+          //             index={i}
+          //           />
+          //         )}
+          //       </div>
+          //     );
+          //   }
+          // })
         )}
         {showCompletedTasks && (
           <span>

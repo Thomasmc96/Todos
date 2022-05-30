@@ -13,22 +13,80 @@ try{
     $data = json_decode(file_get_contents("php://input"));
 
     // Check products_id
-    if(empty($data->products_id)){
+    if(empty($data->products_id) && empty($data->products)){
         
         // Send error response
         echo json_encode([
-            "message" => "products_id can't be empty",
+            "message" => "Please specify an products_id or an array or products",
             "code" => 500
         ]);
     
         exit(0);
     }
 
+    $products = isset($data->products) && !empty($data->products) ? $data->products : [];
+
+    // Handle lots of products
+    if($products){
+        // Loop through products
+        foreach($products as $product){
+            $error = false;
+            // Update product
+            if(!updateProduct($connection, $product)){
+                $error = true;
+            }
+        }
+        if($error){
+            // Send error response
+            echo json_encode([
+                "message" => "Unable to update products",
+                "code" => 500
+            ]);
+        } else {
+            // Send success response
+            echo json_encode([
+                "message" => "The products was updated",
+                "code" => 200
+            ]);
+        }
+    } else {
+        // Update prodcut
+        if(!updateProduct($connection, $data)){
+            // Send error response
+            echo json_encode([
+                "message" => "Unable to update product",
+                "code" => 500
+            ]);
+        }else {
+             // Send success response
+             echo json_encode([
+                "message" => "The product was updated",
+                "code" => 200
+            ]);
+        }
+    }
+
+} catch(\Exception $e) {
+
+     // Send error response
+     echo json_encode([
+         "message" => $e,
+         "code" => 500
+     ]);
+}
+
+/**
+ * @param \PDO $connection
+ * @param mixed $product
+ * @return bool
+ */
+function updateProduct($connection, $product){
+    $error = false;
     
     //Prepare SET
     $set = "";
     // Check each value from the given data
-    foreach($data as $key => $value){
+    foreach($product as $key => $value){
         if($key != "products_id" || $key != "lists_id"){            
             $set .= $key . " = :" . $key . ", ";
         }
@@ -36,13 +94,13 @@ try{
     $set = substr($set, 0, -2);
 
     // Data fields
-    $products_id = $data->products_id;
+    $products_id = $product->products_id;
 
     // Set date_completed depending of completed
-    if(isset($data->completed)){
-        if($data->completed == "1"){
+    if(isset($product->completed)){
+        if($product->completed == "1"){
             $set .= ", date_completed = NOW()";
-        } else if($data->completed == "0"){
+        } else if($product->completed == "0"){
             $set .= ", date_completed = NULL";
         }
     }
@@ -59,7 +117,7 @@ try{
     $statement = $connection->prepare($query);
 
     // Bind data
-    foreach($data as $key => $value){
+    foreach($product as $key => $value){
         if($key != "products_id" || $key != "lists_id"){
             $key = ":" . $key;
             if(!is_numeric($value)){
@@ -70,28 +128,15 @@ try{
         }
     }
     $statement->bindParam(":products_id", $products_id);
-
     // Execute statement
-    if($statement->execute()){
-        
-        // Send success response
-        echo json_encode([
-            "message" => "The product was updated",
-            "code" => 200
+    if(!$statement->execute()){
+         // Send success response
+         echo json_encode([
+            "message" => $connection->errorInfo(),
+            "code" => 600
         ]);
-    }else {
-
-        // Send error response
-        echo json_encode([
-            "message" => "Unable to update product",
-            "code" => 500
-        ]);
+        $error = true;
     }
-} catch(\Exception $e) {
 
-     // Send error response
-     echo json_encode([
-         "message" => $e,
-         "code" => 500
-     ]);
+    return $error === false;
 }

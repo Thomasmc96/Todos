@@ -46,20 +46,20 @@
   text-align: center;
 }
 
-.listSection #notDoneIcon {
+.todoProduct #notDoneIcon {
   width: 25px;
   margin-right: 15px;
 }
 
-.listSection #editIcon {
+.todoProduct #editIcon {
   width: 25px;
 }
 
-.listSection .todoProduct {
+.listSection .todoProduct,
+.todoProduct {
   display: flex;
   justify-content: space-between;
   background-color: #82cb80;
-  width: 70%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
@@ -68,21 +68,22 @@
   padding: 2% 5%;
 }
 
-.listSection .todoProduct p {
+.todoProduct p {
   font-size: 20px;
   margin: 0;
 }
 
-.listSection .doneOrNot {
+.todoProduct .doneOrNot {
   display: flex;
 }
 
 .tasks {
   margin-bottom: 10rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .doneText {
-  width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -90,7 +91,6 @@
 .doneProduct {
   display: flex;
   background-color: #d5f2d4;
-  width: 70%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;

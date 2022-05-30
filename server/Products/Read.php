@@ -36,7 +36,7 @@ try{
     // Prepare query
     $query = "
         SELECT  
-            p.products_id, p.name, p.completed, p.date_completed, l.name as list_name, l.users_id, ls.users_id as shared_user
+            p.products_id, p.name, p.completed, p.date_completed, p.sort_index, l.name as list_name, l.users_id, ls.users_id as shared_user
         FROM
             lists l
         LEFT JOIN
@@ -75,6 +75,7 @@ try{
                         "products_id" => $row['products_id'],
                         "name" => $row['name'],
                         "completed" => $row['completed'],
+                        "sort_index" => $row['sort_index']
                     ];
                  }
             }
