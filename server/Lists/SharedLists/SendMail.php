@@ -24,7 +24,7 @@ try {
     }
 
     $mail = $data->mail;
-    $lists_id = $data->lists_id;
+    $lists_id = base64_encode($data->lists_id);
     $name = $data->name;
 
       // Prepare query to get user
@@ -51,11 +51,14 @@ try {
         ]);
         exit();
     }
-    $users_id = $user[0]["users_id"];
+    
+    // Encode user id
+    $users_id = base64_encode($user[0]["users_id"]);
  
 
     // Link for the user to access
-    $link = "https://todos.dk/server/Lists/SharedLists/Create.php?lists_id=$lists_id&users_id=$users_id";
+    // $link = "https://todos.dk/server/Lists/SharedLists/Create.php?lists_id=$lists_id&users_id=$users_id";
+    $link = "https://todos.dk/join-list?lists_id=$lists_id&users_id=$users_id";
 
  
     // Subject for mail

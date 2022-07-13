@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Frontpage from "./components/Frontpage/Frontpage";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
+import JoinList from "./components/List/JoinList";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import NotFound from "./components/NotFound/NotFound";
@@ -66,6 +67,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Frontpage />} />
         <Route path="/list/:id" element={<List />} />
+        <Route path="/join-list" element={<JoinList />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />

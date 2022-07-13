@@ -10,7 +10,6 @@ $connection = $datebaseService->getConnection();
 header('Content-Type: application/json');
 
 try{
-
     // Get incoming data
     $data = json_decode(file_get_contents("php://input"));
 
@@ -24,12 +23,46 @@ try{
         exit();
     }
 
-
     // Set variables
-    $users_id = $_GET['users_id'];
-    $lists_id = $_GET['lists_id'];
-    
-    // Prepare query
+    $users_id = base64_decode($_GET['users_id']);
+    $lists_id = base64_decode($_GET['lists_id']);
+
+    // Check if user has already joined the list
+    $checkQuery = "
+            SELECT 
+                lists_shared_id
+            FROM
+                lists_shared
+            WHERE
+                users_id = :users_id AND lists_id = :lists_id";
+
+    $checkStatement = $connection->prepare($checkQuery);
+
+    // Bind data
+    $checkStatement->bindParam(":users_id", $users_id);
+    $checkStatement->bindParam(":lists_id", $lists_id);
+
+    if($checkStatement->execute()){
+        $lists_shared_id = $checkStatement->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($lists_shared_id)){
+
+            // Send response
+            echo json_encode([
+                "message" => "User already joined list",
+                "code" => 403
+            ]);
+            exit();
+        }
+    } else {
+         // Send error response
+        echo json_encode([
+            "message" => "Something went wrong",
+            "code" => 500
+        ]);
+        exit();
+    }
+
+    // Prepare query to insert row
     $query = "
         INSERT INTO 
             lists_shared
@@ -42,7 +75,7 @@ try{
 
     // Bind data
     $statement->bindParam(":users_id", $users_id);
-    $statement->bindParam(":lists_id", $lists_id);
+    $statement->bindParam(":lists_id", $lists_id);  
 
 
     // Execute statement
