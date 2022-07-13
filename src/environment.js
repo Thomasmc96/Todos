@@ -1,10 +1,9 @@
 // Hostname
-var hostname = "";
+var hostname = window.location.protocol + "//" + window.location.hostname;
+
+// Add port for localhost
 if (window.location.hostname === "localhost") {
-  hostname =
-    window.location.protocol + "//" + window.location.hostname + ":8000";
-} else {
-  hostname = window.location.protocol + "//" + window.location.hostname;
+  hostname += ":8000";
 }
 
 // Version
