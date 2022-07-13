@@ -1,103 +1,104 @@
-.signUpSection{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.signUpSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.signUpForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 5%;
-    width: 100%;
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5%;
+  width: 100%;
 }
 
-.signUpSection h1{
-    margin-top: 20%;
+.signUpSection h1 {
+  margin-top: 20%;
 }
 
-.labels{
-    font-size: 20px;
-    margin: 5%;
+.labels {
+  font-size: 20px;
+  margin: 5%;
 }
 
-.signUpForm a{
-    color: black;
+.signUpForm a {
+  color: black;
 }
 
-.signUpForm button, .signUpForm #backBtn{
-    background-color: #7BA779;
-    padding: 8%;
-    margin: 1%;
-    border-radius: 5px;
-    border: none;
-    font-family: berlin;
-    font-size: 20px;
-    margin-bottom: 8%;
-    margin-top: 15%;
-    width: 60%;
+.signUpForm button,
+.signUpForm #backBtn {
+  background-color: #7ba779;
+  padding: 8%;
+  margin: 1%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 20px;
+  margin-bottom: 8%;
+  margin-top: 15%;
+  width: 60%;
+  color: black;
 }
 
-.signUpForm .inputBoxSignUp{
-    text-align: left;
-    font-family: berlin;
-    width: 80%;
-    height: 10vw;
-    font-size: 20px;
-    border-radius: 5px;
-    border-color: none;
-    border-width: 0px;
-    background-color: #D5F2D4;
+.signUpForm .inputBoxSignUp {
+  text-align: left;
+  font-family: berlin;
+  width: 80%;
+  height: 10vw;
+  font-size: 20px;
+  border-radius: 5px;
+  border-color: none;
+  border-width: 0px;
+  background-color: #d5f2d4;
 }
 
-#passwordError{
-    color: #FC4848;
+#passwordError {
+  color: #fc4848;
 }
 
-#checkboxError{
-    color: #FC4848;
+#checkboxError {
+  color: #fc4848;
 }
 
-#checkboxContainer{
-    display: flex;
-    margin-top: 10%;
-    align-items: center;
+#checkboxContainer {
+  display: flex;
+  margin-top: 10%;
+  align-items: center;
 }
 
-#checkbox{
-    -webkit-appearance:none;
-    width:25px;
-    height:25px;
-    background:white;
-    border-radius:5px;
-    border:2px solid rgb(107, 107, 107);
-    position: relative;
+#checkbox {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  background: white;
+  border-radius: 5px;
+  border: 2px solid rgb(107, 107, 107);
+  position: relative;
 }
 
 #checkbox:checked {
-    background: #7BA779;
+  background: #7ba779;
 }
 
 #checkbox:checked:after {
-    content: "✔";
-    color: white;
-    font-size: 120%;
-    margin: 0 auto;
-    position: absolute;
-    left: 20%;
-
+  content: "✔";
+  color: white;
+  font-size: 120%;
+  margin: 0 auto;
+  position: absolute;
+  left: 20%;
 }
 
-#btnContainer{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+#btnContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
-#btnContainer button{
-   width: 30%;
-   height: 10vw;
-   display: flex;
-   align-items: center;
+#btnContainer button {
+  width: 30%;
+  height: 10vw;
+  display: flex;
+  align-items: center;
+  color: black;
 }
-
