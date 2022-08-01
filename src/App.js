@@ -14,6 +14,7 @@ import JoinList from "./components/List/JoinList";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import NotFound from "./components/NotFound/NotFound";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 const App = () => {
   // Paths where we don't want to redirect if user isn't logged in
@@ -71,6 +72,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/privatlivspolitik" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );

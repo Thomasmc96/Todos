@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
@@ -144,7 +144,7 @@ const SignUp = () => {
             onChange={handleCheckboxValue}
           />
           <label htmlFor="acceptChechbox">
-          <a>  Klik her for at acceptere vores vilkår</a>{" "}
+          <Link to={"/privatlivspolitik"}>  Klik her for at acceptere vores vilkår</Link>
           </label>
         </div>
         {showCheckboxError && (
