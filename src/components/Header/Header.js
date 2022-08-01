@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
-import todo from "../../assets/img/todo.svg";
+import todo from "../../assets/img/todos.svg";
 import settings from "../../assets/img/settings.svg";
 import { Link } from "react-router-dom";
 import Settings from "./Settings.js";

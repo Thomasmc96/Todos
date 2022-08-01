@@ -65,14 +65,29 @@ try {
     $subject = "Invitation til Todos liste";
 
     // Message in mail
-    $message = "Du er blevet inviteret til en liste af $name.\r\n
-                Klik på linket for at acceptere invitation.\r\n
-                $link";
+    $message = "<html>
+                    <body style='text-align: center;'>
+                        <h1>Invitation</h1>
+                        <p>
+                            Du er blevet inviteret til en liste af $name.\n
+                            Klik på knappen for at acceptere invitation.\n
+                        </p>
+                        <br>
+                        <a href='$link'>
+                            <button style='padding: 2% 5%; border-radius:5px; background-color: #7ba779; border:none;'>
+                                Accepter invitation
+                            </button>
+                        </a>
+                        <img style='width:10rem; height:auto%; margin-top: 2rem;' src='https://todos.dk/server/Lists/SharedLists/logo.png' alt='todos logo'/>
+                    </body>
+                </html>";
 
     // Prepare headers for mail
     $headers =  "From: Todos <info@todos.dk>\r\n";
     $headers .= "Reply-To: Todos <info@todos.dk>\r\n";
     $headers .= "Return-Path: Todos <info@todos.dk>\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
     // Send mail
     if (mail($mail, $subject, $message, $headers) ) {
