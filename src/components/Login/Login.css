@@ -51,6 +51,10 @@
   background-color: #d5f2d4;
 }
 
+.pTags{
+  font-family: berlin;
+}
+
 #loginError {
   color: #fc4848;
   width: 60%;
@@ -59,4 +63,35 @@
 
 .loading {
   margin-top: 15%;
+}
+
+
+@media only screen and (min-width: 992px) {
+  .loginSection h1 {
+    margin-top: 5%;
+  }
+
+  .labels {
+    margin: 2% !important;
+  }
+
+  .loginForm .inputBoxLogin {
+    width: 50%;
+    height: 3vw;
+  }
+
+  .loginForm {
+    margin: 2%;
+  }
+
+  .loginForm button {
+    background-color: #7ba779;
+    padding: 2%;
+    margin: 1%;
+    border-radius: 5px;
+    margin-bottom: 0%;
+    margin-top: 5%;
+    width: 20%;
+    color: black;
+  }
 }

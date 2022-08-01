@@ -79,10 +79,10 @@ const Login = () => {
           required
         />
         <Link to={"/signup"}>
-          <p>Ikke allerede bruger? Så opret dig her.</p>
+          <p className="pTags">Ikke allerede bruger? Så opret dig her.</p>
         </Link>
         {showLoginError && (
-          <p id="loginError">
+          <p className="pTags" id="loginError">
             En af de indtastede værdier er forkerte - prøv igen!
           </p>
         )}
