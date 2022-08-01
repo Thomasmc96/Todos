@@ -105,4 +105,34 @@
   display: flex;
   align-items: center;
   color: black;
+  justify-content: center;
+}
+
+
+@media only screen and (min-width: 992px) {
+  .signUpSection h1 {
+    margin-top: 5%;
+  }
+
+  .signUpForm {
+    margin: 2%;
+  }
+
+  .signUpForm .inputBoxSignUp {
+    width: 50%;
+    height: 3vw;
+  }
+  
+  #checkboxContainer {
+    font-size: 20px;
+    margin-top: 5%;
+  }
+
+  #btnContainer button {
+    width: 15%;
+    height: 4vw;
+    padding: 2%;
+    margin-top: 5%;
+  }
+
 }
