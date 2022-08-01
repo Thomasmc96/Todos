@@ -50,6 +50,10 @@
     background-color: #D5F2D4;
 }
 
+#emailError{
+    color: #FC4848;
+}
+
 #passwordError{
     color: #FC4848;
 }

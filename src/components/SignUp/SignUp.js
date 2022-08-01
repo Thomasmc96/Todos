@@ -12,6 +12,7 @@ const SignUp = () => {
   const [showPasswordError, setShowPasswordError] = useState(false);
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
+  const [showEmailError, setShowEmailError] = useState(false);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -19,6 +20,7 @@ const SignUp = () => {
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
+    setShowEmailError(false)
   };
 
   const handlePassword = (e) => {
@@ -63,14 +65,15 @@ const SignUp = () => {
       })
       .then(function (response) {
         console.log(response);
-        // If response if good
+        // If response is good
         if (response.data.code === 200) {
           localStorage.setItem("token", response.data.jwt);
           localStorage.setItem("name", response.data.name);
           localStorage.setItem("users_id", response.data.id);
           window.location.replace("/");
-        } else {
+        } else if (response.data.message.errorInfo[0] == "23000"){
           // Show error message
+         setShowEmailError(true)
         }
       })
       .catch(function (error) {
@@ -86,6 +89,10 @@ const SignUp = () => {
         <input placeholder="Navn" onChange={handleName} className="inputBoxSignUp" type="name" name="name" required />
         <label className="labels" htmlFor="email">Email</label>
         <input placeholder="Email" onChange={handleEmail} className="inputBoxSignUp" type="email" name="email" required />
+        {showEmailError && (
+          <p id="
+          ">Emailen er allerede i brug - prøv igen!</p>
+        )}
         <label className="labels" htmlFor="password">Adgangskode</label>
         <input placeholder="Adgangskode" onChange={handlePassword} className="inputBoxSignUp" type="password" name="password" required />
         <label className="labels" htmlFor="password">Gentag adgangskode</label>
@@ -102,7 +109,7 @@ const SignUp = () => {
             onChange={handleCheckboxValue}
           />
           <label htmlFor="acceptChechbox">
-            Klik her for at acceptere vores <a href="">vilkår</a>{" "}
+          <a>  Klik her for at acceptere vores vilkår</a>{" "}
           </label>
         </div>
         {showCheckboxError && (
