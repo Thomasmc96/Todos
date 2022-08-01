@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
 
@@ -42,11 +42,32 @@ const JoinList = () => {
     );
     // testing url: http://localhost:3000/join-list?lists_id=19&lists_id=36
   } else if (responseCode === 200) {
-    return <div>Succes!</div>;
+    return (
+      <div className="joinListResponse">
+        <p className="success">Succes!</p>
+        <Link to={"/list/" + lists_id}>
+          <button className="button">Se listen</button>
+        </Link>
+      </div>
+    );
   } else if (responseCode === 403) {
-    return <div>Du er allerede tilknyttet listen</div>;
+    return (
+      <div className="joinListResponse">
+        <p className="warning">Du er allerede tilknyttet listen</p>
+        <Link to={"/list/" + lists_id}>
+          <button className="button">Se listen</button>
+        </Link>
+      </div>
+    );
   } else {
-    return <div>Fejl</div>;
+    return (
+      <div className="joinListResponse error">
+        <p className="error">Fejl</p>
+        <Link to={"/"}>
+          <button className="button">Tilbage</button>
+        </Link>
+      </div>
+    );
   }
 };
 export default JoinList;

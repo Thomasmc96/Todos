@@ -168,3 +168,25 @@
   width: 40%;
   color: black;
 }
+
+.joinListResponse {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10rem;
+}
+
+.joinListResponse .success {
+  color: green;
+}
+.joinListResponse .warning {
+  color: orange;
+}
+.joinListResponse .error {
+  color: red;
+}
+
+.joinListResponse button {
+  font-size: 1.3rem;
+  margin-top: 5rem;
+  padding: 5% 10%;
+}
