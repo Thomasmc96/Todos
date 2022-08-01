@@ -85,13 +85,14 @@
   }
 
   .loginForm button {
-    background-color: #7ba779;
     padding: 2%;
     margin: 1%;
-    border-radius: 5px;
     margin-bottom: 0%;
     margin-top: 5%;
     width: 20%;
-    color: black;
+  }
+
+  .loading {
+    margin-top: 5%;
   }
 }
