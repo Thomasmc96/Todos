@@ -1,9 +1,16 @@
 @font-face {
-    font-family: berlin;
-    src: url('../src/assets/font/Berlin\ Sans\ FB\ Regular.ttf');
+  font-family: berlin;
+  src: url("../src/assets/font/Berlin\ Sans\ FB\ Regular.ttf");
 }
 
-body{
-    margin: 0;
-    font-family: berlin;
+body {
+  margin: 0;
+  font-family: berlin;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

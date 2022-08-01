@@ -75,9 +75,12 @@
 
 .frontpage .list {
   display: flex;
+  margin: 1.5rem auto;
 }
+
 .frontpage .listLink {
   display: flex;
+  align-items: center;
   margin-left: 17%;
   text-decoration: none;
   color: black;
@@ -85,6 +88,14 @@
 
 .frontpage .list p {
   font-size: 17px;
+  margin: 0 auto;
+}
+.frontpage .list .sharedContainer p {
+  font-size: 17px;
+  margin: 0 auto;
+}
+.frontpage .sharedBy {
+  font-size: 12px;
 }
 
 /* Add new list pop up box */
@@ -125,6 +136,7 @@
   margin-bottom: 8%;
   margin-top: 8%;
   width: 40%;
+  color: black;
 }
 
 .deleteList {
@@ -153,6 +165,7 @@
   margin-bottom: 8%;
   margin-top: 8%;
   width: 40%;
+  color: black;
 }
 
 #deleteBtn {

@@ -1,62 +1,66 @@
 .header {
-    background-color: #B3EEB1;
-    display: flex;
-    justify-content: space-between;
-
+  background-color: #b3eeb1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-
-.header .logo{
-    width: 6rem;
-    margin-left: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.header .logo {
+  width: 6rem;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-#settingsIcon{
-    width: 6%;
-    margin-right: 5%;
+#settingsIcon {
+  width: 6%;
+  margin-right: 5%;
 }
 
-.settings{
-    background-color: #7BA779;
-    width: 80vw;
-    border-radius: 20px;
-    position: fixed;
-    top: 30%;
-    left: 10%;
-    text-align: center;  
+.settings {
+  background-color: #7ba779;
+  width: 80vw;
+  border-radius: 20px;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  text-align: center;
 }
 
-.settings h2{
-    font-size: 30px;
-    margin-bottom: 0;
+.settings h2 {
+  font-size: 30px;
+  margin-bottom: 0;
 }
 
-.settings .inputBox{
-    text-align: left;
-    font-family: berlin;
-    width: 80%;
-    height: 8vw;
-    font-size: 17px;
-    border-radius: 5px;
-    border-color: none;
-    border-width: 0px;
+.settings .inputBox {
+  text-align: left;
+  font-family: berlin;
+  width: 80%;
+  height: 8vw;
+  font-size: 17px;
+  border-radius: 5px;
+  border-color: none;
+  border-width: 0px;
 }
 
-.settings button{
-    background-color: white;
-    padding: 3%;
-    margin: 1%;
-    border-radius: 5px;
-    border: none;
-    font-family: berlin;
-    font-size: 17px;
-    margin-bottom: 8%;
-    margin-top: 8%;
-    width: 40%;
+.settings button {
+  background-color: white;
+  padding: 3%;
+  margin: 1%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 17px;
+  margin-bottom: 8%;
+  margin-top: 8%;
+  width: 40%;
+  color: black;
 }
 
-#logOut{
-    background-color: #fc4848;
+#logOut {
+  background-color: #fc4848;
+}
+
+.settings .version {
+  margin-top: 0;
 }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const SignUp = () => {
   const [checkboxValue, setCheckboxValue] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
   const [showEmailError, setShowEmailError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -38,8 +41,8 @@ const SignUp = () => {
     setShowCheckboxError(false);
   };
 
-  const redirect = (e) => {
-    navigate("/login");
+  const redirect = (path) => {
+    navigate(path);
   };
 
   const submitLogin = (e) => {
@@ -56,14 +59,17 @@ const SignUp = () => {
       return;
     }
 
+    setLoading(true);
     // API call
     axios
-      .post("http://localhost:8000/server/users/create.php", {
+      .post(`${environment[0]}/server/Users/Create.php`, {
         name: name,
         email: email,
         password: password,
       })
       .then(function (response) {
+        setLoading(false);
+
         console.log(response);
         // If response is good
         if (response.data.code === 200) {
@@ -79,24 +85,53 @@ const SignUp = () => {
       .catch(function (error) {
         // Another error message
         console.log(error);
+        setLoading(false);
       });
   };
   return (
     <div className="signUpSection">
       <h1>Opret dig her</h1>
       <form className="signUpForm" onSubmit={submitLogin} autoComplete="off">
-        <label className="labels" htmlFor="name">Navn</label>
-        <input placeholder="Navn" onChange={handleName} className="inputBoxSignUp" type="name" name="name" required />
-        <label className="labels" htmlFor="email">Email</label>
-        <input placeholder="Email" onChange={handleEmail} className="inputBoxSignUp" type="email" name="email" required />
-        {showEmailError && (
-          <p id="
-          ">Emailen er allerede i brug - prøv igen!</p>
-        )}
-        <label className="labels" htmlFor="password">Adgangskode</label>
-        <input placeholder="Adgangskode" onChange={handlePassword} className="inputBoxSignUp" type="password" name="password" required />
-        <label className="labels" htmlFor="password">Gentag adgangskode</label>
-        <input placeholder="Gentag adgangskode" onChange={handleConfirmPassword} className="inputBoxSignUp" type="password" name="password" required />
+        <label className="labels" htmlFor="name">
+          Navn
+        </label>
+        <input
+          onChange={handleName}
+          className="inputBoxSignUp"
+          type="name"
+          name="name"
+          required
+        />
+        <label className="labels" htmlFor="email">
+          Email
+        </label>
+        <input
+          onChange={handleEmail}
+          className="inputBoxSignUp"
+          type="email"
+          name="email"
+          required
+        />
+        <label className="labels" htmlFor="password">
+          Adgangskode
+        </label>
+        <input
+          onChange={handlePassword}
+          className="inputBoxSignUp"
+          type="password"
+          name="password"
+          required
+        />
+        <label className="labels" htmlFor="password">
+          Gentag adgangskode
+        </label>
+        <input
+          onChange={handleConfirmPassword}
+          className="inputBoxSignUp"
+          type="password"
+          name="password"
+          required
+        />
         {showPasswordError && (
           <p id="passwordError">Adgangskoderne er ikke ens - prøv igen!</p>
         )}
@@ -115,11 +150,20 @@ const SignUp = () => {
         {showCheckboxError && (
           <p id="checkboxError">Husk at acceptere vilkårene - prøv igen!</p>
         )}
+
         <div id="btnContainer">
-          <button type="button" onClick={redirect}>
-            Tilbage
-          </button>
-          <button type="Submit">Opret</button>
+          {loading ? (
+            <div className="loading">
+              <TailSpin color="#000000" height={40} width={40} />
+            </div>
+          ) : (
+            <React.Fragment>
+              <button type="button" onClick={() => redirect("/login")}>
+                Tilbage
+              </button>
+              <button type="Submit">Opret</button>
+            </React.Fragment>
+          )}
         </div>
       </form>
     </div>

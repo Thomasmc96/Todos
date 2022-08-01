@@ -26,6 +26,7 @@ try{
     // Data fields
     $name = $data->name;
     $lists_id = $data->lists_id;
+    $sort_index = isset($data->sort_index) && !empty($data->sort_index) ? $data->sort_index : null;
 
     // Prepare query
     $query = "
@@ -33,7 +34,8 @@ try{
             products
         SET 
             name = :name,
-            lists_id = :lists_id
+            lists_id = :lists_id,
+            sort_index = :sort_index
         ";
 
     $statement = $connection->prepare($query);
@@ -41,6 +43,7 @@ try{
     // Bind data
     $statement->bindParam(":name", $name);
     $statement->bindParam(":lists_id", $lists_id);
+    $statement->bindParam(":sort_index", $sort_index);
 
 
     // Execute statement
