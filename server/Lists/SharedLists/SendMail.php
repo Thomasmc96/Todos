@@ -78,7 +78,7 @@ try {
                                 Accepter invitation
                             </button>
                         </a>
-                        <img style='width:10rem; height:auto%; margin-top: 2rem;' src='https://todos.dk/server/Lists/SharedLists/logo.png' alt='todos logo'/>
+                        <img style='width:10rem; height:auto; margin-top: 2rem auto 0 auto; display: block;' src='https://todos.dk/server/Lists/SharedLists/logo.png' alt='todos logo'/>
                     </body>
                 </html>";
 
