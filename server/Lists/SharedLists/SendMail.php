@@ -70,7 +70,7 @@ try {
                         <h1>Invitation</h1>
                         <p>
                             Du er blevet inviteret til en liste af $name.\n
-                            Klik på knappen for at acceptere invitation.\n
+                            Klik på knappen for at acceptere invitationen.\n
                         </p>
                         <br>
                         <a href='$link'>
