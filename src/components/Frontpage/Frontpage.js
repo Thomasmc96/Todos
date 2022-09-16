@@ -75,13 +75,13 @@ const Frontpage = () => {
         <p className="profileIcon">{initials}</p>
         <p className="profileName">{localStorage.getItem("name")}</p>
       </div>
-      <hr className="hr" />
-      <img
+      {/* <hr className="hr" /> */}
+      {/* <img
         className="addNewListIcon"
         src={addNewListIcon}
         alt="Tilføj ny liste"
         onClick={showNewList}
-      />
+      /> */}
       <section>
         <h3 className="listCategory">Lister oprettet af mig</h3>
         <hr className="hrList" />
@@ -152,6 +152,14 @@ const Frontpage = () => {
           )
         )}
       </section>
+      <div className="addSection" onClick={showNewList}>
+        <img
+          className="addNewListIcon"
+          src={addNewListIcon}
+          alt="Tilføj ny liste"
+        />
+        <p>Tilføj en liste</p>
+      </div>
       {toggleNewList && (
         <AddNewList
           showNewList={showNewList}

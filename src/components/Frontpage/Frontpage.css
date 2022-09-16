@@ -54,14 +54,6 @@
   margin-top: 5%;
 }
 
-.frontpage .addNewListIcon {
-  width: 3.5rem;
-  display: block;
-  margin-left: auto;
-  margin-right: 4rem;
-  margin-top: 1rem;
-}
-
 .frontpage .listIcon {
   width: 1.5rem;
   margin-right: 1rem;
@@ -90,10 +82,12 @@
   font-size: 17px;
   margin: 0 auto;
 }
+
 .frontpage .list .sharedContainer p {
   font-size: 17px;
   margin: 0 auto;
 }
+
 .frontpage .sharedBy {
   font-size: 12px;
 }
@@ -170,4 +164,27 @@
 
 #deleteBtn {
   background-color: #fc4848;
+}
+
+.frontpage .addSection {
+  display: flex;
+  background-color: #7ba779;
+  width: 70%;
+  border-radius: 5px;
+  padding: 2% 5%;
+  position: fixed;
+  top: 90%;
+  left: 10%;
+}
+
+
+.frontpage .addNewListIcon {
+  width: 40px;
+  display: block;
+  margin-right: 10px;
+}
+
+.frontpage .addSection p {
+  font-size: 20px;
+  margin: 5%;
 }

@@ -132,22 +132,23 @@ const List = () => {
   const SortableItem = SortableElement(({ product, i }) => (
     <div className="todoProduct" key={product.products_id}>
       <div className="doneOrNot">
+
         <img
-          id="notDoneIcon"
-          src={notDoneIcon}
-          alt="Ikke-færdig ikon"
-          onClick={(event) => {
-            // console.log(event);
-            completeTask(event, i, 1);
-          }}
+          onClick={() => showEditTask(product.products_id)}
+          src={editIcon}
+          id="editIcon"
+          alt="Redigér ikon"
         />
         <p>{product.name}</p>
       </div>
       <img
-        onClick={() => showEditTask(product.products_id)}
-        id="editIcon"
-        src={editIcon}
-        alt="Redigér ikon"
+        id="notDoneIcon"
+        src={notDoneIcon}
+        alt="Ikke-færdig ikon"
+        onClick={(event) => {
+          // console.log(event);
+          completeTask(event, i, 1);
+        }}
       />
       {toggleEditTask === product.products_id && (
         <EditTask
@@ -239,7 +240,7 @@ const List = () => {
           )}
         {!showUncompletedTasks &&
           Array.isArray(list.products) &&
-          list.products.length === 0 && <p className="doneText"></p>}
+          list.products.length === 0 && <p className="doneText">Her er der bare luft.</p>}
         {loading ? (
           <div className="loading">
             <TailSpin color="#000000" height={60} width={60} />
@@ -294,6 +295,7 @@ const List = () => {
             if (product.completed == "1") {
               return (
                 <div className="doneProduct" key={product.products_id}>
+                  <p>{product.name}</p>
                   <img
                     id="doneIcon"
                     src={doneIcon}
@@ -302,7 +304,6 @@ const List = () => {
                       completeTask(event, i, 0);
                     }}
                   />
-                  <p>{product.name}</p>
                 </div>
               );
             }
