@@ -35,6 +35,7 @@ const AddTask = (props) => {
               },
             ],
           });
+          props.setShowUncompletedTasks(true);
 
           setTaskName("");
           document.getElementById("taskNameBox").focus();

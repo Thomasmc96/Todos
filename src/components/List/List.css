@@ -21,6 +21,7 @@
   flex-direction: row;
   text-decoration: none;
   color: black;
+  align-items: center;
 }
 
 .listSection .firstSection .shareSection {
@@ -178,9 +179,11 @@
 .joinListResponse .success {
   color: green;
 }
+
 .joinListResponse .warning {
   color: orange;
 }
+
 .joinListResponse .error {
   color: red;
 }

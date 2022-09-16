@@ -32,6 +32,7 @@ const List = () => {
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  console.log(list.products);
   useEffect(() => {
     setLoading(true);
     axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}&users_id=${localStorage.getItem("users_id")}`)
@@ -57,6 +58,7 @@ const List = () => {
       .catch((error) => {
         setLoading(false);
       });
+
   }, []);
 
   // Checks if the data contains any uncompleted and any completed tasks
@@ -313,7 +315,7 @@ const List = () => {
         </div>
       )}
       {toggleAddTask && (
-        <AddTask showAddTask={showAddTask} setList={setList} list={list} />
+        <AddTask showAddTask={showAddTask} setList={setList} list={list} setShowUncompletedTasks={setShowUncompletedTasks} />
       )}
       {toggleShareList && <ShareList showShareList={showShareList} />}
     </div>
