@@ -34,7 +34,7 @@ const List = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}`)
+    axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}&users_id=${localStorage.getItem("users_id")}`)
       .then((result) => {
         // Check user is allowed to see list
         // if (result.data.users_id !== localStorage.getItem("users_id")) {

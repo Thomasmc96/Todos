@@ -39,7 +39,6 @@ const Frontpage = () => {
     // Get lists made by current user
     axios(`${environment[0]}/server/Lists/Read.php?users_id=${users_id}`)
       .then((result) => {
-        console.log(result.data);
         setLists(result.data);
         setLoadingLists(false);
       })
@@ -53,7 +52,6 @@ const Frontpage = () => {
       `${environment[0]}/server/Lists/SharedLists/Read.php?users_id=${users_id}`
     )
       .then((result) => {
-        console.log(result.data);
         setSharedLists(result.data);
         setLoadingSharedLists(false);
       })

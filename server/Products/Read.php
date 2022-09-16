@@ -7,30 +7,40 @@ include_once '../Config/Database.php';
 $datebaseService = new DatabaseService();
 $connection = $datebaseService->getConnection();
 
-try{
+try {
 
     // Get incoming data
     $data = json_decode(file_get_contents("php://input"));
 
-  
+
     // Prepare WHERE
     $where = "1";
 
     // Fetch only one list if lists_id is given
-    if(isset($_GET['lists_id']) && !empty($_GET['lists_id'])){
+    if (isset($_GET['lists_id']) && !empty($_GET['lists_id'])) {
 
         $lists_id = $_GET['lists_id'];
 
         $where .= " AND l.lists_id = " . $lists_id;
-
     } else {
-          // Send error response
-          echo json_encode([
-              "message" => "No lists_id was given",
-              "code" => 500
-          ]);
-      
-          exit(0);
+        // Send error response
+        echo json_encode([
+            "message" => "No lists_id was given",
+            "code" => 500
+        ]);
+
+        exit(0);
+    }
+
+    // Prepare JOIN
+    $join = "";
+
+    // Fetch by user id if set
+    if (isset($_GET['users_id']) && !empty($_GET['users_id'])) {
+
+        $users_id = base64_decode($_GET['users_id']);
+
+        $join .= " AND ls.users_id = " . $users_id;
     }
 
     // Prepare query
@@ -42,48 +52,48 @@ try{
         LEFT JOIN
             products p ON p.lists_id = l.lists_id
         LEFT JOIN
-            lists_shared ls on ls.lists_id = l.lists_id
+            lists_shared ls on ls.lists_id = l.lists_id " . $join . "
         WHERE
-            ". $where ."
+            " . $where . "
         ";
 
     $statement = $connection->prepare($query);
 
- 
+
     // Execute statement
-    if($statement->execute()){
-        
+    if ($statement->execute()) {
+
         $listName = "";
         $products = [];
-        
+
         // Loop through rows 
-        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             $listName = $row['list_name'];
             $usersId = base64_encode($row['users_id']);
 
             // Set shared users
             $sharedUsers = [];
-            if(!in_array($row['shared_user'], $sharedUsers)){
+            if (!in_array($row['shared_user'], $sharedUsers)) {
                 $sharedUsers[] = base64_encode($row['shared_user']);
             }
-            
 
-            if(!empty($row['products_id'])){
+
+            if (!empty($row['products_id'])) {
                 // If uncompleted or if completed in less than 30 mins ago
-                if($row['completed'] == "0" || strtotime(date($row['date_completed'])) > strtotime("-30 minutes") ){
+                if ($row['completed'] == "0" || strtotime(date($row['date_completed'])) > strtotime("-30 minutes")) {
                     $products[] = [
                         "products_id" => $row['products_id'],
                         "name" => $row['name'],
                         "completed" => $row['completed'],
                         "sort_index" => $row['sort_index']
                     ];
-                 }
+                }
             }
         }
 
         // Send success response
         echo json_encode(["list_name" => $listName, "users_id" => $usersId, "products" => $products, "shared_users" => $sharedUsers, "code" => 200]);
-    }else {
+    } else {
 
         // Send error response
         echo json_encode([
@@ -91,11 +101,11 @@ try{
             "code" => 500
         ]);
     }
-} catch(\Exception $e) {
+} catch (\Exception $e) {
 
-     // Send error response
-     echo json_encode([
-         "message" => $e,
-         "code" => 500
-     ]);
+    // Send error response
+    echo json_encode([
+        "message" => $e,
+        "code" => 500
+    ]);
 }
