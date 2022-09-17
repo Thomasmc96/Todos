@@ -7,6 +7,6 @@ if (window.location.hostname === "localhost") {
 }
 
 // Version
-var version = "1.1.4";
+var version = "1.1.5";
 
 export default [hostname, version];
