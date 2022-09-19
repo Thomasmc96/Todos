@@ -5,13 +5,19 @@ import settings from "../../assets/img/settings.svg";
 import { Link } from "react-router-dom";
 import Settings from "./Settings.js";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
+import DeleteProfile from "./DeleteProfile";
 
 const Header = () => {
   const [toggleSettings, setToggleSettings] = useState(false);
+  const [showDeleteProfile, setShowDeleteProfile] = useState(false);
 
   const showSettings = () => {
     setToggleSettings(!toggleSettings);
   };
+  const handleDeleteProfile = () => {
+    setShowDeleteProfile(!showDeleteProfile);
+  }
+
 
   return (
     <header className="header">
@@ -36,8 +42,11 @@ const Header = () => {
         <Settings
           showSettings={showSettings}
           InstallPWAButton={InstallPWAButton}
+          handleDeleteProfile={handleDeleteProfile}
         />
       )}
+      {showDeleteProfile && <DeleteProfile handleDeleteProfile={handleDeleteProfile} />}
+
     </header>
   );
 };

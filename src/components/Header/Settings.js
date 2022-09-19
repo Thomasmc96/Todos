@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import environment from "../../environment";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
-import DeleteProfile from "./DeleteProfile";
 
 const Settings = (props) => {
-
-  const [showDeleteProfile, setShowDeleteProfile] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("users_id");
@@ -14,14 +11,10 @@ const Settings = (props) => {
     window.location.replace("/login");
   };
 
-  const handleDeleteProfile = () => {
-    setShowDeleteProfile(!showDeleteProfile);
-  }
-
   const version = environment[1];
 
   return (
-    <div className="settings">
+    <div className="settings popup">
       <span className="cross" onClick={props.showSettings}>x</span>
       <h2>Indstillinger</h2>
       <div>
@@ -32,13 +25,13 @@ const Settings = (props) => {
         <button id="logOut" type="submit" onClick={logout}>
           Log ud
         </button>
-        <button id="deleteProfile" type="button" onClick={handleDeleteProfile}>
+        <button id="deleteProfile" type="button" onClick={props.handleDeleteProfile}>
           Slet profil
         </button>
       </div>
       <p className="version">v. {version}</p>
 
-      {showDeleteProfile && <DeleteProfile handleDeleteProfile={handleDeleteProfile} />}
+      {/* {showDeleteProfile && <DeleteProfile handleDeleteProfile={handleDeleteProfile} />} */}
     </div>
   );
 };

@@ -39,7 +39,7 @@ const ShareList = (props) => {
   };
 
   return (
-    <div className="addTask">
+    <div className="addTask popup">
       <h2>Del liste</h2>
       <form onSubmit={share}>
         <input

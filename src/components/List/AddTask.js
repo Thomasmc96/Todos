@@ -56,7 +56,7 @@ const AddTask = (props) => {
   };
 
   return (
-    <div className="addTask">
+    <div className="addTask popup">
       <h2 id="addTaskHeader">Tilføj en opgave</h2>
       <form onSubmit={pushTask}>
         <input

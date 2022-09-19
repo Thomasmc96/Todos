@@ -36,10 +36,9 @@ const DeleteList = (props) => {
   };
 
   return (
-    <div className="deleteList">
-      <h2>
-        Listen vil blive slettet permanent. <br /> Vil du slette listen?
-      </h2>
+    <div className="deleteList popup">
+      <h2>Vil du slette listen?</h2>
+      <p>Listen vil blive slettet permanent.</p>
       <form onSubmit={deleteList}>
         {loading ? (
           <div className="loading">

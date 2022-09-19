@@ -21,3 +21,58 @@ body {
   background-color: #7ba779;
   border: none;
 }
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  background-color: #7ba779;
+  width: 70vw;
+  border-radius: 20px;
+  position: fixed;
+  top: 16%;
+  left: 10%;
+  text-align: center;
+  padding: 5%;
+}
+
+.popup h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.popup p {
+  margin: 0;
+}
+
+.popup div {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-around;
+  margin: 5% auto 2% auto;
+}
+
+.popup .inputBox {
+  text-align: left;
+  font-family: berlin;
+  width: 80%;
+  height: 8vw;
+  font-size: 17px;
+  border-radius: 5px;
+  border-width: 0px;
+  margin: 0 auto;
+}
+
+.popup button {
+  background-color: white;
+  padding: 3%;
+  border-radius: 5px;
+  border: none;
+  font-family: berlin;
+  font-size: 17px;
+  margin-bottom: 4%;
+  margin-top: 4%;
+  width: 40%;
+  color: black;
+}

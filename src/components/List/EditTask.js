@@ -61,7 +61,7 @@ const EditTask = (props) => {
   };
 
   return (
-    <div className="addTask">
+    <div className="addTask popup">
       <h2>Skift navn på punktet</h2>
       <input
         autoFocus

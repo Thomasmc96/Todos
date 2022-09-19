@@ -40,7 +40,7 @@ const DeleteProfile = (props) => {
     };
 
     return (
-        <div className="deleteProfile">
+        <div className="deleteProfile popup">
             <h2>Er du sikker?</h2>
             <p>Alle dine data vil blive slettet inkl. dine lister og opgaver.</p>
             <div>

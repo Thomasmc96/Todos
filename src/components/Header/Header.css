@@ -17,47 +17,6 @@
   margin-right: 5%;
 }
 
-.settings {
-  display: flex;
-  flex-direction: column;
-  background-color: #7ba779;
-  width: 80vw;
-  border-radius: 20px;
-  position: fixed;
-  top: 30%;
-  left: 10%;
-  text-align: center;
-}
-
-.settings h2 {
-  font-size: 30px;
-  margin-bottom: 3%;
-}
-
-.settings .inputBox {
-  text-align: left;
-  font-family: berlin;
-  width: 80%;
-  height: 8vw;
-  font-size: 17px;
-  border-radius: 5px;
-  border-color: none;
-  border-width: 0px;
-}
-
-.settings button {
-  background-color: white;
-  padding: 3%;
-  border-radius: 5px;
-  border: none;
-  font-family: berlin;
-  font-size: 17px;
-  margin-bottom: 4%;
-  margin-top: 4%;
-  width: 40%;
-  color: black;
-}
-
 .settings .pwaBtn {
   margin-right: 0 !important;
   height: unset;
@@ -91,17 +50,6 @@
   width: unset;
 }
 
-.deleteProfile {
-  display: flex;
-  flex-direction: column;
-  background-color: #7ba779;
-  width: 80vw;
-  border-radius: 20px;
-  position: fixed;
-  top: 30%;
-  left: 10%;
-  text-align: center;
-}
 
 .deleteProfile div {
   display: flex;

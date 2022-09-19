@@ -42,7 +42,7 @@ const AddNewList = (props) => {
   };
 
   return (
-    <div className="addNewListBox">
+    <div className="addNewListBox popup">
       <h2>Opret liste</h2>
       <form onSubmit={pushNewList}>
         <input
