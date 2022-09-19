@@ -152,14 +152,7 @@ const Frontpage = () => {
           )
         )}
       </section>
-      <div className="addSection" onClick={showNewList}>
-        <img
-          className="addNewListIcon"
-          src={addNewListIcon}
-          alt="Tilføj ny liste"
-        />
-        <p>Tilføj en liste</p>
-      </div>
+
       {toggleNewList && (
         <AddNewList
           showNewList={showNewList}
@@ -167,6 +160,17 @@ const Frontpage = () => {
           lists={lists}
         />
       )}
+      {!toggleNewList && (
+        <div className="addSection" onClick={showNewList}>
+          <img
+            className="addNewListIcon"
+            src={addNewListIcon}
+            alt="Tilføj ny liste"
+          />
+          <p>Tilføj en liste</p>
+        </div>
+      )}
+
     </div>
   );
 };

@@ -309,7 +309,7 @@ const List = () => {
             }
           })}
       </div>
-      {!toggleAddTask && (
+      {!toggleAddTask && !toggleEditTask && (
         <div className="addSection" onClick={showAddTask}>
           <img src={addIcon} alt="Tilføj opgave ikon" />
           <p>Tilføj en opgave</p>
