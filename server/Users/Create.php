@@ -8,12 +8,12 @@ include_once "./UsersUtil.php";
 $datebaseService = new DatabaseService();
 $connection = $datebaseService->getConnection();
 
-try{
+try {
 
     // Get incoming data
     $data = json_decode(file_get_contents("php://input"));
 
-    if(empty($data->name) ||empty($data->email) || empty($data->password)){
+    if (empty($data->name) || empty($data->email) || empty($data->password)) {
 
         // Send error response
         echo json_encode([
@@ -47,16 +47,16 @@ try{
 
 
     // Execute statement
-    if($statement->execute()){
+    if ($statement->execute()) {
         // Login
-        login($email, $data->password);
-        
+        UsersUtil::login($email, $data->password);
+
         // // Send success response
         // echo json_encode([
         //     "message" => "The new user was created",
         //     "users_id" => $connection->lastInsertId()
         // ]);
-    }else {
+    } else {
 
         // Send error response
         echo json_encode([
@@ -64,11 +64,11 @@ try{
             "code" => 500
         ]);
     }
-} catch(\Exception $e) {
+} catch (\Exception $e) {
 
-     // Send error response
-     echo json_encode([
-         "message" => $e,
-         "code" => 500
-     ]);
+    // Send error response
+    echo json_encode([
+        "message" => $e,
+        "code" => 500
+    ]);
 }

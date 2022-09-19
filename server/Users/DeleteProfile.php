@@ -1,14 +1,12 @@
 <?php
 // Include files
-include_once '../Config/Cors.php';
-include_once '../Config/Database.php';
 require "../../vendor/autoload.php";
 include_once "./UsersUtil.php";
 
 // Get incoming data
 $data = json_decode(file_get_contents("php://input"));
 
-if (empty($data->email) || empty($data->password)) {
+if (!isset($data->users_id) || empty($data->users_id)) {
 
     // Send error response
     echo json_encode([
@@ -19,8 +17,6 @@ if (empty($data->email) || empty($data->password)) {
 }
 
 // Data fields
-$email = $data->email;
-$password = $data->password;
+$users_id = base64_decode($data->users_id);
 
-// Login
-UsersUtil::login($email, $password);
+UsersUtil::deleteProfile($users_id);
