@@ -5,7 +5,7 @@ const HideWeb = () => {
     return (
         <div className='hideWeb'>
             <img src={logo} alt="Todos logo" />
-            <h2>Skift til mobilen for nu {":-)"}</h2>
+            <h2>Skift til mobilen (lodret) for nu {":-)"}</h2>
         </div>
     )
 }
