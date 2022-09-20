@@ -46,10 +46,10 @@ const DeleteProfile = (props) => {
             <div>
                 <button type="button" onClick={props.handleDeleteProfile}>Tilbage</button>
                 {loading ? (
-                    <button type="button" className="delete" onClick={deleteEverything}> <TailSpin color="#000000" height={20} width={20} /></button>
+                    <button type="button" className="delete danger"> <TailSpin color="#000000" height={20} width={20} /></button>
 
                 ) : (
-                    <button type="button" className="delete" onClick={deleteEverything}>Slet data</button>
+                    <button type="button" className="delete danger" onClick={deleteEverything}>Slet data</button>
                 )}
             </div>
         </div>

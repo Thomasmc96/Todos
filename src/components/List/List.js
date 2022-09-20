@@ -8,13 +8,15 @@ import editIcon from "../../assets/img/edit.svg";
 import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import ShareList from "./ShareList.js";
 import AddTask from "./AddTask.js";
 import EditTask from "./EditTask.js";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { arrayMoveImmutable } from "array-move";
+import Options from "./Options";
+import ShareList from "./ShareList.js";
+import LeaveList from "./LeaveList.js";
 
 const List = () => {
   // Params from URL
@@ -26,13 +28,14 @@ const List = () => {
     products: [{ completed: "", name: "", products_id: "" }],
   });
   const [toggleAddTask, setToggleAddTask] = useState(false);
-  const [toggleShareList, setToggleShareList] = useState(false);
   const [toggleEditTask, setToggleEditTask] = useState(0);
+  const [toggleOptions, setToggleOptions] = useState(false);
+  const [toggleLeaveList, setToggleLeaveList] = useState(false);
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [toggleShareList, setToggleShareList] = useState(false);
 
-  console.log(list.products);
   useEffect(() => {
     setLoading(true);
     axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}&users_id=${localStorage.getItem("users_id")}`)
@@ -47,7 +50,6 @@ const List = () => {
           result.data.users_id === localStorage.getItem("users_id") ||
           sharedUsers.includes(localStorage.getItem("users_id"))
         ) {
-          console.log(result.data);
           // Save data to state
           setList(result.data);
           checkProducts(result.data.products);
@@ -88,6 +90,14 @@ const List = () => {
   const showShareList = () => {
     setToggleShareList(!toggleShareList);
   };
+
+  const showOptions = () => {
+    setToggleOptions(!toggleOptions);
+  }
+
+  const showLeaveList = () => {
+    setToggleLeaveList(!toggleLeaveList);
+  }
 
   const completeTask = (event, index, status) => {
     console.log(event);
@@ -222,12 +232,13 @@ const List = () => {
           <img id="back" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
-        {list.users_id === localStorage.getItem("users_id") && (
+        {/* {list.users_id === localStorage.getItem("users_id") && (
           <div className="shareSection" onClick={showShareList}>
             <p>Del liste</p>
             <img id="share" src={shareIcon} alt="Del liste ikon" />
           </div>
-        )}
+        )} */}
+        <img className="optionsIcon" src={shareIcon} alt="Valgmuligheder ikon" onClick={showOptions} />
       </div>
       <hr className="hr" />
       <h1>{list.list_name}</h1>
@@ -249,40 +260,6 @@ const List = () => {
           Array.isArray(list.products) && (
             <SortableList list={list} onSortEnd={onSortEnd} pressDelay={150} />
           )
-          // list.products.map((product, i) => {
-          //   if (product.completed == "0") {
-          //     return (
-          //       <div className="todoProduct" key={product.products_id}>
-          //         <div className="doneOrNot">
-          //           <img
-          //             id="notDoneIcon"
-          //             src={notDoneIcon}
-          //             alt="Ikke-færdig ikon"
-          //             onClick={(event) => {
-          //               completeTask(event, i, 1);
-          //             }}
-          //           />
-          //           <p>{product.name}</p>
-          //         </div>
-          //         <img
-          //           onClick={() => showEditTask(product.products_id)}
-          //           id="editIcon"
-          //           src={editIcon}
-          //           alt="Redigér ikon"
-          //         />
-          //         {toggleEditTask === product.products_id && (
-          //           <EditTask
-          //             showEditTask={() => showEditTask(0)}
-          //             task={product}
-          //             setList={setList}
-          //             list={list}
-          //             index={i}
-          //           />
-          //         )}
-          //       </div>
-          //     );
-          //   }
-          // })
         )}
         {showCompletedTasks && (
           <span>
@@ -318,7 +295,10 @@ const List = () => {
       {toggleAddTask && (
         <AddTask showAddTask={showAddTask} setList={setList} list={list} setShowUncompletedTasks={setShowUncompletedTasks} />
       )}
+      {toggleOptions && <Options showOptions={showOptions} list={list} showShareList={showShareList} showLeaveList={showLeaveList} />}
       {toggleShareList && <ShareList showShareList={showShareList} />}
+      {toggleLeaveList && <LeaveList showLeaveList={showLeaveList} />}
+
     </div>
   );
 };

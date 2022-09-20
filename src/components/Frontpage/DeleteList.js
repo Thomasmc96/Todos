@@ -37,6 +37,7 @@ const DeleteList = (props) => {
 
   return (
     <div className="deleteList popup">
+      <span className="cross" onClick={props.showDeleteList}>x</span>
       <h2>Vil du slette listen?</h2>
       <p>Listen vil blive slettet permanent.</p>
       <form onSubmit={deleteList}>
@@ -46,9 +47,6 @@ const DeleteList = (props) => {
           </div>
         ) : (
           <div>
-            <button type="button" onClick={props.showDeleteList}>
-              Tilbage
-            </button>
             <button id="deleteBtn" type="submit" onClick={deleteList}>
               Slet liste
             </button>

@@ -57,6 +57,7 @@ const AddTask = (props) => {
 
   return (
     <div className="addTask popup">
+      <span className="cross" onClick={props.showAddTask}>x</span>
       <h2 id="addTaskHeader">Tilføj en opgave</h2>
       <form onSubmit={pushTask}>
         <input
@@ -77,9 +78,6 @@ const AddTask = (props) => {
           </div>
         ) : (
           <div>
-            <button type="button" onClick={props.showAddTask}>
-              Tilbage
-            </button>
             <button type="submit">Tilføj</button>
           </div>
         )}

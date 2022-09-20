@@ -52,18 +52,6 @@
   background-color: #d5f2d4;
 }
 
-#emailError{
-    color: #FC4848;
-}
-
-#passwordError{
-    color: #FC4848;
-}
-
-#checkboxError {
-  color: #fc4848;
-}
-
 #checkboxContainer {
   display: flex;
   margin-top: 10%;
@@ -122,7 +110,7 @@
     width: 50%;
     height: 3vw;
   }
-  
+
   #checkboxContainer {
     font-size: 20px;
     margin-top: 5%;

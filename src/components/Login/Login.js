@@ -82,7 +82,7 @@ const Login = () => {
           <p className="pTags">Ikke allerede bruger? Så opret dig her.</p>
         </Link>
         {showLoginError && (
-          <p className="pTags" id="loginError">
+          <p className="pTags danger" id="loginError">
             En af de indtastede værdier er forkerte - prøv igen!
           </p>
         )}

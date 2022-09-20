@@ -62,6 +62,7 @@ const EditTask = (props) => {
 
   return (
     <div className="addTask popup">
+      <span className="cross" onClick={props.showEditTask}>x</span>
       <h2>Skift navn på punktet</h2>
       <input
         autoFocus
@@ -79,9 +80,6 @@ const EditTask = (props) => {
         </div>
       ) : (
         <div>
-          <button type="button" onClick={props.showEditTask}>
-            Tilbage
-          </button>
           <button type="submit" onClick={edit}>
             Gem
           </button>

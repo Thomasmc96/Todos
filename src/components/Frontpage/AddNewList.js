@@ -43,6 +43,7 @@ const AddNewList = (props) => {
 
   return (
     <div className="addNewListBox popup">
+      <span className="cross" onClick={props.showNewList}>x</span>
       <h2>Opret liste</h2>
       <form onSubmit={pushNewList}>
         <input
@@ -62,9 +63,6 @@ const AddNewList = (props) => {
           </div>
         ) : (
           <div>
-            <button type="button" onClick={props.showNewList}>
-              Tilbage
-            </button>
             <button type="submit">Opret</button>
           </div>
         )}

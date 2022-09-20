@@ -77,9 +77,9 @@ const SignUp = () => {
           localStorage.setItem("name", response.data.name);
           localStorage.setItem("users_id", response.data.id);
           window.location.replace("/");
-        } else if (response.data.message.errorInfo[0] == "23000"){
+        } else if (response.data.message.errorInfo[0] == "23000") {
           // Show error message
-         setShowEmailError(true)
+          setShowEmailError(true)
         }
       })
       .catch(function (error) {
@@ -133,7 +133,7 @@ const SignUp = () => {
           required
         />
         {showPasswordError && (
-          <p id="passwordError">Adgangskoderne er ikke ens - prøv igen!</p>
+          <p id="passwordError" className="danger">Adgangskoderne er ikke ens - prøv igen!</p>
         )}
         <div id="checkboxContainer">
           <input
@@ -144,11 +144,11 @@ const SignUp = () => {
             onChange={handleCheckboxValue}
           />
           <label htmlFor="acceptChechbox">
-          <Link to={"/privatlivspolitik"}>  Klik her for at acceptere vores vilkår</Link>
+            <Link to={"/privatlivspolitik"}>  Klik her for at acceptere vores vilkår</Link>
           </label>
         </div>
         {showCheckboxError && (
-          <p id="checkboxError">Husk at acceptere vilkårene - prøv igen!</p>
+          <p id="checkboxError" className="danger">Husk at acceptere vilkårene - prøv igen!</p>
         )}
 
         <div id="btnContainer">

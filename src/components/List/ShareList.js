@@ -40,6 +40,7 @@ const ShareList = (props) => {
 
   return (
     <div className="addTask popup">
+      <span className="cross" onClick={props.showShareList}>x</span>
       <h2>Del liste</h2>
       <form onSubmit={share}>
         <input
@@ -58,9 +59,6 @@ const ShareList = (props) => {
           </div>
         ) : (
           <div>
-            <button type="button" onClick={props.showShareList}>
-              Tilbage
-            </button>
             <button type="submit">Del liste</button>
           </div>
         )}

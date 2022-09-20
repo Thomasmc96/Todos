@@ -22,7 +22,7 @@ const Settings = (props) => {
         {/* <button type="button" onClick={props.showSettings}>
           Tilbage
         </button> */}
-        <button id="logOut" type="submit" onClick={logout}>
+        <button id="logOut" className="danger" type="submit" onClick={logout}>
           Log ud
         </button>
         <button id="deleteProfile" type="button" onClick={props.handleDeleteProfile}>
@@ -30,8 +30,6 @@ const Settings = (props) => {
         </button>
       </div>
       <p className="version">v. {version}</p>
-
-      {/* {showDeleteProfile && <DeleteProfile handleDeleteProfile={handleDeleteProfile} />} */}
     </div>
   );
 };

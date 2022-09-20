@@ -51,12 +51,11 @@
   background-color: #d5f2d4;
 }
 
-.pTags{
+.pTags {
   font-family: berlin;
 }
 
 #loginError {
-  color: #fc4848;
   width: 60%;
   text-align: center;
 }
