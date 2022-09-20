@@ -10,6 +10,7 @@ const ShareList = (props) => {
 
   const [mail, setMail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [statusCode, setStatusCode] = useState();
 
   const share = (event) => {
     event.preventDefault();
@@ -23,11 +24,11 @@ const ShareList = (props) => {
       })
       .then(function (response) {
         setLoading(false);
+        setStatusCode(response.data.code);
         console.log(response.data);
 
         // If response if good
         if (response.data.code === 200) {
-          props.showShareList();
           setMail("");
         } else {
         }
@@ -53,6 +54,21 @@ const ShareList = (props) => {
           autoComplete="off"
           onChange={(e) => setMail(e.target.value)}
         />
+        {statusCode && statusCode === 500 && (
+          <p>
+            Kunne ikke deles - prøv igen
+          </p>
+        )}
+        {statusCode && statusCode === 404 && (
+          <p>
+            Kunne ikke deles - er mailen forkert?
+          </p>
+        )}
+        {statusCode && statusCode === 200 && (
+          <p>
+            Listen blev delt!
+          </p>
+        )}
         {loading ? (
           <div className="loading">
             <TailSpin color="#000000" height={40} width={40} />

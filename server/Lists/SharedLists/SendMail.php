@@ -14,9 +14,9 @@ try {
     $data = json_decode(file_get_contents("php://input"));
 
     // Make sure needed data was given
-    if(!isset($data->lists_id) || empty($data->lists_id) || !isset($data->mail) || empty($data->mail)){
-         // Send error response
-         echo json_encode([
+    if (!isset($data->lists_id) || empty($data->lists_id) || !isset($data->mail) || empty($data->mail)) {
+        // Send error response
+        echo json_encode([
             "message" => "Missing data",
             "code" => 500
         ]);
@@ -27,8 +27,8 @@ try {
     $lists_id = base64_encode($data->lists_id);
     $name = $data->name;
 
-      // Prepare query to get user
-      $query = "
+    // Prepare query to get user
+    $query = "
       SELECT 
           users_id
       FROM 
@@ -43,24 +43,24 @@ try {
 
     $user = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if(empty($user)){
-         // Send error response
-         echo json_encode([
+    if (empty($user)) {
+        // Send error response
+        echo json_encode([
             "message" => "User wasn't found",
             "code" => 404
         ]);
         exit();
     }
-    
+
     // Encode user id
     $users_id = base64_encode($user[0]["users_id"]);
- 
+
 
     // Link for the user to access
     // $link = "https://todos.dk/server/Lists/SharedLists/Create.php?lists_id=$lists_id&users_id=$users_id";
     $link = "https://todos.dk/join-list?lists_id=$lists_id&users_id=$users_id";
 
- 
+
     // Subject for mail
     $subject = "Invitation til Todos liste";
 
@@ -90,12 +90,12 @@ try {
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
     // Send mail
-    if (mail($mail, $subject, $message, $headers) ) {
-     // Send success response
-     echo json_encode([
-        "message" => "The mail was sent",
-        "code" => 200
-    ]);
+    if (@mail($mail, $subject, $message, $headers)) {
+        // Send success response
+        echo json_encode([
+            "message" => "The mail was sent",
+            "code" => 200
+        ]);
     } else {
         // Send error response
         echo json_encode([
@@ -103,7 +103,6 @@ try {
             "code" => 500
         ]);
     }
-
 } catch (\Exception $e) {
     // Send error response
     echo json_encode([
