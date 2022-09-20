@@ -108,3 +108,10 @@ p.danger {
     transform: translateY(0px);
   }
 }
+
+/* Temporary */
+@media screen and (min-width: 481px) {
+  body {
+    overflow: hidden;
+  }
+}
