@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import environment from "../src/environment";
 
@@ -15,10 +15,11 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import NotFound from "./components/NotFound/NotFound";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import HideWeb from "./components/Utilities/HideWeb";
 
 const App = () => {
   // Paths where we don't want to redirect if user isn't logged in
-  const nonAuthPaths = ["/login", "/signup"];
+  const nonAuthPaths = ["/login", "/signup", "/privatlivspolitik"];
 
   useEffect(() => {
     var token = localStorage.getItem("token");
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/privatlivspolitik" element={<PrivacyPolicy />} />
       </Routes>
+      <HideWeb />
     </Router>
   );
 };

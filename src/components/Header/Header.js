@@ -26,7 +26,9 @@ const Header = () => {
           <img className="logo" src={todo} alt="To do ikon" />
         </Link>
       ) : (
-        <img className="logo" src={todo} alt="To do ikon" />
+        <Link to={"/login"}>
+          <img className="logo" src={todo} alt="To do ikon" />
+        </Link>
       )}
       {localStorage.getItem("users_id") !== null ? (
         <img
