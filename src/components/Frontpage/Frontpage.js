@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Frontpage.css";
 import addNewListIcon from "../../assets/img/add-new-list.svg";
 import listIcon from "../../assets/img/small-list.svg";
-import deleteIcon from "../../assets/img/delete.svg";
 import axios from "axios";
 import AddNewList from "./AddNewList.js";
-import DeleteList from "./DeleteList.js";
 import { useNavigate, Link } from "react-router-dom";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
@@ -16,7 +14,6 @@ const Frontpage = () => {
   const [lists, setLists] = useState([]);
   const [sharedLists, setSharedLists] = useState([]);
   const [toggleNewList, setToggleNewList] = useState(false);
-  const [toggleDeleteList, setToggleDeleteList] = useState(0);
   const [loadingLists, setLoadingLists] = useState(false);
   const [loadingSharedLists, setLoadingSharedLists] = useState(false);
 
@@ -65,9 +62,7 @@ const Frontpage = () => {
   const showNewList = () => {
     setToggleNewList(!toggleNewList);
   };
-  const showDeleteList = (id) => {
-    setToggleDeleteList(id);
-  };
+
 
   return (
     <div className="frontpage">
@@ -75,13 +70,6 @@ const Frontpage = () => {
         <p className="profileIcon">{initials}</p>
         <p className="profileName">{localStorage.getItem("name")}</p>
       </div>
-      {/* <hr className="hr" /> */}
-      {/* <img
-        className="addNewListIcon"
-        src={addNewListIcon}
-        alt="Tilføj ny liste"
-        onClick={showNewList}
-      /> */}
       <section>
         <h3 className="listCategory">Lister oprettet af mig</h3>
         <hr className="hrList" />
@@ -97,19 +85,6 @@ const Frontpage = () => {
                   <img className="listIcon" src={listIcon} alt="Liste ikon" />
                   <p>{list.name}</p>
                 </Link>
-                <img
-                  className="deleteIcon"
-                  src={deleteIcon}
-                  alt="Delete ikon"
-                  onClick={() => showDeleteList(list.lists_id)}
-                />
-                {toggleDeleteList === list.lists_id && (
-                  <DeleteList
-                    showDeleteList={() => showDeleteList(0)}
-                    setLists={setLists}
-                    lists_id={list.lists_id}
-                  />
-                )}
               </div>
             );
           })

@@ -17,6 +17,7 @@ import { arrayMoveImmutable } from "array-move";
 import Options from "./Options";
 import ShareList from "./ShareList.js";
 import LeaveList from "./LeaveList.js";
+import DeleteList from "./DeleteList.js";
 
 const List = () => {
   // Params from URL
@@ -31,6 +32,7 @@ const List = () => {
   const [toggleEditTask, setToggleEditTask] = useState(0);
   const [toggleOptions, setToggleOptions] = useState(false);
   const [toggleLeaveList, setToggleLeaveList] = useState(false);
+  const [toggleDeleteList, setToggleDeleteList] = useState(false);
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -98,6 +100,10 @@ const List = () => {
   const showLeaveList = () => {
     setToggleLeaveList(!toggleLeaveList);
   }
+
+  const showDeleteList = () => {
+    setToggleDeleteList(!toggleDeleteList);
+  };
 
   const completeTask = (event, index, status) => {
     console.log(event);
@@ -232,12 +238,6 @@ const List = () => {
           <img id="back" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
-        {/* {list.users_id === localStorage.getItem("users_id") && (
-          <div className="shareSection" onClick={showShareList}>
-            <p>Del liste</p>
-            <img id="share" src={shareIcon} alt="Del liste ikon" />
-          </div>
-        )} */}
         <img className="optionsIcon" src={shareIcon} alt="Valgmuligheder ikon" onClick={showOptions} />
       </div>
       <hr className="hr" />
@@ -295,10 +295,10 @@ const List = () => {
       {toggleAddTask && (
         <AddTask showAddTask={showAddTask} setList={setList} list={list} setShowUncompletedTasks={setShowUncompletedTasks} />
       )}
-      {toggleOptions && <Options showOptions={showOptions} list={list} showShareList={showShareList} showLeaveList={showLeaveList} />}
+      {toggleOptions && <Options showOptions={showOptions} list={list} showShareList={showShareList} showLeaveList={showLeaveList} showDeleteList={showDeleteList} />}
       {toggleShareList && <ShareList showShareList={showShareList} />}
       {toggleLeaveList && <LeaveList showLeaveList={showLeaveList} />}
-
+      {toggleDeleteList && <DeleteList showDeleteList={showDeleteList} />}
     </div>
   );
 };

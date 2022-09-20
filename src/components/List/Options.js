@@ -1,6 +1,7 @@
 import React from 'react'
 import shareIcon from "../../assets/img/share.svg";
 import leaveIcon from "../../assets/img/leave.svg";
+import deleteIcon from "../../assets/img/delete.svg";
 
 const Options = (props) => {
     return (
@@ -9,10 +10,18 @@ const Options = (props) => {
             <h2>Valgmuligheder</h2>
             <div>
                 {props.list.users_id === localStorage.getItem("users_id") && (
-                    <button type='button' onClick={props.showShareList}>
-                        <p>Del liste</p>
-                        <img className="shareIcon icon" src={shareIcon} alt="Del liste ikon" />
-                    </button>
+                    <React.Fragment>
+
+                        <button type='button' onClick={props.showShareList}>
+                            <p>Del liste</p>
+                            <img className="shareIcon icon" src={shareIcon} alt="Del liste ikon" />
+                        </button>
+                        <button type='button' className='danger' onClick={props.showDeleteList}>
+                            <p>Slet liste</p>
+                            <img className="deleteList icon" src={deleteIcon} alt="Slet liste ikon" />
+                        </button>
+
+                    </React.Fragment>
                 )}
                 {props.list.users_id !== localStorage.getItem("users_id") && (
                     <button className='danger' onClick={props.showLeaveList}>

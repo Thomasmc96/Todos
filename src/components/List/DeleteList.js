@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
+import { useParams } from "react-router-dom";
 
 const DeleteList = (props) => {
+  // Params from URL
+  const { id } = useParams();
+
   const [loading, setLoading] = useState(false);
 
   const deleteList = (event) => {
@@ -12,17 +16,14 @@ const DeleteList = (props) => {
     // API call
     axios
       .post(`${environment[0]}/server/Lists/Delete.php`, {
-        lists_id: props.lists_id,
+        lists_id: id,
       })
       .then(function (response) {
         setLoading(false);
 
         // If response if good
         if (response.data.code === 200) {
-          props.setLists((prevLists) => {
-            return prevLists.filter((list) => list.lists_id != props.lists_id);
-          });
-          props.showDeleteList();
+          window.location.replace("/");
         } else {
           // Show error message
           console.log("error");
