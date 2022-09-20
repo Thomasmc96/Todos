@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./List.css";
 import backIcon from "../../assets/img/back.svg";
 import shareIcon from "../../assets/img/share.svg";
+import dotsIcon from "../../assets/img/dots.svg";
 import notDoneIcon from "../../assets/img/not-done.svg";
 import doneIcon from "../../assets/img/done.svg";
 import editIcon from "../../assets/img/edit.svg";
@@ -238,7 +239,7 @@ const List = () => {
           <img id="back" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
-        <img className="optionsIcon" src={shareIcon} alt="Valgmuligheder ikon" onClick={showOptions} />
+        <img className="optionsIcon" src={dotsIcon} alt="Valgmuligheder ikon" onClick={showOptions} />
       </div>
       <hr className="hr" />
       <h1>{list.list_name}</h1>
