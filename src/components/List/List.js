@@ -19,6 +19,7 @@ import Options from "./Options";
 import ShareList from "./ShareList.js";
 import LeaveList from "./LeaveList.js";
 import DeleteList from "./DeleteList.js";
+import Members from "./Members.js";
 
 const List = () => {
   // Params from URL
@@ -34,6 +35,7 @@ const List = () => {
   const [toggleOptions, setToggleOptions] = useState(false);
   const [toggleLeaveList, setToggleLeaveList] = useState(false);
   const [toggleDeleteList, setToggleDeleteList] = useState(false);
+  const [toggleMembers, setToggleMembers] = useState(false);
   const [showUncompletedTasks, setShowUncompletedTasks] = useState(false);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,7 +46,6 @@ const List = () => {
     axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}&users_id=${localStorage.getItem("users_id")}`)
       .then((result) => {
         // Check user is allowed to see list
-        // if (result.data.users_id !== localStorage.getItem("users_id")) {
         let sharedUsers = result.data.shared_users;
 
         setLoading(false);
@@ -53,6 +54,7 @@ const List = () => {
           result.data.users_id === localStorage.getItem("users_id") ||
           sharedUsers.includes(localStorage.getItem("users_id"))
         ) {
+          console.log(result.data);
           // Save data to state
           setList(result.data);
           checkProducts(result.data.products);
@@ -92,6 +94,7 @@ const List = () => {
 
   const showShareList = () => {
     setToggleShareList(!toggleShareList);
+    showOptions();
   };
 
   const showOptions = () => {
@@ -100,10 +103,17 @@ const List = () => {
 
   const showLeaveList = () => {
     setToggleLeaveList(!toggleLeaveList);
+    showOptions();
   }
 
   const showDeleteList = () => {
     setToggleDeleteList(!toggleDeleteList);
+    showOptions();
+  };
+
+  const showMembers = () => {
+    setToggleMembers(!toggleMembers);
+    showOptions();
   };
 
   const completeTask = (event, index, status) => {
@@ -287,7 +297,7 @@ const List = () => {
             }
           })}
       </div>
-      {!toggleAddTask && !toggleEditTask && (
+      {!toggleAddTask && !toggleEditTask && !toggleShareList && (
         <div className="addSection" onClick={showAddTask}>
           <img src={addIcon} alt="Tilføj opgave ikon" />
           <p>Tilføj en opgave</p>
@@ -296,10 +306,11 @@ const List = () => {
       {toggleAddTask && (
         <AddTask showAddTask={showAddTask} setList={setList} list={list} setShowUncompletedTasks={setShowUncompletedTasks} />
       )}
-      {toggleOptions && <Options showOptions={showOptions} list={list} showShareList={showShareList} showLeaveList={showLeaveList} showDeleteList={showDeleteList} />}
+      {toggleOptions && <Options showOptions={showOptions} list={list} showShareList={showShareList} showLeaveList={showLeaveList} showDeleteList={showDeleteList} showMembers={showMembers} />}
       {toggleShareList && <ShareList showShareList={showShareList} />}
       {toggleLeaveList && <LeaveList showLeaveList={showLeaveList} />}
       {toggleDeleteList && <DeleteList showDeleteList={showDeleteList} />}
+      {toggleMembers && <Members showMembers={showMembers} />}
     </div>
   );
 };
