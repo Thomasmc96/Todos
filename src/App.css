@@ -27,6 +27,7 @@ body {
   flex-direction: column;
   background-color: #7ba779;
   width: 70vw;
+  min-height: 24vh;
   border-radius: 20px;
   position: fixed;
   top: 16%;

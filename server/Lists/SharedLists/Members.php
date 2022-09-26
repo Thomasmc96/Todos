@@ -50,9 +50,9 @@ try {
     if ($statement->execute()) {
 
         // Send success response
-        $lists = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $members = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        echo json_encode($lists);
+        echo json_encode(["members" => $members, "code" => 200]);
     } else {
 
         // Send error response

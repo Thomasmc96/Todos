@@ -25,7 +25,6 @@ const ShareList = (props) => {
       .then(function (response) {
         setLoading(false);
         setStatusCode(response.data.code);
-        console.log(response.data);
 
         // If response if good
         if (response.data.code === 200) {

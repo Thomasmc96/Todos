@@ -173,3 +173,11 @@
 .addTask p {
   margin-top: 5%;
 }
+
+.members .member p {
+  font-size: 20px;
+}
+
+.members .member span {
+  font-size: 16px;
+}
