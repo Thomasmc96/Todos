@@ -52,6 +52,16 @@ try {
         // Send success response
         $members = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        foreach ($members as $pos => $member) {
+            if (!empty($member['lists_shared_id'])) {
+                $members[$pos]['owner'] = 0;
+            } else {
+                $members[$pos]['owner'] = 1;
+            }
+            // Unset lists_shared_id key
+            unset($members[$pos]['lists_shared_id']);
+        }
+
         echo json_encode(["members" => $members, "code" => 200]);
     } else {
 

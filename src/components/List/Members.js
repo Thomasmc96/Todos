@@ -15,11 +15,12 @@ const Members = (props) => {
 
     useEffect(() => {
         setLoading(true);
-        console.log(`${environment[0]}/server/Lists/SharedLists/Members.php?lists_id=${lists_id}`);
         axios(`${environment[0]}/server/Lists/SharedLists/Members.php?lists_id=${lists_id}`)
             .then((response) => {
+                if (response.data.code === 200) {
+                    setListMembers(response.data.members)
+                }
                 setLoading(false)
-                setListMembers(response.data.members)
                 setStatusCode(response.data.code);
             }).catch((error) => {
                 setLoading(false)
@@ -36,12 +37,12 @@ const Members = (props) => {
             ) : (
                 statusCode === 200 &&
                 Array.isArray(listMembers) && listMembers.length > 0 &&
-                listMembers.sort((a, b) => a.lists_shared_id - b.lists_shared_id)
+                listMembers.sort((a, b) => b.owner - a.owner)
                     .map((member, i) => {
-                        const { name, lists_shared_id } = member;
+                        const { name, owner } = member;
                         return (
                             <div key={i} className="member">
-                                <p>{name} {lists_shared_id === null && (<span>(ejer)</span>)}</p>
+                                <p>{name} {owner === 1 && (<span>(ejer)</span>)}</p>
                             </div>
                         )
                     })

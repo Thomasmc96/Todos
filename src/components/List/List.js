@@ -54,7 +54,6 @@ const List = () => {
           result.data.users_id === localStorage.getItem("users_id") ||
           sharedUsers.includes(localStorage.getItem("users_id"))
         ) {
-          console.log(result.data);
           // Save data to state
           setList(result.data);
           checkProducts(result.data.products);
