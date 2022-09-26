@@ -21,7 +21,7 @@ try {
     } else {
         // Send error response
         echo json_encode([
-            "message" => "No users_id was given",
+            "message" => "No lists_id was given",
             "code" => 500
         ]);
         exit();
@@ -34,11 +34,11 @@ try {
         FROM 
             users u
         LEFT JOIN
-            lists l ON l.users_id = u.users_id
+            lists l ON l.users_id = u.users_id AND l.lists_id = :lists_id
         LEFT JOIN
-            lists_shared ls ON ls.users_id = u.users_id
+            lists_shared ls ON ls.users_id = u.users_id AND ls.lists_id = :lists_id
         WHERE
-            l.lists_id = :lists_id OR ls.lists_id = :lists_id;
+            l.lists_id = :lists_id OR ls.lists_id = :lists_id
         ";
 
     $statement = $connection->prepare($query);

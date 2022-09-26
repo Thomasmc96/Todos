@@ -167,7 +167,7 @@
 
 .options .icon {
   width: 15px;
-  margin-left: 8%;
+  margin-left: 5%;
 }
 
 .addTask p {
@@ -180,4 +180,9 @@
 
 .members .member span {
   font-size: 16px;
+}
+
+.options button {
+  justify-content: unset !important;
+  gap: 10px;
 }
