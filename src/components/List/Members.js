@@ -19,6 +19,7 @@ const Members = (props) => {
             .then((response) => {
                 if (response.data.code === 200) {
                     setListMembers(response.data.members)
+                    console.log(response.data.members)
                 }
                 setLoading(false)
                 setStatusCode(response.data.code);
