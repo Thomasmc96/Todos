@@ -12,9 +12,19 @@
   margin-bottom: 1rem;
 }
 
-#settingsIcon {
-  width: 6%;
-  margin-right: 5%;
+.header .headerIcons {
+  display: flex;
+  justify-content: end;
+}
+
+.header .headerIcons .notificationContainer {
+  position: relative;
+}
+
+
+.header .headerIcons .icon {
+  width: 10%;
+  margin-right: 7%;
 }
 
 .settings .pwaBtn {
@@ -46,4 +56,12 @@
   width: 100%;
   justify-content: center;
   gap: 5%;
+}
+
+.notifications {
+  position: absolute;
+  background-color: #EEE;
+  height: 500px;
+  width: 300px;
+  top: 100%;
 }
