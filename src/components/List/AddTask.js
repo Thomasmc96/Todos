@@ -18,11 +18,13 @@ const AddTask = (props) => {
       .post(`${environment[0]}/server/Products/Create.php`, {
         name: taskName,
         lists_id: id,
+        users_id: localStorage.getItem("users_id"),
       })
       .then(function (response) {
         setLoading(false);
         // If response is good
         if (response.status === 200) {
+          console.log(response);
           props.setList({
             list_name: props.list.list_name,
             users_id: props.list.users_id,
@@ -57,7 +59,9 @@ const AddTask = (props) => {
 
   return (
     <div className="addTask popup">
-      <span className="cross" onClick={props.showAddTask}>x</span>
+      <span className="cross" onClick={props.showAddTask}>
+        x
+      </span>
       <h2 id="addTaskHeader">Tilføj en opgave</h2>
       <form onSubmit={pushTask}>
         <input

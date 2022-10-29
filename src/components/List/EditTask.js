@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
+import { useParams } from "react-router-dom";
 
 const EditTask = (props) => {
+  const users_id = localStorage.getItem("users_id");
+
+  // Params from URL
+  const { id } = useParams();
+
   const [taskName, setTaskName] = useState(props.task.name);
   const [loading, setLoading] = useState(false);
 
@@ -20,6 +26,8 @@ const EditTask = (props) => {
       .post(`${environment[0]}/server/Products/Update.php`, {
         products_id: props.task.products_id,
         name: taskName,
+        users_id: users_id,
+        lists_id_2: id,
       })
       .then(function (response) {
         setLoading(false);
@@ -62,7 +70,9 @@ const EditTask = (props) => {
 
   return (
     <div className="addTask popup">
-      <span className="cross" onClick={props.showEditTask}>x</span>
+      <span className="cross" onClick={props.showEditTask}>
+        x
+      </span>
       <h2>Skift navn på punktet</h2>
       <input
         autoFocus

@@ -21,7 +21,6 @@
   position: relative;
 }
 
-
 .header .headerIcons .icon {
   width: 10%;
   margin-right: 7%;
@@ -42,13 +41,11 @@
   align-items: center;
 }
 
-
 #deleteProfile {
   background-color: transparent;
   padding: 0;
   width: unset;
 }
-
 
 .deleteProfile div {
   display: flex;
@@ -59,9 +56,49 @@
 }
 
 .notifications {
-  position: absolute;
-  background-color: #EEE;
-  height: 500px;
-  width: 300px;
-  top: 100%;
+  position: fixed;
+  background-color: #eee;
+  max-height: 60vh;
+  width: 50vw;
+  top: 7vh;
+  left: 33vw;
+  border-radius: 5px;
+  border: black 1px solid;
+  overflow-y: auto;
+}
+
+.notifications h2 {
+  text-align: center;
+}
+
+.notification {
+  background-color: white;
+  min-height: 10vh;
+  border-top: black 1px solid;
+  padding: 0 5px 5px 5px;
+}
+
+.notification h3 {
+  margin: 5px 0 5px 0;
+}
+
+.notification p {
+  margin: 0;
+}
+
+.notification img {
+  width: 18px;
+}
+
+.notification .item {
+  display: flex;
+  align-items: center;
+  margin-top: 13px;
+  margin-bottom: 0;
+  gap: 10px;
+}
+
+.notification .created_date {
+  opacity: 0.5;
+  font-size: 0.8rem;
 }

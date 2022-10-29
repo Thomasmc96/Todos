@@ -25,6 +25,8 @@ const List = () => {
   // Params from URL
   const { id } = useParams();
 
+  const users_id = localStorage.getItem("users_id");
+
   // States
   const [list, setList] = useState({
     list_name: "",
@@ -43,7 +45,9 @@ const List = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios(`${environment[0]}/server/Products/Read.php?lists_id=${id}&users_id=${localStorage.getItem("users_id")}`)
+    axios(
+      `${environment[0]}/server/Products/Read.php?lists_id=${id}&users_id=${users_id}`
+    )
       .then((result) => {
         // Check user is allowed to see list
         let sharedUsers = result.data.shared_users;
@@ -51,8 +55,8 @@ const List = () => {
         setLoading(false);
 
         if (
-          result.data.users_id === localStorage.getItem("users_id") ||
-          sharedUsers.includes(localStorage.getItem("users_id"))
+          result.data.users_id === users_id ||
+          sharedUsers.includes(users_id)
         ) {
           // Save data to state
           setList(result.data);
@@ -64,7 +68,6 @@ const List = () => {
       .catch((error) => {
         setLoading(false);
       });
-
   }, []);
 
   // Checks if the data contains any uncompleted and any completed tasks
@@ -98,12 +101,12 @@ const List = () => {
 
   const showOptions = () => {
     setToggleOptions(!toggleOptions);
-  }
+  };
 
   const showLeaveList = () => {
     setToggleLeaveList(!toggleLeaveList);
     showOptions();
-  }
+  };
 
   const showDeleteList = () => {
     setToggleDeleteList(!toggleDeleteList);
@@ -138,8 +141,11 @@ const List = () => {
       .post(`${environment[0]}/server/Products/Update.php`, {
         products_id: product.products_id,
         completed: status,
+        users_id: users_id,
+        lists_id_2: id,
       })
       .then(function (response) {
+        console.log(users_id);
         console.log(response.data);
         // If response if good
         if (response.data.code === 200) {
@@ -158,7 +164,6 @@ const List = () => {
   const SortableItem = SortableElement(({ product, i }) => (
     <div className="todoProduct" key={product.products_id}>
       <div className="doneOrNot">
-
         <img
           onClick={() => showEditTask(product.products_id)}
           src={editIcon}
@@ -226,6 +231,8 @@ const List = () => {
     axios
       .post(`${environment[0]}/server/Products/Update.php`, {
         products: arr,
+        users_id: users_id,
+        lists_id_2: id,
       })
       .then(function (response) {
         console.log(response.data);
@@ -248,7 +255,12 @@ const List = () => {
           <img id="back" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
-        <img className="optionsIcon" src={dotsIcon} alt="Valgmuligheder ikon" onClick={showOptions} />
+        <img
+          className="optionsIcon"
+          src={dotsIcon}
+          alt="Valgmuligheder ikon"
+          onClick={showOptions}
+        />
       </div>
       <hr className="hr" />
       <h1>{list.list_name}</h1>
@@ -261,7 +273,9 @@ const List = () => {
           )}
         {!showUncompletedTasks &&
           Array.isArray(list.products) &&
-          list.products.length === 0 && <p className="doneText">Her er der bare luft.</p>}
+          list.products.length === 0 && (
+            <p className="doneText">Her er der bare luft.</p>
+          )}
         {loading ? (
           <div className="loading">
             <TailSpin color="#000000" height={60} width={60} />
@@ -303,9 +317,23 @@ const List = () => {
         </div>
       )}
       {toggleAddTask && (
-        <AddTask showAddTask={showAddTask} setList={setList} list={list} setShowUncompletedTasks={setShowUncompletedTasks} />
+        <AddTask
+          showAddTask={showAddTask}
+          setList={setList}
+          list={list}
+          setShowUncompletedTasks={setShowUncompletedTasks}
+        />
       )}
-      {toggleOptions && <Options showOptions={showOptions} list={list} showShareList={showShareList} showLeaveList={showLeaveList} showDeleteList={showDeleteList} showMembers={showMembers} />}
+      {toggleOptions && (
+        <Options
+          showOptions={showOptions}
+          list={list}
+          showShareList={showShareList}
+          showLeaveList={showLeaveList}
+          showDeleteList={showDeleteList}
+          showMembers={showMembers}
+        />
+      )}
       {toggleShareList && <ShareList showShareList={showShareList} />}
       {toggleLeaveList && <LeaveList showLeaveList={showLeaveList} />}
       {toggleDeleteList && <DeleteList showDeleteList={showDeleteList} />}
