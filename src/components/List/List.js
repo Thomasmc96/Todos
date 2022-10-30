@@ -119,9 +119,6 @@ const List = () => {
   };
 
   const completeTask = (event, index, status) => {
-    console.log(event);
-    console.log(index);
-    console.log(status);
     event.preventDefault();
 
     // Save state array in local variable
@@ -145,8 +142,6 @@ const List = () => {
         lists_id_2: id,
       })
       .then(function (response) {
-        console.log(users_id);
-        console.log(response.data);
         // If response if good
         if (response.data.code === 200) {
           // Save to state
@@ -177,7 +172,6 @@ const List = () => {
         src={notDoneIcon}
         alt="Ikke-færdig ikon"
         onClick={(event) => {
-          // console.log(event);
           completeTask(event, i, 1);
         }}
       />
@@ -226,7 +220,6 @@ const List = () => {
       users_id: list.users_id,
       products: arr,
     });
-    console.log(arr);
     // API call
     axios
       .post(`${environment[0]}/server/Products/Update.php`, {
@@ -235,7 +228,6 @@ const List = () => {
         lists_id_2: id,
       })
       .then(function (response) {
-        console.log(response.data);
         // If response if good
         if (response.data.code === 200) {
           console.log("Success");

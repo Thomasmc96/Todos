@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import axios from "axios";
 import environment from "../../environment";
-import { Link } from "react-router-dom";
 import todo from "../../assets/img/todos.svg";
 import settings from "../../assets/img/settings.svg";
 import Settings from "./Settings.js";
@@ -29,7 +29,7 @@ const Header = () => {
           setNotifications(result.data.notifications);
           let notSeenAmount = 0;
           for (let i = 0; i < result.data.notifications.length; i++) {
-            if (result.data.notifications[i].seen_by_user == "0") {
+            if (result.data.notifications[i].seen_by_user === "0") {
               notSeenAmount++;
             }
             setNotificationsNotSeen(notSeenAmount);
@@ -39,7 +39,7 @@ const Header = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [users_id]);
 
   const showNotifications = () => {
     setToggleNotifications(!toggleNotifications);
@@ -79,8 +79,6 @@ const Header = () => {
       )}
       {localStorage.getItem("users_id") !== null ? (
         <div className="headerIcons">
-          {/* <div className="notificationContainer"> */}
-
           <div className="iconContainer">
             <img
               onClick={showNotifications}
@@ -99,7 +97,6 @@ const Header = () => {
               notifications={notifications}
             />
           )}
-          {/* </div> */}
           <div className="iconContainer">
             <img
               onClick={showSettings}

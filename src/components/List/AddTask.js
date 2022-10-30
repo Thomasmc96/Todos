@@ -24,7 +24,6 @@ const AddTask = (props) => {
         setLoading(false);
         // If response is good
         if (response.status === 200) {
-          console.log(response);
           props.setList({
             list_name: props.list.list_name,
             users_id: props.list.users_id,

@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import listIcon from "../../assets/img/small-list.svg";
 import doneIcon from "../../assets/img/done.svg";
 import notDoneIcon from "../../assets/img/not-done.svg";
 import personIcon from "../../assets/img/shared-list.svg";
 
 const Notifications = (props) => {
-  const hideNotifications = (event) => {
-    const box = document.getElementById("notifications");
+  const hideNotifications = useCallback(
+    (event) => {
+      const box = document.getElementById("notifications");
 
-    if (event.target.id !== "notificationsIcon")
-      if (!box.contains(event.target)) {
-        props.showNotifications(false);
-      }
-  };
+      if (event.target.id !== "notificationsIcon")
+        if (!box.contains(event.target)) {
+          props.showNotifications(false);
+        }
+    },
+    [props]
+  );
 
   useEffect(() => {
     window.addEventListener("click", hideNotifications);
@@ -20,7 +23,7 @@ const Notifications = (props) => {
     return () => {
       window.removeEventListener("click", hideNotifications);
     };
-  }, []);
+  }, [hideNotifications]);
 
   return (
     <div className="notifications" id="notifications">
