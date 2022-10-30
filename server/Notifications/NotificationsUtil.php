@@ -139,7 +139,7 @@ class NotificationsUtil {
                 INNER JOIN
                     lists l ON l.lists_id = p.lists_id
                 WHERE
-                    n.users_id = :users_id
+                    n.users_id = :users_id AND (n.created_date > NOW() - INTERVAL 2 DAY OR n.seen_by_user = 0)
                 ORDER BY
                     n.created_date DESC
             ";
