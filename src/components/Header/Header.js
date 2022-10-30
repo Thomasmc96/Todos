@@ -4,7 +4,8 @@ import "./Header.css";
 import axios from "axios";
 import environment from "../../environment";
 import todo from "../../assets/img/todos.svg";
-import settings from "../../assets/img/settings.svg";
+import settingsIcon from "../../assets/img/settings.svg";
+import notificationsIcon from "../../assets/img/notifications.svg";
 import Settings from "./Settings.js";
 import Notifications from "./Notifications.js";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
@@ -96,7 +97,7 @@ const Header = () => {
               onClick={showNotifications}
               className="icon"
               id="notificationsIcon"
-              src={settings}
+              src={notificationsIcon}
               alt="Notifikationer ikon"
             />
             {notificationsNotSeen > 0 && (
@@ -113,7 +114,7 @@ const Header = () => {
             <img
               onClick={showSettings}
               className="icon"
-              src={settings}
+              src={settingsIcon}
               alt="Instillinger ikon"
             />
           </div>

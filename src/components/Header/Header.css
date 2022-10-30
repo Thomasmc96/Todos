@@ -34,7 +34,7 @@
 }
 .header .headerIcons .iconContainer .badge {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
   background-color: #d9534f;
   border-radius: 50%;
