@@ -20,25 +20,37 @@ const Header = () => {
   const users_id = localStorage.getItem("users_id");
 
   useEffect(() => {
-    axios(
-      `${environment[0]}/server/Notifications/Read.php?users_id=${users_id}`
-    )
-      .then((result) => {
-        if (result.data.code === 200) {
-          // Save data to state
-          setNotifications(result.data.notifications);
-          let notSeenAmount = 0;
-          for (let i = 0; i < result.data.notifications.length; i++) {
-            if (result.data.notifications[i].seen_by_user === "0") {
-              notSeenAmount++;
+    const getNotifications = () => {
+      axios(
+        `${environment[0]}/server/Notifications/Read.php?users_id=${users_id}`
+      )
+        .then((result) => {
+          if (result.data.code === 200) {
+            // Save data to state
+            setNotifications(result.data.notifications);
+            let notSeenAmount = 0;
+            for (let i = 0; i < result.data.notifications.length; i++) {
+              if (result.data.notifications[i].seen_by_user === "0") {
+                notSeenAmount++;
+              }
+              setNotificationsNotSeen(notSeenAmount);
             }
-            setNotificationsNotSeen(notSeenAmount);
           }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    // Call when mounting
+    getNotifications();
+
+    // Get notifications live
+    const interval = setInterval(() => {
+      getNotifications();
+    }, 10000); // 10 sec
+
+    return () => clearInterval(interval);
   }, [users_id]);
 
   const showNotifications = () => {

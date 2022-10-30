@@ -22,9 +22,11 @@
 }
 
 .header .headerIcons .iconContainer {
-  width: 30px;
+  width: 24px;
   margin-right: 20px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .header .headerIcons .iconContainer .icon {
