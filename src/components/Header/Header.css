@@ -21,9 +21,28 @@
   position: relative;
 }
 
-.header .headerIcons .icon {
-  width: 10%;
-  margin-right: 7%;
+.header .headerIcons .iconContainer {
+  width: 30px;
+  margin-right: 20px;
+  position: relative;
+}
+
+.header .headerIcons .iconContainer .icon {
+  width: 100%;
+}
+.header .headerIcons .iconContainer .badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #d9534f;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  line-height: 13px;
+  font-size: 0.7rem;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
 }
 
 .settings .pwaBtn {
@@ -60,8 +79,8 @@
   background-color: #eee;
   max-height: 60vh;
   width: 50vw;
-  top: 7vh;
-  left: 33vw;
+  top: 55px;
+  right: 69px;
   border-radius: 5px;
   border: black 1px solid;
   overflow-y: auto;
@@ -74,12 +93,13 @@
 .notification {
   background-color: white;
   min-height: 10vh;
-  border-top: black 1px solid;
+  border-bottom: black 1px solid;
   padding: 0 5px 5px 5px;
 }
 
 .notification h3 {
-  margin: 5px 0 5px 0;
+  margin: 5px 5px 5px 0;
+  display: inline-block;
 }
 
 .notification p {
@@ -101,4 +121,20 @@
 .notification .created_date {
   opacity: 0.5;
   font-size: 0.8rem;
+}
+
+.notification .statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.notification .backgroundSuccess {
+  background-color: #5cb85c;
+}
+.notification .backgroundInfo {
+  background-color: #428bca;
+}
+.notification .backgroundDelete {
+  background-color: #d9534f;
 }

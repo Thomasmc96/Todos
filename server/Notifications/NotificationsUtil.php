@@ -59,7 +59,7 @@ class NotificationsUtil {
 
     }
 
-    public static function update($notifications_id){
+    public static function update($users_id){
 
         // Establish database connection
         $datebaseService = new DatabaseService();
@@ -67,10 +67,10 @@ class NotificationsUtil {
 
         try{
 
-            if(!isset($notifications_id)){
+            if(!isset($users_id)){
                  // Send error response
                  return json_encode([
-                    "message" => "Notification id is missing",
+                    "message" => "Users id is missing",
                     "code" => 500
                 ]);
             }
@@ -82,13 +82,13 @@ class NotificationsUtil {
                 SET 
                     seen_by_user = 1
                 WHERE
-                    notifications_id = :notifications_id
+                    users_id = :users_id
             ";
 
             $statement = $connection->prepare($query);
 
             // Bind data
-            $statement->bindParam(":notifications_id", $notifications_id);
+            $statement->bindParam(":users_id", $users_id);
 
             if($statement->execute()){
                 echo json_encode([
@@ -140,6 +140,8 @@ class NotificationsUtil {
                     lists l ON l.lists_id = p.lists_id
                 WHERE
                     n.users_id = :users_id
+                ORDER BY
+                    n.created_date DESC
             ";
 
             $statement = $connection->prepare($query);

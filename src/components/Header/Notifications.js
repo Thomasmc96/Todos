@@ -5,10 +5,9 @@ import notDoneIcon from "../../assets/img/not-done.svg";
 import personIcon from "../../assets/img/shared-list.svg";
 
 const Notifications = (props) => {
-  console.log(props.notifications);
   return (
     <div className="notifications">
-      <h2>Notifikationer</h2>
+      {/* <h2>Notifikationer</h2> */}
       {Array.isArray(props.notifications) &&
         props.notifications.length > 0 &&
         props.notifications.map((notification, i) => {
@@ -22,9 +21,24 @@ const Notifications = (props) => {
           } = notification;
           return (
             <div className="notification" key={i}>
-              {type === "complete" && <h3>Udført opgave</h3>}
-              {type === "create" && <h3>Ny opgave</h3>}
-              {type === "update" && <h3>Rettet opgave</h3>}
+              {type === "complete" && (
+                <React.Fragment>
+                  <h3>Udført opgave</h3>
+                  <span className="backgroundSuccess statusDot"></span>
+                </React.Fragment>
+              )}
+              {type === "create" && (
+                <React.Fragment>
+                  <h3>Ny opgave</h3>
+                  <span className="backgroundInfo statusDot"></span>
+                </React.Fragment>
+              )}
+              {type === "update" && (
+                <React.Fragment>
+                  <h3>Rettet opgave</h3>
+                  <span className="backgroundInfo statusDot"></span>
+                </React.Fragment>
+              )}
               <p className="created_date">{created_date}</p>
               <div className="item">
                 <img src={listIcon} alt="Liste ikon"></img>

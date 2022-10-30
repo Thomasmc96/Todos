@@ -15,6 +15,7 @@ const Header = () => {
   const [toggleNotifications, setToggleNotifications] = useState(false);
   const [showDeleteProfile, setShowDeleteProfile] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [notificationsNotSeen, setNotificationsNotSeen] = useState(0);
 
   const users_id = localStorage.getItem("users_id");
 
@@ -26,6 +27,13 @@ const Header = () => {
         if (result.data.code === 200) {
           // Save data to state
           setNotifications(result.data.notifications);
+          let notSeenAmount = 0;
+          for (let i = 0; i < result.data.notifications.length; i++) {
+            if (result.data.notifications[i].seen_by_user == "0") {
+              notSeenAmount++;
+            }
+            setNotificationsNotSeen(notSeenAmount);
+          }
           console.log(result.data);
         } else {
           console.log(result.data);
@@ -38,6 +46,24 @@ const Header = () => {
 
   const showNotifications = () => {
     setToggleNotifications(!toggleNotifications);
+
+    if (notificationsNotSeen > 0) {
+      axios(
+        `${environment[0]}/server/Notifications/Update.php?users_id=${users_id}`
+      )
+        .then((result) => {
+          if (result.data.code === 200) {
+            // Save data to state
+            setNotificationsNotSeen(0);
+            console.log(result.data);
+          } else {
+            console.log(result.data);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   const showSettings = () => {
     setToggleSettings(!toggleSettings);
@@ -61,12 +87,17 @@ const Header = () => {
         <div className="headerIcons">
           {/* <div className="notificationContainer"> */}
 
-          <img
-            onClick={showNotifications}
-            className="icon"
-            src={settings}
-            alt="Notifikationer ikon"
-          />
+          <div className="iconContainer">
+            <img
+              onClick={showNotifications}
+              className="icon"
+              src={settings}
+              alt="Notifikationer ikon"
+            />
+            {notificationsNotSeen > 0 && (
+              <span className="badge">{notificationsNotSeen}</span>
+            )}
+          </div>
           {toggleNotifications && (
             <Notifications
               showNotifications={showNotifications}
@@ -74,12 +105,14 @@ const Header = () => {
             />
           )}
           {/* </div> */}
-          <img
-            onClick={showSettings}
-            className="icon"
-            src={settings}
-            alt="Instillinger ikon"
-          />
+          <div className="iconContainer">
+            <img
+              onClick={showSettings}
+              className="icon"
+              src={settings}
+              alt="Instillinger ikon"
+            />
+          </div>
         </div>
       ) : (
         <InstallPWAButton />
