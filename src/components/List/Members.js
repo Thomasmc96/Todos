@@ -28,7 +28,7 @@ const Members = (props) => {
         setLoading(false);
         setStatusCode(500);
       });
-  }, []);
+  }, [lists_id]);
 
   return (
     <div className="members popup">

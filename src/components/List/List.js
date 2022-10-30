@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./List.css";
 import backIcon from "../../assets/img/back.svg";
-import shareIcon from "../../assets/img/share.svg";
 import dotsIcon from "../../assets/img/dots.svg";
 import notDoneIcon from "../../assets/img/not-done.svg";
 import doneIcon from "../../assets/img/done.svg";
@@ -259,12 +258,14 @@ const List = () => {
       <hr className="hr" />
       <div className="tasks">
         {!showUncompletedTasks &&
+          !loading &&
           Array.isArray(list.products) &&
           list.products.length > 0 && (
             <p className="doneText">Alle opgaver er løst</p>
           )}
         {!showUncompletedTasks &&
           Array.isArray(list.products) &&
+          !loading &&
           list.products.length === 0 && (
             <p className="doneText">Her er der bare luft.</p>
           )}
