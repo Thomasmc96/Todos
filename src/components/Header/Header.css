@@ -76,7 +76,7 @@
 
 .notifications {
   position: fixed;
-  background-color: #eee;
+  background-color: white;
   max-height: 60vh;
   width: 50vw;
   top: 55px;
@@ -137,4 +137,8 @@
 }
 .notification .backgroundDelete {
   background-color: #d9534f;
+}
+
+.notifications .emptyMessage {
+  text-align: center;
 }

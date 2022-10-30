@@ -34,9 +34,6 @@ const Header = () => {
             }
             setNotificationsNotSeen(notSeenAmount);
           }
-          console.log(result.data);
-        } else {
-          console.log(result.data);
         }
       })
       .catch((error) => {
@@ -55,9 +52,6 @@ const Header = () => {
           if (result.data.code === 200) {
             // Save data to state
             setNotificationsNotSeen(0);
-            console.log(result.data);
-          } else {
-            console.log(result.data);
           }
         })
         .catch((error) => {
@@ -91,6 +85,7 @@ const Header = () => {
             <img
               onClick={showNotifications}
               className="icon"
+              id="notificationsIcon"
               src={settings}
               alt="Notifikationer ikon"
             />

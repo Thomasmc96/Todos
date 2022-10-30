@@ -1,24 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import listIcon from "../../assets/img/small-list.svg";
 import doneIcon from "../../assets/img/done.svg";
 import notDoneIcon from "../../assets/img/not-done.svg";
 import personIcon from "../../assets/img/shared-list.svg";
 
 const Notifications = (props) => {
+  const hideNotifications = (event) => {
+    const box = document.getElementById("notifications");
+
+    if (event.target.id !== "notificationsIcon")
+      if (!box.contains(event.target)) {
+        props.showNotifications(false);
+      }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", hideNotifications);
+
+    return () => {
+      window.removeEventListener("click", hideNotifications);
+    };
+  }, []);
+
   return (
-    <div className="notifications">
-      {/* <h2>Notifikationer</h2> */}
+    <div className="notifications" id="notifications">
       {Array.isArray(props.notifications) &&
         props.notifications.length > 0 &&
         props.notifications.map((notification, i) => {
-          const {
-            type,
-            seen_by_user,
-            created_date,
-            products_name,
-            created_by,
-            lists_name,
-          } = notification;
+          const { type, created_date, products_name, created_by, lists_name } =
+            notification;
           return (
             <div className="notification" key={i}>
               {type === "complete" && (
@@ -63,6 +73,10 @@ const Notifications = (props) => {
             </div>
           );
         })}
+      {Array.isArray(props.notifications) &&
+        props.notifications.length === 0 && (
+          <p className="emptyMessage">Ingen notifikationer</p>
+        )}
     </div>
   );
 };
