@@ -9,76 +9,65 @@ include_once '../Lists/ListsUtil.php';
 $datebaseService = new DatabaseService();
 $connection = $datebaseService->getConnection();
 
-// try{
+// Get incoming data
+$data = json_decode(file_get_contents("php://input"));
 
-    // Get incoming data
-    $data = json_decode(file_get_contents("php://input"));
+// Check products_id
+if(empty($data->products_id) && empty($data->products)){
+    
+    // Send error response
+    echo json_encode([
+        "message" => "Please specify an products_id or an array or products",
+        "code" => 500
+    ]);
 
-    // Check products_id
-    if(empty($data->products_id) && empty($data->products)){
-        
+    exit(0);
+}
+
+$products = isset($data->products) && !empty($data->products) ? $data->products : [];
+$users_id = isset($data->users_id) ? base64_decode($data->users_id) : null;
+$lists_id = isset($data->lists_id_2) ? $data->lists_id_2 : null;
+$notify = isset($data->notify) ? $data->notify : null;
+
+// Handle lots of products
+if($products){
+    // Loop through products
+    foreach($products as $product){
+        $error = false;
+        // Update product
+        if(!updateProduct($connection, $product, $users_id, $lists_id, $notify)){
+            $error = true;
+        }
+    }
+    if($error){
         // Send error response
         echo json_encode([
-            "message" => "Please specify an products_id or an array or products",
+            "message" => "Unable to update products",
             "code" => 500
         ]);
-    
-        exit(0);
+    } else {
+        // Send success response
+        echo json_encode([
+            "message" => "The products was updated",
+            "code" => 200
+        ]);
     }
-
-    $products = isset($data->products) && !empty($data->products) ? $data->products : [];
-    $users_id = isset($data->users_id) ? base64_decode($data->users_id) : null;
-    $lists_id = isset($data->lists_id_2) ? $data->lists_id_2 : null;
-    $notify = isset($data->notify) ? $data->notify : null;
-
-    // Handle lots of products
-    if($products){
-        // Loop through products
-        foreach($products as $product){
-            $error = false;
-            // Update product
-            if(!updateProduct($connection, $product, $users_id, $lists_id, $notify)){
-                $error = true;
-            }
-        }
-        if($error){
-            // Send error response
-            echo json_encode([
-                "message" => "Unable to update products",
-                "code" => 500
-            ]);
-        } else {
+} else {
+    // Update prodcut
+    if(!updateProduct($connection, $data, $users_id, $lists_id, $nottify)){
+        // Send error response
+        echo json_encode([
+            "message" => "Unable to update product",
+            "code" => 500
+        ]);
+    }else {
             // Send success response
             echo json_encode([
-                "message" => "The products was updated",
-                "code" => 200
-            ]);
-        }
-    } else {
-        // Update prodcut
-        if(!updateProduct($connection, $data, $users_id, $lists_id, $nottify)){
-            // Send error response
-            echo json_encode([
-                "message" => "Unable to update product",
-                "code" => 500
-            ]);
-        }else {
-             // Send success response
-             echo json_encode([
-                "message" => "The product was updated",
-                "code" => 200
-            ]);
-        }
+            "message" => "The product was updated",
+            "code" => 200
+        ]);
     }
-
-// } catch(\Exception $e) {
-
-//      // Send error response
-//      echo json_encode([
-//          "message" => $e,
-//          "code" => 500
-//      ]);
-// }
+}
 
 /**
  * @param \PDO $connection
