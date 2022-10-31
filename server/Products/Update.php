@@ -143,6 +143,7 @@ function updateProduct($connection, $product, $users_id, $lists_id, $notify = tr
         $error = true;
     }
 
+    // Check if we should notify
     if(isset($notify) && $notify){
 
         $users = ListsUtil::getAllUsersByListId($lists_id);
