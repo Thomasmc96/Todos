@@ -225,6 +225,7 @@ const List = () => {
         products: arr,
         users_id: users_id,
         lists_id_2: id,
+        notify: false
       })
       .then(function (response) {
         // If response if good
