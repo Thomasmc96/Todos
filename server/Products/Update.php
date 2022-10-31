@@ -27,7 +27,7 @@ if(empty($data->products_id) && empty($data->products)){
 $products = isset($data->products) && !empty($data->products) ? $data->products : [];
 $users_id = isset($data->users_id) ? base64_decode($data->users_id) : null;
 $lists_id = isset($data->lists_id_2) ? $data->lists_id_2 : null;
-$notify = isset($data->notify) ? $data->notify : null;
+$dontNotify = isset($data->dontNotify) ? true : false;
 
 // Handle lots of products
 if($products){
@@ -35,7 +35,7 @@ if($products){
     foreach($products as $product){
         $error = false;
         // Update product
-        if(!updateProduct($connection, $product, $users_id, $lists_id, $notify)){
+        if(!updateProduct($connection, $product, $users_id, $lists_id, $dontNotify)){
             $error = true;
         }
     }
@@ -54,7 +54,7 @@ if($products){
     }
 } else {
     // Update prodcut
-    if(!updateProduct($connection, $data, $users_id, $lists_id, $nottify)){
+    if(!updateProduct($connection, $data, $users_id, $lists_id, $dontNotify)){
         // Send error response
         echo json_encode([
             "message" => "Unable to update product",
@@ -74,14 +74,14 @@ if($products){
  * @param mixed $product
  * @return bool
  */
-function updateProduct($connection, $product, $users_id, $lists_id, $notify = true){
+function updateProduct($connection, $product, $users_id, $lists_id, $dontNotify = false){
     $error = false;
     
     //Prepare SET
     $set = "";
     // Check each value from the given data
     foreach($product as $key => $value){
-        if($key != "products_id" && $key != "lists_id" && $key != "users_id" && $key != "lists_id_2" && $key != "notification"){            
+        if($key != "products_id" && $key != "lists_id" && $key != "users_id" && $key != "lists_id_2" && $key != "dontNotify"){            
             $set .= $key . " = :" . $key . ", ";
         }
     }
@@ -112,7 +112,7 @@ function updateProduct($connection, $product, $users_id, $lists_id, $notify = tr
 
     // Bind data
     foreach($product as $key => $value){
-        if($key != "products_id" && $key != "lists_id" && $key != "users_id" && $key != "lists_id_2" && $key != "notification"){
+        if($key != "products_id" && $key != "lists_id" && $key != "users_id" && $key != "lists_id_2" && $key != "dontNotify"){
             $key = ":" . $key;
             if(!is_numeric($value)){
                 $statement->bindValue($key, $value, PDO::PARAM_STR);
@@ -133,7 +133,7 @@ function updateProduct($connection, $product, $users_id, $lists_id, $notify = tr
     }
 
     // Check if we should notify
-    if(isset($notify) && $notify){
+    if(!isset($dontNotify) || !$dontNotify){
 
         $users = ListsUtil::getAllUsersByListId($lists_id);
 

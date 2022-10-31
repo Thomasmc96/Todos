@@ -147,7 +147,7 @@ const List = () => {
           setList({ list_name: list.list_name, products: products });
           checkProducts(products);
         } else {
-          console.log("Error");
+          console.log(response);
         }
       })
       .catch(function (error) {
@@ -225,14 +225,14 @@ const List = () => {
         products: arr,
         users_id: users_id,
         lists_id_2: id,
-        notify: false
+        dontNotify: true,
       })
       .then(function (response) {
         // If response if good
         if (response.data.code === 200) {
           console.log("Success");
         } else {
-          console.log("Error");
+          console.log(response.data);
         }
       })
       .catch(function (error) {
