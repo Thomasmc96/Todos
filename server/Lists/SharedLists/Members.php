@@ -17,7 +17,7 @@ try {
     // Fetch by users_id
     if (isset($_GET['lists_id']) && !empty($_GET['lists_id'])) {
 
-        $lists_id = $_GET['lists_id'];
+        $lists_id = base64_decode($_GET['lists_id']);
     } else {
         // Send error response
         echo json_encode([

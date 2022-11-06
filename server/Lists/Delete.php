@@ -24,7 +24,7 @@ try{
     }
 
     // Data fields
-    $lists_id = $data->lists_id;
+    $lists_id = base64_decode($data->lists_id);
 
     // Prepare query
     $query = "

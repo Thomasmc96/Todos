@@ -27,7 +27,7 @@ try{
 
     // Data fields
     $name = $data->name;
-    $lists_id = $data->lists_id;
+    $lists_id = base64_decode($data->lists_id);
     $sort_index = isset($data->sort_index) && !empty($data->sort_index) ? $data->sort_index : null;
     $users_id = base64_decode($data->users_id);
 

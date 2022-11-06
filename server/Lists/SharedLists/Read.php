@@ -54,6 +54,10 @@ try{
         // Send success response
         $lists = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        foreach($lists as $pos => $value){
+            $lists[$pos]['lists_id'] = base64_encode($lists[$pos]['lists_id']);
+        }
+
         echo json_encode($lists);
     }else {
 

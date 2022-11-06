@@ -25,7 +25,7 @@ try {
     }
 
     $mail = $data->mail;
-    $lists_id = base64_encode($data->lists_id);
+    $lists_id = $data->lists_id;
     $name = $data->name;
     $created_by = base64_decode($data->created_by);
 

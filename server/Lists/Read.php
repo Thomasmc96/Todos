@@ -21,7 +21,7 @@ try{
     // Fetch only one list if lists_id is given
     if(isset($_GET['lists_id']) && !empty($_GET['lists_id'])){
 
-        $lists_id = $_GET['lists_id'];
+        $lists_id = base64_decode($_GET['lists_id']);
 
         $where .= " AND lists_id = " . $lists_id;
 
@@ -62,6 +62,10 @@ try{
         
         // Send success response
         $lists = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($lists as $pos => $value){
+            $lists[$pos]['lists_id'] = base64_encode($lists[$pos]['lists_id']);
+        }
 
         echo json_encode($lists);
     }else {

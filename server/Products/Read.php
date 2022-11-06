@@ -19,7 +19,7 @@ try {
     // Fetch only one list if lists_id is given
     if (isset($_GET['lists_id']) && !empty($_GET['lists_id'])) {
 
-        $lists_id = $_GET['lists_id'];
+        $lists_id = base64_decode($_GET['lists_id']);
 
         $where .= " AND l.lists_id = " . $lists_id;
     } else {

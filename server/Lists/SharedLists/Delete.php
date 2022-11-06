@@ -25,7 +25,7 @@ try {
 
     // Set variables
     $users_id = (int)base64_decode($data->users_id);
-    $lists_id = (int)$data->lists_id;
+    $lists_id =  (int)base64_decode($data->lists_id);
 
 
     // Prepare query to insert row

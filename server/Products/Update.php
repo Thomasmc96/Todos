@@ -26,7 +26,7 @@ if(empty($data->products_id) && empty($data->products)){
 
 $products = isset($data->products) && !empty($data->products) ? $data->products : [];
 $users_id = isset($data->users_id) ? base64_decode($data->users_id) : null;
-$lists_id = isset($data->lists_id_2) ? $data->lists_id_2 : null;
+$lists_id = isset($data->lists_id_2) ? base64_decode($data->lists_id_2) : null;
 $dontNotify = isset($data->dontNotify) ? true : false;
 
 // Handle lots of products
