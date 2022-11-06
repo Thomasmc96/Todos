@@ -25,13 +25,46 @@ const Notifications = (props) => {
     };
   }, [hideNotifications]);
 
+  const acceptListInvitation = (lists_id) => {
+    window.location.replace(
+      `/join-list?users_id=${localStorage.getItem(
+        "users_id"
+      )}&lists_id=${lists_id}`
+    );
+  };
+
   return (
     <div className="notifications" id="notifications">
       {Array.isArray(props.notifications) &&
         props.notifications.length > 0 &&
         props.notifications.map((notification, i) => {
-          const { type, created_date, products_name, created_by, lists_name } =
-            notification;
+          const {
+            type,
+            created_date,
+            products_name,
+            created_by,
+            lists_name,
+            lists_id,
+          } = notification;
+
+          if (type === "list_invitation") {
+            return (
+              <div className="notification" key={i}>
+                <h3>Invitation</h3>
+                <span className="backgroundInfo statusDot"></span>
+                <p className="created_date">{created_date}</p>
+                <p className="invitationInfo">
+                  {created_by} inviterede dig til listen: <b>{lists_name}</b>
+                </p>
+                <button
+                  className="button acceptBtn"
+                  onClick={() => acceptListInvitation(lists_id)}
+                >
+                  Acceptér
+                </button>
+              </div>
+            );
+          }
           return (
             <div className="notification" key={i}>
               {type === "complete" && (

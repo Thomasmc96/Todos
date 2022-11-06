@@ -41,6 +41,7 @@ const ShareList = (props) => {
         mail: mail,
         lists_id: lists_id,
         name: localStorage.getItem("name"),
+        created_by: localStorage.getItem("users_id"),
       })
       .then(function (response) {
         setLoading(false);

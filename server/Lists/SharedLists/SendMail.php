@@ -2,6 +2,7 @@
 // Include files
 include_once '../../Config/Cors.php';
 include_once '../../Config/Database.php';
+include_once '../../Notifications/NotificationsUtil.php';
 
 // Establish database connection
 $datebaseService = new DatabaseService();
@@ -14,7 +15,7 @@ try {
     $data = json_decode(file_get_contents("php://input"));
 
     // Make sure needed data was given
-    if (!isset($data->lists_id) || empty($data->lists_id) || !isset($data->mail) || empty($data->mail)) {
+    if (!isset($data->lists_id) || empty($data->lists_id) || !isset($data->mail) || empty($data->mail) || !isset($data->created_by)) {
         // Send error response
         echo json_encode([
             "message" => "Missing data",
@@ -26,6 +27,7 @@ try {
     $mail = $data->mail;
     $lists_id = base64_encode($data->lists_id);
     $name = $data->name;
+    $created_by = base64_decode($data->created_by);
 
     // Prepare query to get user
     $query = "
@@ -89,8 +91,12 @@ try {
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
+    NotificationsUtil::create("list_invitation", base64_decode($lists_id), base64_decode($users_id), $created_by);
     // Send mail
     if (@mail($mail, $subject, $message, $headers)) {
+
+        // Create notification
+
         // Send success response
         echo json_encode([
             "message" => "The mail was sent",

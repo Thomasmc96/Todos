@@ -29,6 +29,7 @@ const Header = () => {
           if (result.data.code === 200) {
             // Save data to state
             setNotifications(result.data.notifications);
+            console.log(result.data);
             let notSeenAmount = 0;
             for (let i = 0; i < result.data.notifications.length; i++) {
               if (result.data.notifications[i].seen_by_user === "0") {
@@ -72,9 +73,11 @@ const Header = () => {
         });
     }
   };
+
   const showSettings = () => {
     setToggleSettings(!toggleSettings);
   };
+
   const handleDeleteProfile = () => {
     setShowDeleteProfile(!showDeleteProfile);
     showSettings();

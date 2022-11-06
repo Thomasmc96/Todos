@@ -144,3 +144,10 @@
 .notifications .emptyMessage {
   text-align: center;
 }
+
+.notifications .acceptBtn {
+  margin: 10px 0 5px 0;
+}
+.notifications .invitationInfo {
+  margin: 10px 0 5px 0;
+}
