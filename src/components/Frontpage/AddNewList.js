@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
@@ -6,6 +6,29 @@ import { TailSpin } from "react-loader-spinner";
 const AddNewList = (props) => {
   const [listName, setListName] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (
+        event.target.id !== "addListBtn" &&
+        !event.target.classList.contains("cross")
+      )
+        if (!box.contains(event.target)) {
+          props.showNewList(false);
+        }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [hidePopup]);
 
   // Function that adds a new list to the users list
   const pushNewList = (event) => {
@@ -43,7 +66,9 @@ const AddNewList = (props) => {
 
   return (
     <div className="addNewListBox popup">
-      <span className="cross" onClick={props.showNewList}>x</span>
+      <span className="cross" onClick={props.showNewList}>
+        x
+      </span>
       <h2>Opret liste</h2>
       <form onSubmit={pushNewList}>
         <input

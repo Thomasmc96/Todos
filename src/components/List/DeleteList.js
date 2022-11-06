@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
@@ -9,6 +9,26 @@ const DeleteList = (props) => {
   const { id } = useParams();
 
   const [loading, setLoading] = useState(false);
+
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (!event.target.classList.contains("cross"))
+        if (!box.contains(event.target)) {
+          props.showDeleteList(false);
+        }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [hidePopup]);
 
   const deleteList = (event) => {
     event.preventDefault();
@@ -38,7 +58,9 @@ const DeleteList = (props) => {
 
   return (
     <div className="deleteList popup">
-      <span className="cross" onClick={props.showDeleteList}>x</span>
+      <span className="cross" onClick={props.showDeleteList}>
+        x
+      </span>
       <h2>Vil du slette listen?</h2>
       <p>Listen vil blive slettet permanent.</p>
       <form onSubmit={deleteList}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
@@ -12,6 +12,30 @@ const EditTask = (props) => {
 
   const [taskName, setTaskName] = useState(props.task.name);
   const [loading, setLoading] = useState(false);
+
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (
+        event.target.id !== "editIcon" &&
+        !event.target.classList.contains("cross") &&
+        !event.target.classList.contains("saveBtn")
+      )
+        if (!box.contains(event.target)) {
+          props.showEditTask(false);
+        }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [hidePopup]);
 
   const edit = (event) => {
     event.preventDefault();
@@ -90,7 +114,7 @@ const EditTask = (props) => {
         </div>
       ) : (
         <div>
-          <button type="submit" onClick={edit}>
+          <button type="button" className="saveBtn" onClick={edit}>
             Gem
           </button>
         </div>

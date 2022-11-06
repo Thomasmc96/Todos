@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import shareIcon from "../../assets/img/share.svg";
 import leaveIcon from "../../assets/img/leave.svg";
 import deleteIcon from "../../assets/img/delete.svg";
 import membersIcon from "../../assets/img/shared-list.svg";
 
 const Options = (props) => {
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (
+        !event.target.classList.contains("optionsIcon") &&
+        !event.target.classList.contains("cross")
+      )
+        if (!box.contains(event.target)) {
+          props.showOptions(false);
+        }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [hidePopup]);
+
   return (
     <div className="options popup">
       <span className="cross" onClick={props.showOptions}>

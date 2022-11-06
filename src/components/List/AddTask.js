@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import environment from "../../environment";
@@ -9,6 +9,29 @@ const AddTask = (props) => {
 
   const [taskName, setTaskName] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (
+        !event.target.classList.contains("addSection") &&
+        !event.target.classList.contains("cross")
+      )
+        if (!box.contains(event.target)) {
+          props.showAddTask(false);
+        }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [hidePopup]);
 
   // Function that adds a new task to the users list
   const pushTask = (event) => {

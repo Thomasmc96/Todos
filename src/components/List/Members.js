@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import environment from "../../environment";
@@ -11,6 +11,18 @@ const Members = (props) => {
   const [listMembers, setListMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [statusCode, setStatusCode] = useState();
+
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (!event.target.classList.contains("cross"))
+        if (!box.contains(event.target)) {
+          props.showMembers(false);
+        }
+    },
+    [props]
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -28,7 +40,13 @@ const Members = (props) => {
         setLoading(false);
         setStatusCode(500);
       });
-  }, [lists_id]);
+
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [lists_id, hidePopup]);
 
   return (
     <div className="members popup">

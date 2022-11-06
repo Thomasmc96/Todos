@@ -77,6 +77,7 @@ const Header = () => {
   };
   const handleDeleteProfile = () => {
     setShowDeleteProfile(!showDeleteProfile);
+    showSettings();
   };
 
   return (
@@ -114,6 +115,7 @@ const Header = () => {
             <img
               onClick={showSettings}
               className="icon"
+              id="settingsIcon"
               src={settingsIcon}
               alt="Instillinger ikon"
             />

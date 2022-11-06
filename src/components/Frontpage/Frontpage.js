@@ -63,7 +63,6 @@ const Frontpage = () => {
     setToggleNewList(!toggleNewList);
   };
 
-
   return (
     <div className="frontpage">
       <div className="profileFront">
@@ -136,7 +135,7 @@ const Frontpage = () => {
         />
       )}
       {!toggleNewList && (
-        <div className="addSection" onClick={showNewList}>
+        <div className="addSection" id="addListBtn" onClick={showNewList}>
           <img
             className="addNewListIcon"
             src={addNewListIcon}
@@ -145,7 +144,6 @@ const Frontpage = () => {
           <p>Tilføj en liste</p>
         </div>
       )}
-
     </div>
   );
 };

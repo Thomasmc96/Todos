@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import environment from "../../environment";
@@ -11,6 +11,26 @@ const ShareList = (props) => {
   const [mail, setMail] = useState("");
   const [loading, setLoading] = useState(false);
   const [statusCode, setStatusCode] = useState();
+
+  const hidePopup = useCallback(
+    (event) => {
+      const box = document.querySelector(".popup");
+
+      if (!event.target.classList.contains("cross"))
+        if (!box.contains(event.target)) {
+          props.showShareList(false);
+        }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    window.addEventListener("click", hidePopup);
+
+    return () => {
+      window.removeEventListener("click", hidePopup);
+    };
+  }, [hidePopup]);
 
   const share = (event) => {
     event.preventDefault();
@@ -40,7 +60,9 @@ const ShareList = (props) => {
 
   return (
     <div className="addTask popup">
-      <span className="cross" onClick={props.showShareList}>x</span>
+      <span className="cross" onClick={props.showShareList}>
+        x
+      </span>
       <h2>Del liste</h2>
       <form onSubmit={share}>
         <input
@@ -54,20 +76,12 @@ const ShareList = (props) => {
           onChange={(e) => setMail(e.target.value)}
         />
         {statusCode && statusCode === 500 && (
-          <p>
-            Kunne ikke deles - prøv igen
-          </p>
+          <p>Kunne ikke deles - prøv igen</p>
         )}
         {statusCode && statusCode === 404 && (
-          <p>
-            Kunne ikke deles - er mailen forkert?
-          </p>
+          <p>Kunne ikke deles - er mailen forkert?</p>
         )}
-        {statusCode && statusCode === 200 && (
-          <p>
-            Listen blev delt!
-          </p>
-        )}
+        {statusCode && statusCode === 200 && <p>Listen blev delt!</p>}
         {loading ? (
           <div className="loading">
             <TailSpin color="#000000" height={40} width={40} />
