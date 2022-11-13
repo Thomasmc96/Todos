@@ -44,6 +44,13 @@ const Settings = (props) => {
       <h2>Indstillinger</h2>
       <div>
         <InstallPWAButton />
+        <button
+          className="profileBtn"
+          type="button"
+          onClick={props.handleProfile}
+        >
+          Min profil
+        </button>
         <button id="logOut" className="danger" type="button" onClick={logout}>
           Log ud
         </button>

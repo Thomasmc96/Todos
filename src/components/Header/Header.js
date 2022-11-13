@@ -10,11 +10,13 @@ import Settings from "./Settings.js";
 import Notifications from "./Notifications.js";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
 import DeleteProfile from "./DeleteProfile";
+import Profile from "./Profile";
 
 const Header = () => {
   const [toggleSettings, setToggleSettings] = useState(false);
   const [toggleNotifications, setToggleNotifications] = useState(false);
   const [showDeleteProfile, setShowDeleteProfile] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [notificationsNotSeen, setNotificationsNotSeen] = useState(0);
 
@@ -22,26 +24,27 @@ const Header = () => {
 
   useEffect(() => {
     const getNotifications = () => {
-      axios(
-        `${environment[0]}/server/Notifications/Read.php?users_id=${users_id}`
-      )
-        .then((result) => {
-          if (result.data.code === 200) {
-            // Save data to state
-            setNotifications(result.data.notifications);
-            console.log(result.data);
-            let notSeenAmount = 0;
-            for (let i = 0; i < result.data.notifications.length; i++) {
-              if (result.data.notifications[i].seen_by_user === "0") {
-                notSeenAmount++;
+      if (users_id !== null) {
+        axios(
+          `${environment[0]}/server/Notifications/Read.php?users_id=${users_id}`
+        )
+          .then((result) => {
+            if (result.data.code === 200) {
+              // Save data to state
+              setNotifications(result.data.notifications);
+              let notSeenAmount = 0;
+              for (let i = 0; i < result.data.notifications.length; i++) {
+                if (result.data.notifications[i].seen_by_user === "0") {
+                  notSeenAmount++;
+                }
+                setNotificationsNotSeen(notSeenAmount);
               }
-              setNotificationsNotSeen(notSeenAmount);
             }
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     };
 
     // Call when mounting
@@ -50,7 +53,7 @@ const Header = () => {
     // Get notifications live
     const interval = setInterval(() => {
       getNotifications();
-    }, 10000); // 10 sec
+    }, 5000); // 5 sec
 
     return () => clearInterval(interval);
   }, [users_id]);
@@ -80,6 +83,11 @@ const Header = () => {
 
   const handleDeleteProfile = () => {
     setShowDeleteProfile(!showDeleteProfile);
+    showSettings();
+  };
+
+  const handleProfile = () => {
+    setShowProfile(!showProfile);
     showSettings();
   };
 
@@ -132,11 +140,13 @@ const Header = () => {
           showSettings={showSettings}
           InstallPWAButton={InstallPWAButton}
           handleDeleteProfile={handleDeleteProfile}
+          handleProfile={handleProfile}
         />
       )}
       {showDeleteProfile && (
         <DeleteProfile handleDeleteProfile={handleDeleteProfile} />
       )}
+      {showProfile && <Profile handleProfile={handleProfile} />}
     </header>
   );
 };

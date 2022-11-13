@@ -151,3 +151,12 @@
 .notifications .invitationInfo {
   margin: 10px 0 5px 0;
 }
+
+.profile .infoContainer {
+  margin-bottom: 15px;
+  gap: 5px;
+}
+
+.profile .infoContainer p:first-of-type {
+  font-weight: 600;
+}
