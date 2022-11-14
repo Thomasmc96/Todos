@@ -1,8 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { TailSpin } from "react-loader-spinner";
+import axios from "axios";
+import environment from "../../environment";
 
 const Profile = (props) => {
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(false);
+
+  const users_id = localStorage.getItem('users_id')
+
+  useEffect(() => {
+    setLoading(true);
+
+    axios.get(`${environment[0]}/server/Users/Read.php?users_id=${users_id}`)
+    .then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }, [])
 
   const hidePopup = useCallback(
     (event) => {

@@ -124,4 +124,37 @@ class UsersUtil
             ]);
         }
     }
+
+    public static function getUser($users_id){
+         // Establish database connection
+         $datebaseService = new DatabaseService();
+         $connection = $datebaseService->getConnection();
+ 
+         // Prepare query
+         $query = "
+            SELECT
+                *
+            FROM
+                users
+            WHERE
+                users_id = " . $users_id;
+ 
+         $statement = $connection->prepare($query);
+         $result = $statement->execute();
+ 
+         if ($result) {
+
+            $user = $statement->fetchAll();
+
+             echo json_encode([
+                 "user" => $user,
+                 "code" => 200
+             ]);
+         } else {
+             echo json_encode([
+                 "message" => $result,
+                 "code" => 500
+             ]);
+         }
+    }
 }
