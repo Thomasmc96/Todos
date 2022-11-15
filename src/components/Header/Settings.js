@@ -54,13 +54,13 @@ const Settings = (props) => {
         <button id="logOut" className="danger" type="button" onClick={logout}>
           Log ud
         </button>
-        <button
+        {/* <button
           id="deleteProfile"
           type="button"
           onClick={props.handleDeleteProfile}
         >
           Slet profil
-        </button>
+        </button> */}
       </div>
       <p className="version">v. {version}</p>
     </div>

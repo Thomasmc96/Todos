@@ -19,7 +19,7 @@ if (empty($_GET['users_id'])) {
 }
 
 // Data fields
-$users_id = json_decode($_GET['users_id']);
+$users_id = base64_decode($_GET['users_id']);
 
 // Login
 UsersUtil::getUser($users_id);

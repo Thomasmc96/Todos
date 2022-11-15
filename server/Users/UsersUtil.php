@@ -125,36 +125,36 @@ class UsersUtil
         }
     }
 
-    public static function getUser($users_id){
-         // Establish database connection
-         $datebaseService = new DatabaseService();
-         $connection = $datebaseService->getConnection();
- 
-         // Prepare query
-         $query = "
+    public static function getUser($users_id)
+    {
+        // Establish database connection
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        // Prepare query
+        $query = "
             SELECT
-                *
+                email, name
             FROM
                 users
             WHERE
                 users_id = " . $users_id;
- 
-         $statement = $connection->prepare($query);
-         $result = $statement->execute();
- 
-         if ($result) {
 
-            $user = $statement->fetchAll();
+        $statement = $connection->prepare($query);
 
-             echo json_encode([
-                 "user" => $user,
-                 "code" => 200
-             ]);
-         } else {
-             echo json_encode([
-                 "message" => $result,
-                 "code" => 500
-             ]);
-         }
+        if ($statement->execute()) {
+
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            echo json_encode([
+                "user" => $user,
+                "code" => 200
+            ]);
+        } else {
+            echo json_encode([
+                "message" => "Something went wrong",
+                "code" => 500
+            ]);
+        }
     }
 }

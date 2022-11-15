@@ -83,7 +83,7 @@ const Header = () => {
 
   const handleDeleteProfile = () => {
     setShowDeleteProfile(!showDeleteProfile);
-    showSettings();
+    handleProfile();
   };
 
   const handleProfile = () => {
@@ -139,14 +139,14 @@ const Header = () => {
         <Settings
           showSettings={showSettings}
           InstallPWAButton={InstallPWAButton}
-          handleDeleteProfile={handleDeleteProfile}
+          // handleDeleteProfile={handleDeleteProfile}
           handleProfile={handleProfile}
         />
       )}
       {showDeleteProfile && (
         <DeleteProfile handleDeleteProfile={handleDeleteProfile} />
       )}
-      {showProfile && <Profile handleProfile={handleProfile} />}
+      {showProfile && <Profile handleProfile={handleProfile} handleDeleteProfile={handleDeleteProfile}/>}
     </header>
   );
 };
