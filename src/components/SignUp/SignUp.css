@@ -22,12 +22,12 @@
 }
 
 .signUpForm a {
-  color: black;
+  color: var(--text-color);
 }
 
 .signUpForm button,
 .signUpForm #backBtn {
-  background-color: #7ba779;
+  background-color: var(--green-1);
   padding: 8%;
   margin: 1%;
   border-radius: 5px;
@@ -37,7 +37,7 @@
   margin-bottom: 8%;
   margin-top: 15%;
   width: 60%;
-  color: black;
+  color: var(--text-color);
 }
 
 .signUpForm .inputBoxSignUp {
@@ -69,7 +69,7 @@
 }
 
 #checkbox:checked {
-  background: #7ba779;
+  background: var(--green-1);
 }
 
 #checkbox:checked:after {
@@ -92,10 +92,9 @@
   height: 10vw;
   display: flex;
   align-items: center;
-  color: black;
+  color: var(--text-color);
   justify-content: center;
 }
-
 
 @media only screen and (min-width: 992px) {
   .signUpSection h1 {
@@ -122,5 +121,4 @@
     padding: 2%;
     margin-top: 5%;
   }
-
 }

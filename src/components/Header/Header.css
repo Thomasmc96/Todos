@@ -1,7 +1,7 @@
 @import url("../../assets/css/switch.css");
 
 .header {
-  background-color: #b3eeb1;
+  background-color: var(--green-2);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,6 +12,10 @@
   margin-left: 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.header a {
+  background-color: transparent !important;
 }
 
 .header .headerIcons {
@@ -64,7 +68,7 @@
   align-items: center;
 }
 
-.settings .darkModeToggleContainer{
+.settings .darkModeToggleContainer {
   align-items: center;
   display: flex;
   justify-content: flex-end;

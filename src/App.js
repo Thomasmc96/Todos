@@ -22,6 +22,11 @@ const App = () => {
   const nonAuthPaths = ["/login", "/signup", "/privatlivspolitik"];
 
   useEffect(() => {
+    let theme = localStorage.getItem("theme");
+    if (theme !== null) {
+      document.body.className = theme;
+    }
+
     var token = localStorage.getItem("token");
 
     if (token === null) {

@@ -1,3 +1,13 @@
+:root {
+  --green-1: #7ba779;
+  --green-2: #b3eeb1;
+  --background-color: #fff;
+  --background-color-dark-theme: #262628;
+  --text-color: #000000;
+  --text-color-dark-theme: #fff;
+  --danger-color: #fc4848;
+}
+
 @font-face {
   font-family: berlin;
   src: url("../src/assets/font/Berlin\ Sans\ FB\ Regular.ttf");
@@ -6,6 +16,32 @@
 body {
   margin: 0;
   font-family: berlin;
+}
+
+body.light {
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+body.light hr {
+  background-color: var(--text-color);
+}
+
+body.dark,
+body.dark a,
+body.dark button,
+body.dark .settings .darkModeToggleContainer .slider {
+  color: var(--text-color-dark-theme);
+  background-color: var(--background-color-dark-theme);
+}
+
+body.dark hr {
+  background: var(--background-color);
+}
+
+body.dark .icon {
+  filter: invert(99%) sepia(3%) saturate(112%) hue-rotate(266deg)
+    brightness(118%) contrast(87%);
 }
 
 .loading {
@@ -18,14 +54,14 @@ body {
 .button {
   padding: 2% 5%;
   border-radius: 5px;
-  background-color: #7ba779;
+  background-color: var(--green-1);
   border: none;
 }
 
 .popup {
   display: flex;
   flex-direction: column;
-  background-color: #7ba779;
+  background-color: var(--green-1);
   width: 70vw;
   min-height: 24vh;
   border-radius: 20px;
@@ -72,7 +108,6 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: white;
   padding: 3%;
   border-radius: 5px;
   border: none;
@@ -81,7 +116,6 @@ body {
   margin-bottom: 4%;
   margin-top: 4%;
   width: 80%;
-  color: black;
 }
 
 .popup .cross {
@@ -93,11 +127,11 @@ body {
 }
 
 button.danger {
-  background-color: #fc4848 !important;
+  background-color: var(--danger-color) !important;
 }
 
 p.danger {
-  color: #fc4848 !important;
+  color: var(--danger-color) !important;
 }
 
 @keyframes fadeIn {

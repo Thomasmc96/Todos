@@ -81,7 +81,11 @@ const Frontpage = () => {
             return (
               <div className="list" key={list.lists_id}>
                 <Link to={"/list/" + list.lists_id} className="listLink">
-                  <img className="listIcon" src={listIcon} alt="Liste ikon" />
+                  <img
+                    className="listIcon icon"
+                    src={listIcon}
+                    alt="Liste ikon"
+                  />
                   <p>{list.name}</p>
                 </Link>
               </div>
@@ -107,7 +111,11 @@ const Frontpage = () => {
             return (
               <div className="list" key={sharedList.lists_id}>
                 <Link to={"/list/" + sharedList.lists_id} className="listLink">
-                  <img className="listIcon" src={listIcon} alt="Liste ikon" />
+                  <img
+                    className="listIcon icon"
+                    src={listIcon}
+                    alt="Liste ikon"
+                  />
                   <div className="sharedContainer">
                     <p>{sharedList.name}</p>
                     <span className="sharedBy">

@@ -22,11 +22,11 @@
 }
 
 .loginForm a {
-  color: black;
+  color: var(--text-color);
 }
 
 .loginForm button {
-  background-color: #7ba779;
+  background-color: var(--green-1);
   padding: 8%;
   margin: 1%;
   border-radius: 5px;
@@ -36,7 +36,7 @@
   margin-bottom: 8%;
   margin-top: 15%;
   width: 60%;
-  color: black;
+  color: var(--text-color);
 }
 
 .loginForm .inputBoxLogin {
@@ -63,7 +63,6 @@
 .loading {
   margin-top: 15%;
 }
-
 
 @media only screen and (min-width: 992px) {
   .loginSection h1 {
