@@ -25,6 +25,8 @@ const App = () => {
     let theme = localStorage.getItem("theme");
     if (theme !== null) {
       document.body.className = theme;
+    } else {
+      document.body.className = "light";
     }
 
     var token = localStorage.getItem("token");
