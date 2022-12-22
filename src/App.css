@@ -16,6 +16,11 @@
 body {
   margin: 0;
   font-family: berlin;
+  color: var(--text-color);
+}
+
+h2 {
+  color: var(--text-color);
 }
 
 body.light {
@@ -23,23 +28,55 @@ body.light {
   background-color: var(--background-color);
 }
 
+body.light p, 
+body.light span,
+body.light h3
+{
+  color: var(--text-color);
+}
+
 body.light hr {
   background-color: var(--text-color);
 }
 
+/* body.light p, body.light span {
+  color: var(--text-color)
+} */
+
 body.dark,
-body.dark a,
-body.dark button,
-body.dark .settings .darkModeToggleContainer .slider {
-  color: var(--text-color-dark-theme);
+body.dark .settings .darkModeToggleContainer .slider  {
   background-color: var(--background-color-dark-theme);
 }
 
-body.dark hr {
-  background: var(--background-color);
+body.dark a,
+body.dark h1,
+body.dark label,
+body.dark .frontpage .list p,
+body.dark .frontpage h3,
+body.dark .frontpage .profileName,
+body.dark .backSection p,
+body.dark #privacyPolicyDiv *,
+/* body.dark span, */
+body.dark .settings .darkModeToggleContainer .slider {
+  color: var(--text-color-dark-theme);
 }
 
-body.dark .icon {
+body.dark h1, 
+body.dark h3 {
+  font-weight: 500;
+}
+
+body.dark hr {
+  background: var(--background-color) !important;
+}
+
+body .button p {
+  color:var(--text-color)
+}
+
+body.dark .frontpage .icon,
+body.dark .firstSection .icon,
+body.dark .list .icon {
   filter: invert(99%) sepia(3%) saturate(112%) hue-rotate(266deg)
     brightness(118%) contrast(87%);
 }
@@ -71,6 +108,7 @@ body.dark .icon {
   text-align: center;
   padding: 5%;
   animation: fadeIn 0.2s;
+  z-index: 10;
 }
 
 .popup h2 {

@@ -244,11 +244,11 @@ const List = () => {
     <div className="listSection">
       <div className="firstSection">
         <Link to={"/"} className="backSection">
-          <img id="back" src={backIcon} alt="Tilbage ikon" />
+          <img id="back" className="icon" src={backIcon} alt="Tilbage ikon" />
           <p>Tilbage</p>
         </Link>
         <img
-          className="optionsIcon"
+          className="optionsIcon icon"
           src={dotsIcon}
           alt="Valgmuligheder ikon"
           onClick={showOptions}

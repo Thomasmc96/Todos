@@ -14,6 +14,7 @@ const Settings = (props) => {
   };
 
   const logout = () => {
+    localStorage.setItem("theme", "light");
     localStorage.removeItem("users_id");
     localStorage.removeItem("name");
     localStorage.removeItem("token");
@@ -57,7 +58,7 @@ const Settings = (props) => {
         x
       </span>
       <h2>Indstillinger</h2>
-      {/* <div className="darkModeToggleContainer">
+      <div className="darkModeToggleContainer">
         <label className="switch">
           <input
             type="checkbox"
@@ -67,7 +68,7 @@ const Settings = (props) => {
           />
           <span className="slider round"></span>
         </label>
-      </div> */}
+      </div>
       <div>
         <InstallPWAButton />
         <button

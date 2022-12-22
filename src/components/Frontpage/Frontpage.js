@@ -143,7 +143,7 @@ const Frontpage = () => {
         />
       )}
       {!toggleNewList && (
-        <div className="addSection" id="addListBtn" onClick={showNewList}>
+        <div className="addSection button" id="addListBtn" onClick={showNewList}>
           <img
             className="addNewListIcon"
             src={addNewListIcon}
