@@ -1,6 +1,8 @@
 :root {
   --green-1: #7ba779;
   --green-2: #b3eeb1;
+  --lightblue: #87ceeb;
+  --darkblue: #261f8b;
   --background-color: #fff;
   --background-color-dark-theme: #262628;
   --text-color: #000000;
@@ -8,14 +10,24 @@
   --danger-color: #fc4848;
 }
 
-@font-face {
+/* @font-face {
   font-family: berlin;
   src: url("../src/assets/font/Berlin\ Sans\ FB\ Regular.ttf");
+} */
+
+@font-face {
+  font-family: Oswald;
+  src: url("../src/assets/font/Oswald-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Readex;
+  src: url("../src/assets/font/ReadexPro-VariableFont_HEXP\,wght.ttf");
 }
 
 body {
   margin: 0;
-  font-family: berlin;
+  font-family: Readex;
   color: var(--text-color);
 }
 
@@ -28,10 +40,9 @@ body.light {
   background-color: var(--background-color);
 }
 
-body.light p, 
+body.light p,
 body.light span,
-body.light h3
-{
+body.light h3 {
   color: var(--text-color);
 }
 
@@ -44,7 +55,7 @@ body.light hr {
 } */
 
 body.dark,
-body.dark .settings .darkModeToggleContainer .slider  {
+body.dark .settings .darkModeToggleContainer .slider {
   background-color: var(--background-color-dark-theme);
 }
 
@@ -61,7 +72,7 @@ body.dark .settings .darkModeToggleContainer .slider {
   color: var(--text-color-dark-theme);
 }
 
-body.dark h1, 
+body.dark h1,
 body.dark h3 {
   font-weight: 500;
 }
@@ -71,7 +82,7 @@ body.dark hr {
 }
 
 body .button p {
-  color:var(--text-color)
+  color: var(--text-color);
 }
 
 body.dark .frontpage .icon,
@@ -91,14 +102,14 @@ body.dark .list .icon {
 .button {
   padding: 2% 5%;
   border-radius: 5px;
-  background-color: var(--green-1);
+  background-color: var(--darkblue);
   border: none;
 }
 
 .popup {
   display: flex;
   flex-direction: column;
-  background-color: var(--green-1);
+  background-color: var(--lightblue);
   width: 70vw;
   min-height: 24vh;
   border-radius: 20px;
@@ -132,7 +143,7 @@ body.dark .list .icon {
 
 .popup .inputBox {
   text-align: left;
-  font-family: berlin;
+  font-family: Readex;
   width: 80%;
   height: 8vw;
   font-size: 17px;
@@ -149,7 +160,7 @@ body.dark .list .icon {
   padding: 3%;
   border-radius: 5px;
   border: none;
-  font-family: berlin;
+  font-family: Oswald;
   font-size: 17px;
   margin-bottom: 4%;
   margin-top: 4%;

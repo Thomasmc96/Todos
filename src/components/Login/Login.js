@@ -78,9 +78,6 @@ const Login = () => {
           onChange={handlePassword}
           required
         />
-        <Link to={"/signup"}>
-          <p className="pTags">Ikke allerede bruger? Så opret dig her.</p>
-        </Link>
         {showLoginError && (
           <p className="pTags danger" id="loginError">
             En af de indtastede værdier er forkerte - prøv igen!
@@ -93,6 +90,9 @@ const Login = () => {
         ) : (
           <button type="Submit">Login</button>
         )}
+        <Link to={"/signup"}>
+          <p className="pTags">Ikke allerede bruger? - Opret dig</p>
+        </Link>
       </form>
     </div>
   );
