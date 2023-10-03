@@ -8,12 +8,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5%;
   width: 100%;
 }
 
 .signUpSection h1 {
   margin-top: 20%;
+  font-family: Oswald;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 }
 
 .labels {
@@ -23,38 +25,34 @@
 
 .signUpForm a {
   color: var(--text-color);
+  font-family: Readex;
+  margin-left: 0.2rem;
 }
 
 .signUpForm button,
 .signUpForm #backBtn {
-  background-color: var(--green-1);
-  padding: 8%;
   margin: 1%;
   border-radius: 5px;
   border: none;
-  font-family: berlin;
-  font-size: 20px;
-  margin-bottom: 8%;
   margin-top: 15%;
-  width: 60%;
-  color: var(--text-color);
+  
 }
 
 .signUpForm .inputBoxSignUp {
   text-align: left;
-  font-family: berlin;
+  font-family: Readex;
   width: 80%;
   height: 10vw;
-  font-size: 20px;
+  font-size: 1.25rem;
   border-radius: 5px;
   border-color: none;
   border-width: 0px;
-  background-color: #d5f2d4;
+  background-color: rgb(135, 206, 235, 0.3);
 }
 
 #checkboxContainer {
   display: flex;
-  margin-top: 10%;
+  margin-top: 5%;
   align-items: center;
 }
 
@@ -64,12 +62,12 @@
   height: 25px;
   background: white;
   border-radius: 5px;
-  border: 2px solid rgb(107, 107, 107);
+  border: .12rem solid rgb(24, 24, 24);
   position: relative;
 }
 
 #checkbox:checked {
-  background: var(--green-1);
+  background: var(--darkblue);
 }
 
 #checkbox:checked:after {
@@ -88,11 +86,15 @@
 }
 
 #btnContainer button {
+  background-color: var(--darkblue);
+  padding: 3%;
   width: 30%;
-  height: 10vw;
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
-  color: var(--text-color);
+  color: var(--text-color-dark-theme);
   justify-content: center;
 }
 

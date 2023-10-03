@@ -30,7 +30,7 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--text-color);
+  background-color: var(--lightblue);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -47,6 +47,8 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+  background-color: var(--lightblue) !important;
+
 }
 
 /* Rounded sliders */
@@ -78,7 +80,7 @@ input:checked + .slider:before {
   transition: 0.4s;
 }
 .settings .darkModeToggleContainer .slider {
-  background-color: white;
+  background-color: var(--lightblue);
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -87,7 +89,8 @@ input:checked + .slider:before {
 }
 
 .settings .darkModeToggleContainer .slider:before {
-  background-color: var(--green-1);
+  background-color: var(--darkblue);
+
   bottom: 4px;
   content: "";
   height: 26px;

@@ -144,7 +144,7 @@ const SignUp = () => {
             onChange={handleCheckboxValue}
           />
           <label htmlFor="acceptChechbox">
-            <Link to={"/privatlivspolitik"}>  Klik her for at acceptere vores vilkår</Link>
+            <Link to={"/privatlivspolitik"}>  Klik for at acceptere vores vilkår</Link>
           </label>
         </div>
         {showCheckboxError && (

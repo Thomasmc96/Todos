@@ -11,6 +11,7 @@ import Notifications from "./Notifications.js";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
 import DeleteProfile from "./DeleteProfile";
 import Profile from "./Profile";
+import newLogo from '../../assets/img/new_logo.svg'
 
 const Header = () => {
   const [toggleSettings, setToggleSettings] = useState(false);
@@ -95,11 +96,11 @@ const Header = () => {
     <header className="header">
       {localStorage.getItem("token") !== null ? (
         <Link to={"/"}>
-          <img className="logo" src={todo} alt="To do ikon" />
+          <img className="logo" src={newLogo} alt="To do ikon" />
         </Link>
       ) : (
         <Link to={"/login"}>
-          <img className="logo" src={todo} alt="To do ikon" />
+          <img className="logo" src={newLogo} alt="To do ikon" />
         </Link>
       )}
       {localStorage.getItem("users_id") !== null ? (

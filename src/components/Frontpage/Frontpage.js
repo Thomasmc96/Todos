@@ -66,11 +66,11 @@ const Frontpage = () => {
   return (
     <div className="frontpage">
       <div className="profileFront">
-        <p className="profileIcon">{initials}</p>
-        <p className="profileName">{localStorage.getItem("name")}</p>
+        {/* <p className="profileIcon">{initials}</p> */}
+        <p className="profileName">Hej {localStorage.getItem("name")}!</p>
       </div>
       <section>
-        <h3 className="listCategory">Lister oprettet af mig</h3>
+        <h3 className="listCategory">Mine lister</h3>
         <hr className="hrList" />
         {loadingLists ? (
           <div className="loading">
