@@ -36,17 +36,11 @@ const Options = (props) => {
       <h2>Valgmuligheder</h2>
       <div>
         <button type="button" onClick={props.showMembers}>
-          <img className="icon" src={membersIcon} alt="Medlemmer ikon" />
           <p>Medlemmer</p>
         </button>
         {props.list.users_id === localStorage.getItem("users_id") && (
           <React.Fragment>
             <button type="button" onClick={props.showShareList}>
-              <img
-                className="shareIcon icon"
-                src={shareIcon}
-                alt="Del liste ikon"
-              />
               <p>Del liste</p>
             </button>
             <button
@@ -54,11 +48,6 @@ const Options = (props) => {
               className="danger"
               onClick={props.showDeleteList}
             >
-              <img
-                className="deleteList icon"
-                src={deleteIcon}
-                alt="Slet liste ikon"
-              />
               <p>Slet liste</p>
             </button>
           </React.Fragment>
