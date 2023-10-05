@@ -126,7 +126,14 @@ body.dark .addNewListIcon{
   filter: unset;
 }
 
+body.dark .joinListResponse p{
+  color: var(--text-color-dark-theme);
+}
 
+body.dark .joinListResponse button{
+  background-color: var(--lightblue);
+  color: #000000;
+}
 
 .loading {
   display: flex;
