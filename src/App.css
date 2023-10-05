@@ -110,8 +110,22 @@ body.dark .doneText{
 }
 
 body.dark .notification {
-  background-color: var(--popup-background);
+  background-color: var(--lightblue);
 }
+
+body.dark .popup {
+  background-color: var(--lightblue);
+  border: #ffffff 3px solid;
+}
+
+body.dark .addSection{
+  background-color: var(--lightblue);
+}
+
+body.dark .addNewListIcon{
+  filter: unset;
+}
+
 
 
 .loading {
@@ -143,11 +157,6 @@ body.dark .notification {
   padding: 5%;
   animation: fadeIn 0.2s;
   z-index: 10;
-}
-
-body.dark .popup {
-  background-color: var(--popup-background);
-  border: #ffffff 3px solid;
 }
 
 .popup h2 {
