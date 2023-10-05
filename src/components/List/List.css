@@ -204,3 +204,7 @@
   justify-content: unset !important;
   gap: 10px;
 }
+
+.options.popup h2 {
+  margin-bottom: 0%;
+}
