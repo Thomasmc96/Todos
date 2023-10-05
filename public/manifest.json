@@ -3,28 +3,28 @@
   "name": "Todos App",
   "icons": [
     {
-      "src": "logo64.png",
+      "src": "64px.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "logo120.png",
+      "src": "120px.png",
       "sizes": "120x120",
       "type": "image/png"
     },
     {
-      "src": "logo180.png",
+      "src": "180px.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "logo192.png",
+      "src": "192px.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "512px.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -32,5 +32,5 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#87ceeb",
-  "background_color": "#000000"
+  "background_color": "#87ceeb"
 }
