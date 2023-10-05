@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import environment from "../../environment";
-import { TailSpin } from "react-loader-spinner";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import environment from '../../environment';
+import { TailSpin } from 'react-loader-spinner';
+import { useParams } from 'react-router-dom';
+import cross from '../../assets/img/icons_v2/cross.svg';
 
 const EditTask = (props) => {
-  const users_id = localStorage.getItem("users_id");
+  const users_id = localStorage.getItem('users_id');
 
   // Params from URL
   const { id } = useParams();
@@ -15,12 +16,12 @@ const EditTask = (props) => {
 
   const hidePopup = useCallback(
     (event) => {
-      const box = document.querySelector(".popup");
+      const box = document.querySelector('.popup');
 
       if (
-        event.target.id !== "editIcon" &&
-        !event.target.classList.contains("cross") &&
-        !event.target.classList.contains("saveBtn")
+        event.target.id !== 'editIcon' &&
+        !event.target.classList.contains('cross') &&
+        !event.target.classList.contains('saveBtn')
       )
         if (!box.contains(event.target)) {
           props.showEditTask(false);
@@ -30,10 +31,10 @@ const EditTask = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener("click", hidePopup);
+    window.addEventListener('click', hidePopup);
 
     return () => {
-      window.removeEventListener("click", hidePopup);
+      window.removeEventListener('click', hidePopup);
     };
   }, [hidePopup]);
 
@@ -79,7 +80,7 @@ const EditTask = (props) => {
             products: products,
           });
         } else {
-          console.log("Error");
+          console.log('Error');
         }
       })
       .catch(function (error) {
@@ -94,10 +95,13 @@ const EditTask = (props) => {
 
   return (
     <div className="addTask popup">
-      <span className="cross" onClick={props.showEditTask}>
-        x
-      </span>
-      <h2>Skift navn på punktet</h2>
+      <img
+        src={cross}
+        alt="lukned-knap"
+        className="cross"
+        onClick={props.showEditTask}
+      />
+      <h2>Ændre opgaven</h2>
       <input
         autoFocus
         type="text"

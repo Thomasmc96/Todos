@@ -44,7 +44,7 @@ const JoinList = () => {
   } else if (responseCode === 200) {
     return (
       <div className="joinListResponse">
-        <p className="success">Succes!</p>
+        <p className="success">Fedt, du kan nu tilgå listen!</p>
         <Link to={"/list/" + lists_id}>
           <button className="button">Se listen</button>
         </Link>
@@ -53,7 +53,7 @@ const JoinList = () => {
   } else if (responseCode === 403) {
     return (
       <div className="joinListResponse">
-        <p className="warning">Du er allerede tilknyttet listen</p>
+        <p className="warning">Du er allerede tilknyttet listen!</p>
         <Link to={"/list/" + lists_id}>
           <button className="button">Se listen</button>
         </Link>

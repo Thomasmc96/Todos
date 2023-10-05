@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
+import cross from "../../assets/img/icons_v2/cross.svg";
+
 
 const Members = (props) => {
   const params = useParams();
@@ -50,9 +52,7 @@ const Members = (props) => {
 
   return (
     <div className="members popup">
-      <span className="cross" onClick={props.showMembers}>
-        x
-      </span>
+      <img src={cross} alt="lukned-knap" className="cross" onClick={props.showLeaveList}/>
       <h2>Medlemmer</h2>
       {loading ? (
         <TailSpin color="#000000" height={40} width={40} />

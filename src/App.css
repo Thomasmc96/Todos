@@ -4,10 +4,11 @@
   --lightblue: #87ceeb;
   --darkblue: #261f8b;
   --background-color: #fff;
-  --background-color-dark-theme: #000027;
+  --background-color-dark-theme: #25253f;
   --text-color: #000000;
   --text-color-dark-theme: #fff;
   --danger-color: #fc4848;
+  --popup-background: #5c8596;
 }
 
 /* @font-face {
@@ -46,6 +47,10 @@ body.light h3 {
   color: var(--text-color);
 }
 
+body.light button p{
+  color: var(--text-color-dark-theme);
+}
+
 body.light hr {
   background-color: var(--text-color);
 }
@@ -82,7 +87,9 @@ body.dark h3 {
 }
 
 body.dark hr {
-  background: var(--background-color) !important;
+  height: 0.15rem;
+  background-color: var(--background-color) !important;
+  border: none;
 }
 
 body .button p {
@@ -97,6 +104,15 @@ body.dark .list .icon {
   filter: invert(99%) sepia(3%) saturate(112%) hue-rotate(266deg)
     brightness(118%) contrast(87%);
 }
+
+body.dark .doneText{
+  color: var(--text-color-dark-theme);
+}
+
+body.dark .notification {
+  background-color: var(--popup-background);
+}
+
 
 .loading {
   display: flex;
@@ -129,6 +145,11 @@ body.dark .list .icon {
   z-index: 10;
 }
 
+body.dark .popup {
+  background-color: var(--popup-background);
+  border: #ffffff 3px solid;
+}
+
 .popup h2 {
   font-size: 30px;
   margin-bottom: 15%;
@@ -137,10 +158,14 @@ body.dark .list .icon {
 
 .popup p {
   margin: 0;
-  color: var(--text-color) !important;
+  color: var(--text-color);
   padding: 3%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.popup button p{
+  color: var(--text-color-dark-theme);
 }
 
 .popup div {

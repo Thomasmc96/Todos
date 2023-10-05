@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import environment from "../../environment";
-import { TailSpin } from "react-loader-spinner";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import environment from '../../environment';
+import { TailSpin } from 'react-loader-spinner';
+import cross from "../../assets/img/icons_v2/cross.svg";
 
 const ShareList = (props) => {
   const params = useParams();
   const lists_id = params.id;
 
-  const [mail, setMail] = useState("");
+  const [mail, setMail] = useState('');
   const [loading, setLoading] = useState(false);
   const [statusCode, setStatusCode] = useState();
 
   const hidePopup = useCallback(
     (event) => {
-      const box = document.querySelector(".popup");
+      const box = document.querySelector('.popup');
 
-      if (!event.target.classList.contains("cross"))
+      if (!event.target.classList.contains('cross'))
         if (!box.contains(event.target)) {
           props.showShareList(false);
         }
@@ -25,10 +26,10 @@ const ShareList = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener("click", hidePopup);
+    window.addEventListener('click', hidePopup);
 
     return () => {
-      window.removeEventListener("click", hidePopup);
+      window.removeEventListener('click', hidePopup);
     };
   }, [hidePopup]);
 
@@ -40,8 +41,8 @@ const ShareList = (props) => {
       .post(`${environment[0]}/server/Lists/SharedLists/SendMail.php`, {
         mail: mail,
         lists_id: lists_id,
-        name: localStorage.getItem("name"),
-        created_by: localStorage.getItem("users_id"),
+        name: localStorage.getItem('name'),
+        created_by: localStorage.getItem('users_id'),
       })
       .then(function (response) {
         setLoading(false);
@@ -49,7 +50,7 @@ const ShareList = (props) => {
 
         // If response if good
         if (response.data.code === 200) {
-          setMail("");
+          setMail('');
         } else {
         }
       })
@@ -61,9 +62,12 @@ const ShareList = (props) => {
 
   return (
     <div className="addTask popup">
-      <span className="cross" onClick={props.showShareList}>
-        x
-      </span>
+      <img
+        src={cross}
+        alt="lukned-knap"
+        className="cross"
+        onClick={props.showLeaveList}
+      />
       <h2>Del liste</h2>
       <form onSubmit={share}>
         <input

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { TailSpin } from "react-loader-spinner";
 import axios from "axios";
 import environment from "../../environment";
+import cross from "../../assets/img/icons_v2/cross.svg";
 
 const Profile = (props) => {
   const [loading, setLoading] = useState(false);
@@ -50,9 +51,7 @@ const Profile = (props) => {
 
   return (
     <div className="profile popup">
-      <span className="cross" onClick={props.handleProfile}>
-        x
-      </span>
+      <img src={cross} alt="lukned-knap" className="cross" onClick={props.handleProfile}/>
       <h2>Profil</h2>
       {loading ? (
         <>

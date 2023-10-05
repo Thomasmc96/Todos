@@ -273,13 +273,13 @@ const List = () => {
           !loading &&
           Array.isArray(list.products) &&
           list.products.length > 0 && (
-            <p className="doneText">Alle opgaver er løst</p>
+            <p className="doneText">Alle opgaver er løst!</p>
           )}
         {!showUncompletedTasks &&
           Array.isArray(list.products) &&
           !loading &&
           list.products.length === 0 && (
-            <p className="doneText">Her er der bare luft.</p>
+            <p className="doneText">Der er ingen opgaver.</p>
           )}
         {loading ? (
           <div className="loading">

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
+import cross from "../../assets/img/icons_v2/cross.svg";
 
 const AddNewList = (props) => {
   const [listName, setListName] = useState("");
@@ -66,9 +67,7 @@ const AddNewList = (props) => {
 
   return (
     <div className="addNewListBox popup">
-      <span className="cross" onClick={props.showNewList}>
-        x
-      </span>
+      <img src={cross} alt="lukned-knap" className="cross" onClick={props.showNewList}/>
       <h2>Opret liste</h2>
       <form onSubmit={pushNewList}>
         <input

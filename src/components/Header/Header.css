@@ -37,7 +37,6 @@
 
 .header .headerIcons .iconContainer .icon {
   width: 100%;
-  filter: invert(15%) sepia(51%) saturate(3640%) hue-rotate(236deg) brightness(89%) contrast(109%);
 }
 .header .headerIcons .iconContainer .badge {
   position: absolute;
@@ -164,6 +163,13 @@
 
 .notifications .acceptBtn {
   margin: 10px 0 5px 0;
+  color: var(--text-color-dark-theme);
+  text-transform: uppercase;
+  width: 80%;
+  padding-top: 8%;
+  padding-bottom: 8%;
+  font-size: 1.2rem;
+  font-family: Oswald;
 }
 .notifications .invitationInfo {
   margin: 10px 0 5px 0;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import environment from "../../environment";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
+import cross from "../../assets/img/icons_v2/cross.svg";
 
 const Settings = (props) => {
   const [useDarkMode, setUseDarkMode] = useState(
@@ -54,9 +55,7 @@ const Settings = (props) => {
 
   return (
     <div className="settings popup">
-      <span className="cross" onClick={props.showSettings}>
-        x
-      </span>
+      <img src={cross} alt="lukned-knap" className="cross" onClick={props.showSettings}/>
       <h2>Indstillinger</h2>
       <div className="darkModeToggleContainer">
         <label className="switch">

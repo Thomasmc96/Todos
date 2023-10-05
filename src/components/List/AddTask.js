@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import environment from "../../environment";
-import { TailSpin } from "react-loader-spinner";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import environment from '../../environment';
+import { TailSpin } from 'react-loader-spinner';
+import cross from '../../assets/img/icons_v2/cross.svg';
 
 const AddTask = (props) => {
   const { id } = useParams();
 
-  const [taskName, setTaskName] = useState("");
+  const [taskName, setTaskName] = useState('');
   const [loading, setLoading] = useState(false);
 
   const hidePopup = useCallback(
     (event) => {
-      const box = document.querySelector(".popup");
+      const box = document.querySelector('.popup');
 
       if (
-        !event.target.classList.contains("addSection") &&
-        !event.target.classList.contains("cross")
+        !event.target.classList.contains('addSection') &&
+        !event.target.classList.contains('cross')
       )
         if (!box.contains(event.target)) {
           props.showAddTask(false);
@@ -26,10 +27,10 @@ const AddTask = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener("click", hidePopup);
+    window.addEventListener('click', hidePopup);
 
     return () => {
-      window.removeEventListener("click", hidePopup);
+      window.removeEventListener('click', hidePopup);
     };
   }, [hidePopup]);
 
@@ -41,7 +42,7 @@ const AddTask = (props) => {
       .post(`${environment[0]}/server/Products/Create.php`, {
         name: taskName,
         lists_id: id,
-        users_id: localStorage.getItem("users_id"),
+        users_id: localStorage.getItem('users_id'),
       })
       .then(function (response) {
         setLoading(false);
@@ -53,7 +54,7 @@ const AddTask = (props) => {
             products: [
               ...props.list.products,
               {
-                completed: "0",
+                completed: '0',
                 products_id: response.data.products_id,
                 name: taskName,
               },
@@ -61,10 +62,10 @@ const AddTask = (props) => {
           });
           props.setShowUncompletedTasks(true);
 
-          setTaskName("");
-          document.getElementById("taskNameBox").focus();
-          document.getElementById("addTaskHeader").innerHTML =
-            "Tilføj en opgave mere";
+          setTaskName('');
+          document.getElementById('taskNameBox').focus();
+          document.getElementById('addTaskHeader').innerHTML =
+            'Tilføj en opgave mere';
         } else {
         }
       })
@@ -81,9 +82,12 @@ const AddTask = (props) => {
 
   return (
     <div className="addTask popup">
-      <span className="cross" onClick={props.showAddTask}>
-        x
-      </span>
+      <img
+        src={cross}
+        alt="lukned-knap"
+        className="cross"
+        onClick={props.showLeaveList}
+      />
       <h2 id="addTaskHeader">Tilføj en opgave</h2>
       <form onSubmit={pushTask}>
         <input

@@ -151,21 +151,36 @@
 }
 
 .joinListResponse .success {
-  color: green;
+  color: var(--darkblue);
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-size: 1.5rem;
 }
 
 .joinListResponse .warning {
-  color: orange;
+  color: var(--darkblue);
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+
 }
 
 .joinListResponse .error {
-  color: red;
+  color: var(--darkblue);
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+
 }
 
 .joinListResponse button {
   font-size: 1.3rem;
   margin-top: 5rem;
   padding: 5% 10%;
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: var(--text-color-dark-theme);
 }
 
 .options .icon {
