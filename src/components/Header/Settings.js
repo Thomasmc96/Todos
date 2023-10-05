@@ -55,7 +55,12 @@ const Settings = (props) => {
 
   return (
     <div className="settings popup">
-      <img src={cross} alt="lukned-knap" className="cross" onClick={props.showSettings}/>
+      <img
+        src={cross}
+        alt="lukned-knap"
+        className="cross"
+        onClick={props.showSettings}
+      />
       <h2>Indstillinger</h2>
       <div className="darkModeToggleContainer">
         <label className="switch">
@@ -80,13 +85,6 @@ const Settings = (props) => {
         <button id="logOut" className="danger" type="button" onClick={logout}>
           Log ud
         </button>
-        {/* <button
-          id="deleteProfile"
-          type="button"
-          onClick={props.handleDeleteProfile}
-        >
-          Slet profil
-        </button> */}
       </div>
       <p className="version">v. {version}</p>
     </div>

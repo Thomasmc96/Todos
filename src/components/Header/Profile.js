@@ -17,12 +17,11 @@ const Profile = (props) => {
       .get(`${environment[0]}/server/Users/Read.php?users_id=${users_id}`)
       .then((response) => {
         setUser(response.data.user);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
-        setLoading(false)
+        setLoading(false);
       });
-
   }, []);
 
   const hidePopup = useCallback(
@@ -51,7 +50,12 @@ const Profile = (props) => {
 
   return (
     <div className="profile popup">
-      <img src={cross} alt="lukned-knap" className="cross" onClick={props.handleProfile}/>
+      <img
+        src={cross}
+        alt="lukned-knap"
+        className="cross"
+        onClick={props.handleProfile}
+      />
       <h2>Profil</h2>
       {loading ? (
         <>
@@ -67,7 +71,7 @@ const Profile = (props) => {
             <p>Email</p>
             <p>{user.email}</p>
           </div>
-            <button
+          <button
             id="deleteProfile"
             type="button"
             onClick={props.handleDeleteProfile}

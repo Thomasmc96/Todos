@@ -11,7 +11,7 @@ import Notifications from "./Notifications.js";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
 import DeleteProfile from "./DeleteProfile";
 import Profile from "./Profile";
-import newLogo from '../../assets/img/round-logo.svg'
+import newLogo from "../../assets/img/round-logo.svg";
 
 const Header = () => {
   const [toggleSettings, setToggleSettings] = useState(false);
@@ -140,14 +140,18 @@ const Header = () => {
         <Settings
           showSettings={showSettings}
           InstallPWAButton={InstallPWAButton}
-          // handleDeleteProfile={handleDeleteProfile}
           handleProfile={handleProfile}
         />
       )}
       {showDeleteProfile && (
         <DeleteProfile handleDeleteProfile={handleDeleteProfile} />
       )}
-      {showProfile && <Profile handleProfile={handleProfile} handleDeleteProfile={handleDeleteProfile}/>}
+      {showProfile && (
+        <Profile
+          handleProfile={handleProfile}
+          handleDeleteProfile={handleDeleteProfile}
+        />
+      )}
     </header>
   );
 };
