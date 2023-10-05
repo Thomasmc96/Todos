@@ -1,8 +1,4 @@
 import React, { useEffect, useCallback } from 'react';
-import shareIcon from '../../assets/img/share.svg';
-import leaveIcon from '../../assets/img/leave.svg';
-import deleteIcon from '../../assets/img/delete.svg';
-import membersIcon from '../../assets/img/shared-list.svg';
 import cross from "../../assets/img/icons_v2/cross.svg";
 
 
@@ -40,6 +36,9 @@ const Options = (props) => {
       />
       <h2>Valgmuligheder</h2>
       <div>
+      <button type="button" onClick={props.showChangeTitle}>
+          <p>Listens titel</p>
+        </button>
         <button type="button" onClick={props.showMembers}>
           <p>Medlemmer</p>
         </button>

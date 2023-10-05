@@ -3,13 +3,13 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import environment from '../../environment';
 import { TailSpin } from 'react-loader-spinner';
-import cross from "../../assets/img/icons_v2/cross.svg";
+import cross from '../../assets/img/icons_v2/cross.svg';
 
-const ShareList = (props) => {
+const ChangeTitle = (props) => {
   const params = useParams();
   const lists_id = params.id;
 
-  const [mail, setMail] = useState('');
+  const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(false);
   const [statusCode, setStatusCode] = useState();
 
@@ -19,7 +19,7 @@ const ShareList = (props) => {
 
       if (!event.target.classList.contains('cross'))
         if (!box.contains(event.target)) {
-          props.showShareList(false);
+          props.showChangeTitle(false);
         }
     },
     [props]
@@ -33,25 +33,26 @@ const ShareList = (props) => {
     };
   }, [hidePopup]);
 
-  const share = (event) => {
+  const change = (event) => {
     event.preventDefault();
     setLoading(true);
 
     axios
-      .post(`${environment[0]}/server/Lists/SharedLists/SendMail.php`, {
-        mail: mail,
+      .post(`${environment[0]}/server/Lists/ChangeTitle.php`, {
+        title: title,
         lists_id: lists_id,
-        name: localStorage.getItem('name'),
-        created_by: localStorage.getItem('users_id'),
       })
       .then(function (response) {
         setLoading(false);
         setStatusCode(response.data.code);
+        console.log(response)
 
         // If response if good
         if (response.data.code === 200) {
-          setMail('');
-        } else {
+            let listCopy = props.list;
+            listCopy.list_name = title
+            props.setList(listCopy)
+            setTitle('');
         }
       })
       .catch(function (error) {
@@ -66,38 +67,36 @@ const ShareList = (props) => {
         src={cross}
         alt="lukned-knap"
         className="cross"
-        onClick={props.showShareList}
+        onClick={props.showChangeTitle}
       />
-      <h2>Del liste</h2>
-      <form onSubmit={share}>
+      <h2>Ændre listens titel</h2>
+      <form onSubmit={change}>
         <input
           autoFocus
           type="text"
           name="name"
           className="inputBox"
-          placeholder="Indtast mail"
+          placeholder="Indtast ny titel"
           required
           autoComplete="off"
-          onChange={(e) => setMail(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
         {statusCode && statusCode === 500 && (
-          <p>Kunne ikke deles - prøv igen</p>
+          <p>Kunne ikke ændres - prøv igen</p>
         )}
-        {statusCode && statusCode === 404 && (
-          <p>Kunne ikke deles - er mailen forkert?</p>
-        )}
-        {statusCode && statusCode === 200 && <p>Listen blev delt!</p>}
+        {statusCode && statusCode === 200 && <p>Listens titel er ændret!</p>}
         {loading ? (
           <div className="loading">
             <TailSpin color="#000000" height={40} width={40} />
           </div>
         ) : (
           <div>
-            <button type="submit">Del liste</button>
+            <button type="submit">Ændre titel</button>
           </div>
         )}
       </form>
     </div>
   );
 };
-export default ShareList;
+
+export default ChangeTitle;

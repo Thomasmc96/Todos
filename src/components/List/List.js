@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./List.css";
 import backIcon from "../../assets/img/icons_v2/arrow.svg";
 import dotsIcon from "../../assets/img/dots.svg";
-import notDoneIcon from "../../assets/img/not-done.svg";
-import doneIcon from "../../assets/img/done.svg";
 import editIcon from "../../assets/img/icons_v2/edit.svg";
-import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import AddTask from "./AddTask.js";
@@ -20,6 +17,7 @@ import LeaveList from "./LeaveList.js";
 import DeleteList from "./DeleteList.js";
 import Members from "./Members.js";
 import AddButton from "../Utilities/AddButton";
+import ChangeTitle from './ChangeTitle';
 
 const List = () => {
 
@@ -43,6 +41,7 @@ const List = () => {
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toggleShareList, setToggleShareList] = useState(false);
+  const [toggleChangeTitle, setToggleChangeTitle] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -116,6 +115,11 @@ const List = () => {
 
   const showMembers = () => {
     setToggleMembers(!toggleMembers);
+    showOptions();
+  };
+
+  const showChangeTitle = () => {
+    setToggleChangeTitle(!toggleChangeTitle);
     showOptions();
   };
 
@@ -325,7 +329,7 @@ const List = () => {
             }
           })}
       </div>
-      {!toggleAddTask && !toggleEditTask && !toggleShareList && (
+      {!toggleAddTask && !toggleEditTask && !toggleShareList && !toggleChangeTitle && (
         <AddButton showPopUp={showAddTask}/>
       )}
       {toggleAddTask && (
@@ -344,12 +348,14 @@ const List = () => {
           showLeaveList={showLeaveList}
           showDeleteList={showDeleteList}
           showMembers={showMembers}
+          showChangeTitle={showChangeTitle}
         />
       )}
       {toggleShareList && <ShareList showShareList={showShareList} />}
       {toggleLeaveList && <LeaveList showLeaveList={showLeaveList} />}
       {toggleDeleteList && <DeleteList showDeleteList={showDeleteList} />}
       {toggleMembers && <Members showMembers={showMembers} />}
+      {toggleChangeTitle && <ChangeTitle showChangeTitle={showChangeTitle} list={list} setList={setList}/>}
     </div>
   );
 };
