@@ -4,14 +4,14 @@ import "./Header.css";
 import axios from "axios";
 import environment from "../../environment";
 import todo from "../../assets/img/todos.svg";
-import settingsIcon from "../../assets/img/settings.svg";
-import notificationsIcon from "../../assets/img/notifications.svg";
+import settingsIcon from "../../assets/img/icons_v2/settings.svg";
+import notificationsIcon from "../../assets/img/icons_v2/notification.svg";
 import Settings from "./Settings.js";
 import Notifications from "./Notifications.js";
 import InstallPWAButton from "../Utilities/InstallPWAButton";
 import DeleteProfile from "./DeleteProfile";
 import Profile from "./Profile";
-import newLogo from '../../assets/img/new_logo.svg'
+import newLogo from '../../assets/img/round-logo.svg'
 
 const Header = () => {
   const [toggleSettings, setToggleSettings] = useState(false);

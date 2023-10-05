@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./List.css";
-import backIcon from "../../assets/img/back.svg";
+import backIcon from "../../assets/img/icons_v2/arrow.svg";
 import dotsIcon from "../../assets/img/dots.svg";
 import notDoneIcon from "../../assets/img/not-done.svg";
 import doneIcon from "../../assets/img/done.svg";
-import editIcon from "../../assets/img/edit.svg";
+import editIcon from "../../assets/img/icons_v2/edit.svg";
 import addIcon from "../../assets/img/add.svg";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
@@ -19,8 +19,10 @@ import ShareList from "./ShareList.js";
 import LeaveList from "./LeaveList.js";
 import DeleteList from "./DeleteList.js";
 import Members from "./Members.js";
+import AddButton from "../Utilities/AddButton";
 
 const List = () => {
+
   // Params from URL
   const { id } = useParams();
 
@@ -166,14 +168,23 @@ const List = () => {
         />
         <p>{product.name}</p>
       </div>
-      <img
+      <input
+        id="checkbox"
+        type="checkbox"
+        name="acceptCheckbox"
+        value={1}
+        onClick={(event) => {
+          completeTask(event, i, 1);
+        }}
+      />
+      {/* <img
         id="notDoneIcon"
         src={notDoneIcon}
         alt="Ikke-færdig ikon"
         onClick={(event) => {
           completeTask(event, i, 1);
         }}
-      />
+      /> */}
       {toggleEditTask === product.products_id && (
         <EditTask
           showEditTask={() => showEditTask(0)}
@@ -291,24 +302,31 @@ const List = () => {
               return (
                 <div className="doneProduct" key={product.products_id}>
                   <p>{product.name}</p>
-                  <img
+                  <input
+                    id="checkbox"
+                    type="checkbox"
+                    name="acceptCheckbox"
+                    checked="checked"
+                    value={1}
+                    onClick={(event) => {
+                      completeTask(event, i, 0);
+                    }}
+                  />
+                  {/* <img
                     id="doneIcon"
                     src={doneIcon}
                     alt="Færdig ikon"
                     onClick={(event) => {
                       completeTask(event, i, 0);
                     }}
-                  />
+                  /> */}
                 </div>
               );
             }
           })}
       </div>
       {!toggleAddTask && !toggleEditTask && !toggleShareList && (
-        <div className="addSection" onClick={showAddTask}>
-          <img src={addIcon} alt="Tilføj opgave ikon" />
-          <p>Tilføj en opgave</p>
-        </div>
+        <AddButton showPopUp={showAddTask}/>
       )}
       {toggleAddTask && (
         <AddTask

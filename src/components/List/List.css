@@ -7,7 +7,7 @@
 }
 
 .listSection .firstSection #back {
-  width: 10px;
+  width: 2rem;
   margin-right: 10%;
 }
 
@@ -120,7 +120,7 @@
   /* margin-right: 15px; */
 }
 
-.listSection .addSection {
+/* .listSection .addSection {
   display: flex;
   background-color: var(--darkblue);
   width: 70%;
@@ -129,12 +129,12 @@
   position: fixed;
   top: 90%;
   left: 10%;
-}
+} */
 
-.listSection .addSection img {
+/* .listSection .addSection img {
   width: 35px;
   margin-right: 10px;
-}
+} */
 
 .listSection .addSection p {
   color: var(--text-color-dark-theme);

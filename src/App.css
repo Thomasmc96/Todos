@@ -132,12 +132,12 @@ body.dark .list .icon {
 .popup h2 {
   font-size: 30px;
   margin-bottom: 15%;
-  margin-top: 2%;
+  margin-top: 8%;
 }
 
 .popup p {
   margin: 0;
-  color: var(--text-color-dark-theme) !important;
+  color: var(--text-color) !important;
   padding: 3%;
   margin-left: auto;
   margin-right: auto;
@@ -183,7 +183,7 @@ body.dark .list .icon {
 }
 
 .popup .cross {
-  font-size: 30px;
+  width: 2rem;
   position: absolute;
   top: 3%;
   right: 5%;

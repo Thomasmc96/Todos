@@ -97,22 +97,7 @@
   background-color: var(--danger-color);
 }
 
-.frontpage .addSection {
-  display: flex;
-  background-color: var(--darkblue);
-  width: 70%;
-  border-radius: 5px;
-  padding: 2% 5%;
-  position: fixed;
-  top: 90%;
-  left: 10%;
-}
 
-.frontpage .addNewListIcon {
-  width: 40px;
-  display: block;
-  margin-right: 10px;
-}
 
 .frontpage .addSection p {
   font-family: Oswald;

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Frontpage.css";
-import addNewListIcon from "../../assets/img/add-new-list.svg";
-import listIcon from "../../assets/img/small-list.svg";
+import addNewListIcon from "../../assets/img/icons_v2/add.svg";
+import listIcon from "../../assets/img/icons_v2/small-list.svg";
 import axios from "axios";
 import AddNewList from "./AddNewList.js";
 import { useNavigate, Link } from "react-router-dom";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
+import AddButton from "../Utilities/AddButton";
 
 const Frontpage = () => {
   const navigate = useNavigate();
@@ -143,14 +144,7 @@ const Frontpage = () => {
         />
       )}
       {!toggleNewList && (
-        <div className="addSection button" id="addListBtn" onClick={showNewList}>
-          <img
-            className="addNewListIcon"
-            src={addNewListIcon}
-            alt="Tilføj ny liste"
-          />
-          <p>Tilføj en liste</p>
-        </div>
+        <AddButton showPopUp={showNewList}/>
       )}
     </div>
   );

@@ -8,10 +8,10 @@
 }
 
 .header .logo {
-  width: 2.5rem;
+  width: 3.5rem;
   margin-left: 1.2rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: .8rem;
 }
 
 .header a {
@@ -28,8 +28,8 @@
 }
 
 .header .headerIcons .iconContainer {
-  width: 24px;
-  margin-right: 20px;
+  width: 2.5rem;
+  margin-right: .8rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -37,6 +37,7 @@
 
 .header .headerIcons .iconContainer .icon {
   width: 100%;
+  filter: invert(15%) sepia(51%) saturate(3640%) hue-rotate(236deg) brightness(89%) contrast(109%);
 }
 .header .headerIcons .iconContainer .badge {
   position: absolute;

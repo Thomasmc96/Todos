@@ -3,6 +3,7 @@ import axios from "axios";
 import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
+import cross from "../../assets/img/icons_v2/cross.svg";
 
 const LeaveList = (props) => {
   // Params from URL
@@ -62,10 +63,8 @@ const LeaveList = (props) => {
 
   return (
     <div className="leaveList popup">
-      <span className="cross" onClick={props.showLeaveList}>
-        x
-      </span>
-      <h2>Forlad listen?</h2>
+      <img src={cross} alt="lukned-knap" className="cross" onClick={props.showLeaveList}/>
+      <h2>Forlad listen</h2>
       <p>Er du sikker på du vil forlade listen?</p>
       {loading ? (
         <div>
