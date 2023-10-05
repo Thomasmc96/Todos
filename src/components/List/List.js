@@ -312,7 +312,7 @@ const List = () => {
                     name="acceptCheckbox"
                     checked="checked"
                     value={1}
-                    onClick={(event) => {
+                    onChange={(event) => {
                       completeTask(event, i, 0);
                     }}
                   />
