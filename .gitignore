@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 #config
+/server/Config/Config.ini
 /server/Config/config.ini

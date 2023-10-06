@@ -150,6 +150,9 @@ const SignUp = () => {
         {showCheckboxError && (
           <p id="checkboxError" className="danger">Husk at acceptere vilkårene - prøv igen!</p>
         )}
+        {showEmailError && (
+          <p id="checkboxError" className="danger">Mailen er allerede i brug</p>
+        )}
 
         <div id="btnContainer">
           {loading ? (
