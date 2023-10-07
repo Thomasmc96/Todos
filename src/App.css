@@ -43,11 +43,12 @@ body.light {
 
 body.light p,
 body.light span,
+body.light #deleteProfile,
 body.light h3 {
   color: var(--text-color);
 }
 
-body.light button p{
+body.light button p {
   color: var(--text-color-dark-theme);
 }
 
@@ -59,12 +60,11 @@ body.light hr {
   color: var(--text-color)
 } */
 
-
 body.dark .settings .darkModeToggleContainer .slider {
   background-color: var(--darkblue);
 }
 
-body.dark{
+body.dark {
   background-color: var(--background-color-dark-theme);
 }
 
@@ -105,7 +105,7 @@ body.dark .list .icon {
     brightness(118%) contrast(87%);
 }
 
-body.dark .doneText{
+body.dark .doneText {
   color: var(--text-color-dark-theme);
 }
 
@@ -118,19 +118,19 @@ body.dark .popup {
   border: #ffffff 3px solid;
 }
 
-body.dark .addSection{
+body.dark .addSection {
   background-color: var(--lightblue);
 }
 
-body.dark .addNewListIcon{
+body.dark .addNewListIcon {
   filter: unset;
 }
 
-body.dark .joinListResponse p{
+body.dark .joinListResponse p {
   color: var(--text-color-dark-theme);
 }
 
-body.dark .joinListResponse button{
+body.dark .joinListResponse button {
   background-color: var(--lightblue);
   color: #000000;
 }
@@ -180,7 +180,7 @@ body.dark .joinListResponse button{
   margin-right: auto;
 }
 
-.popup button p{
+.popup button p {
   color: var(--text-color-dark-theme);
 }
 

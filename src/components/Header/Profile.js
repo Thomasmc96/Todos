@@ -30,7 +30,8 @@ const Profile = (props) => {
 
       if (
         event.target.id !== "settingsIcon" &&
-        !event.target.classList.contains("cross")
+        !event.target.classList.contains("cross") &&
+        event.target.id !== "deleteProfile"
       ) {
         if (!box.contains(event.target)) {
           props.handleProfile();

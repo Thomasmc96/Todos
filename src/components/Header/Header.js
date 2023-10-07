@@ -84,7 +84,7 @@ const Header = () => {
 
   const handleDeleteProfile = () => {
     setShowDeleteProfile(!showDeleteProfile);
-    handleProfile();
+    setShowProfile(!showProfile);
   };
 
   const handleProfile = () => {
