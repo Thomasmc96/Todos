@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import environment from '../../environment';
-import { TailSpin } from 'react-loader-spinner';
-import { useParams } from 'react-router-dom';
-import cross from '../../assets/img/icons_v2/cross.svg';
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import environment from "../../environment";
+import { TailSpin } from "react-loader-spinner";
+import { useParams } from "react-router-dom";
+import cross from "../../assets/img/icons_v2/cross.svg";
 
 const DeleteList = (props) => {
   // Params from URL
@@ -13,9 +13,9 @@ const DeleteList = (props) => {
 
   const hidePopup = useCallback(
     (event) => {
-      const box = document.querySelector('.popup');
+      const box = document.querySelector(".popup");
 
-      if (!event.target.classList.contains('cross'))
+      if (!event.target.classList.contains("cross"))
         if (!box.contains(event.target)) {
           props.showDeleteList(false);
         }
@@ -24,10 +24,10 @@ const DeleteList = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener('click', hidePopup);
+    window.addEventListener("click", hidePopup);
 
     return () => {
-      window.removeEventListener('click', hidePopup);
+      window.removeEventListener("click", hidePopup);
     };
   }, [hidePopup]);
 
@@ -44,10 +44,10 @@ const DeleteList = (props) => {
 
         // If response if good
         if (response.data.code === 200) {
-          window.location.replace('/');
+          window.location.replace("/");
         } else {
           // Show error message
-          console.log('error');
+          console.log("error");
         }
       })
       .catch(function (error) {
@@ -63,7 +63,7 @@ const DeleteList = (props) => {
         src={cross}
         alt="lukned-knap"
         className="cross"
-        onClick={props.showLeaveList}
+        onClick={props.showDeleteList}
       />
       <h2>Vil du slette listen?</h2>
       <p>Listen vil blive slettet permanent.</p>
