@@ -5,7 +5,6 @@ import environment from "../../environment";
 import { TailSpin } from "react-loader-spinner";
 import cross from "../../assets/img/icons_v2/cross.svg";
 
-
 const Members = (props) => {
   const params = useParams();
   const lists_id = params.id;
@@ -52,7 +51,12 @@ const Members = (props) => {
 
   return (
     <div className="members popup">
-      <img src={cross} alt="lukned-knap" className="cross" onClick={props.showLeaveList}/>
+      <img
+        src={cross}
+        alt="lukned-knap"
+        className="cross"
+        onClick={props.showMembers}
+      />
       <h2>Medlemmer</h2>
       {loading ? (
         <TailSpin color="#000000" height={40} width={40} />
